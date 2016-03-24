@@ -29,9 +29,6 @@ var server = app.listen(port, function () {
 
 var apiRoutes = express.Router();
 
-/**
- * 	HTTP-POST REQUEST
- */
 mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 	if(err) throw err;
 
@@ -42,6 +39,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
   var notifications = db.collection("notifications");
 
   // API definitions
+
   app.get('/', function(req, res) {
     res.send('Hello! The API is at http://localhost:' + port + '/api');
   });
@@ -50,14 +48,78 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
     res.send({ message: 'Welcome to the coolest API on earth!' });
   });
 
-  // API for authentication
+  /**
+  *  API to initialize the database with values
+  */
 
-  apiRoutes.post('/authenticate',function(req,res)
+  apiRoutes.get('/populate', function(req, res) {
+    users.find().toArray(function(err,result)
+    {
+      if (err)
+        throw err;
+
+      if (result.length == 0)
+        users.insert({"unique_id":"2014CS50297","name":"Vaibhav Bhagee","password":"d7218156761eff363a67505eca3fd90fde37ce08","department":"Computer Science","contact_info":"9999988888","tags":["Vindhyachal","NSS"],"course_list":["COP290","COL226"],"complaint_list":[]},function(error,result1)
+        {
+          if (err)
+            throw err;
+
+            res.send({success:true,message:"Successfully Populated"});
+        });
+      else
+        res.send({success:false,message:"Database contains data which can be overwritten"});
+    });
+  });
+
+  /**
+  *  API for LOGIN authentication and Token generation for normal users
+  */
+
+  apiRoutes.post('/login',function(req,res)
   {
     var username = req.body.username;
-    var password = crypto.createHash('sha1').update(req.body.password).digest('hex');
+    var password = crypto.createHash('sha1').update(req.body.password).digest('hex'); // Hash the string password to SHA-1
 
     users.find({"unique_id":username,"password":password}).toArray(function(err,result)
+    {
+      if (err)
+        throw err;
+
+      if (result.length == 0)
+        res.send({"Success":false,"Message":"Incorrect Credentials"});
+      else
+      {
+        var token = jwt.sign(result[0], app.get('superSecret'), {
+          expiresIn: 86400 // expires in 24 hours
+        });
+
+        // return the information including token as JSON
+        res.send({
+          success: true,
+          token: token,
+          unique_id: result[0].unique_id,
+          name: result[0].name,
+          department: result[0].department,
+          contact_info: result[0].contact_info,
+          tags: result[0].tags,
+          course_list: result[0].course_list,
+          complaint_list: result[0].complaint_list
+        });
+      }
+    });
+
+  });
+
+  /**
+  *  API for LOGIN authentication and Token generation for special users
+  */
+
+  apiRoutes.post('/special_login',function(req,res)
+  {
+    var username = req.body.username;
+    var password = crypto.createHash('sha1').update(req.body.password).digest('hex'); // Hash the string password to SHA-1
+
+    special_users.find({"unique_id":username,"password":password}).toArray(function(err,result)
     {
       if (err)
         throw err;
@@ -73,7 +135,14 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         // return the information including token as JSON
         res.send({
           success: true,
-          token: token
+          token: token,
+          unique_id: result[0].unique_id,
+          name: result[0].name,
+          department: result[0].department,
+          contact_info: result[0].contact_info,
+          tags: result[0].tags,
+          course_list: result[0].course_list,
+          complaint_list: result[0].complaint_list
         });
       }
     });
