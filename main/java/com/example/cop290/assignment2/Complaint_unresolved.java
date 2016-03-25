@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Notification_Fragment extends Fragment {
+public class Complaint_unresolved extends Fragment {
 
 
-    public Notification_Fragment() {
+    public Complaint_unresolved() {
         // Required empty public constructor
     }
 
@@ -23,7 +23,7 @@ public class Notification_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notification_, container, false);
+        return inflater.inflate(R.layout.fragment_complaint_unresolved, container, false);
     }
 
 }
