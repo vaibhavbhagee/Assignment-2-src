@@ -332,7 +332,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 
   apiRoutes.post('/new_thread', function(req, res) {
 
-      (complaints.find({"complaint_id":req.body.complaint_id}).toArray(function(err,result)
+      (complaints.find({"complaint_id":req.body.complaint_id}).toArray(function(err,result) // Fetch the relavant complaint
       {
         if (err)
           throw err;
@@ -341,6 +341,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
           res.send({success:false,message:"Incorrect complaint ID"});
         else
         {
+          // Create the thread object
           var thread_obj = {
             thread_id:req.body.complaint_id+"_th"+result[0]["threads"].length,
             complaint_id:req.body.complaint_id,
@@ -350,8 +351,9 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
             comments:[]
           }
 
-          result[0]["threads"].push(thread_obj); //TODO: Check for undefined symbol thread
+          result[0]["threads"].push(thread_obj);
 
+          // Add the thread to the complaint
           (complaints.update({"complaint_id":req.body.complaint_id},{$set:{"threads":result[0]["threads"]}},function(err,result1)
           {
             if (err)
@@ -363,12 +365,113 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
               content: req.decoded.name + " posted a new thread under complaint id "+req.body.complaint_id
             }
 
+            // Generate the required notification
             notifications.insert(notif,function(err,result2)
             {
               if (err)
                 throw err;
 
                 res.send({success:true,message:"Thread Added Successfully",complaint:result[0],notification:notif});
+            });    
+
+          }));          
+        }
+      }));
+  });
+
+  /**
+  *  API to post a new Comment to a thread of a complaint
+  */
+
+  apiRoutes.post('/new_comment', function(req, res) {
+
+      (complaints.find({"complaint_id":req.body.complaint_id}).toArray(function(err,result) // Fetch the required complaint
+      {
+        if (err)
+          throw err;
+
+        if (result.length == 0)
+          res.send({success:false,message:"Incorrect complaint ID"});
+        else
+        {
+          var comment_obj = {
+            posted_by:req.decoded.unique_id,
+            description:req.body.description,
+            timestamp:new Date(),
+          }
+
+          for (var i = 0; i < result[0]["threads"].length; i++ )
+          {
+            if(result[0]["threads"][i]["thread_id"] === req.body.thread_id)
+              result[0]["threads"][i]["comments"].push(comment_obj);
+            // break;
+          }
+
+          (complaints.update({"complaint_id":req.body.complaint_id},{$set:{"threads":result[0]["threads"]}},function(err,result1)
+          {
+            if (err)
+              throw err;
+
+            var notif = {
+              complaint_id:req.body.complaint_id,
+              timestamp: new Date(),
+              content: req.decoded.name + " posted a new comment on the thread "+req.body.thread_id+" under complaint id "+req.body.complaint_id
+            }
+
+            notifications.insert(notif,function(err,result2)
+            {
+              if (err)
+                throw err;
+
+                res.send({success:true,message:"Thread Added Successfully",complaint:result[0],notification:notif});
+            });    
+
+          }));          
+        }
+      }));
+  });
+
+  /**
+  *  API to post a new Comment to a thread of a complaint
+  */
+
+  apiRoutes.post('/mark_resolved', function(req, res) {
+
+      (complaints.find({"complaint_id":req.body.complaint_id}).toArray(function(err,result) // Fetch the required complaint
+      {
+        if (err)
+          throw err;
+
+        if (result.length == 0)
+          res.send({success:false,message:"Incorrect complaint ID"});
+        else
+        {
+          var status = "unresolved";
+
+          if (result[0]["lodged_by"] === req.decoded.unique_id)
+            status = "resolved";
+          else if (result[0]["current_level"] === req.decoded.unique_id)
+            status = "under_resolution";
+
+          result[0]["current_status"] = status;
+
+          (complaints.update({"complaint_id":req.body.complaint_id},{$set:{"current_status":status}},function(err,result1)
+          {
+            if (err)
+              throw err;
+
+            var notif = {
+              complaint_id:req.body.complaint_id,
+              timestamp: new Date(),
+              content: req.decoded.name + " marked the complaint "+req.body.complaint_id+" as "+status
+            }
+
+            notifications.insert(notif,function(err,result2)
+            {
+              if (err)
+                throw err;
+
+                res.send({success:true,message:"Complaint Status Changed Successfully",complaint:result[0],notification:notif});
             });    
 
           }));          
