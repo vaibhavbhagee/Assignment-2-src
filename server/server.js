@@ -263,16 +263,16 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
       if (err)
         throw err;
 
-      if (result.length == 0)
-        users.insert({"unique_id":req.body.unique_id,"name":req.body.name,"password":password,"department":req.body.department,"contact_info":req.body.contact_info,"tags":req.body.tags,"course_list":req.body.course_list,"complaint_list":[]},function(err,result1)
+      if (result.length != 0)
+        users.update({"unique_id":req.body.unique_id},{$set:{"unique_id":req.body.unique_id,"name":req.body.name,"password":password,"department":req.body.department,"contact_info":req.body.contact_info,"tags":req.body.tags,"course_list":req.body.course_list,"complaint_list":[]}},function(err,result1)
         {
           if (err)
             throw err;
 
-            res.send({success:true,message:"User Added Successfully"});
+            res.send({success:true,message:"User Updated Successfully"});
         });    
       else
-        res.send({success:false,message:"User Already Exists"});
+        res.send({success:false,message:"User Not Found"});
     });
   });
 
@@ -294,6 +294,26 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
       else
         res.send({success:false,complaintlist:result[0].complaint_list});
     });
+  });
+
+  /**
+  *  API to get complaint details of a user
+  */
+
+  apiRoutes.post('/complaint_details', function(req, res) {
+
+      (complaints.find({"complaint_id":req.body.complaint_id}).toArray(function(err,result)
+      {
+        if (err)
+          throw err;
+
+        if (result.length == 0)
+          res.send({success:false,message:"Complaint not found"});
+        else
+        {
+          res.send({success:true,complaint:result[0]});
+        }
+      }));
   });
 
   app.use('/api', apiRoutes);
