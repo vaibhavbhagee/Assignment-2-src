@@ -1,29 +1,65 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.cop290.assignment2.Complaint_Fragment">
 
-    <android.support.design.widget.TabLayout
-        android:layout_marginTop="50dp"
-        android:id="@+id/tabs"
-        app:tabGravity="fill"
-        app:tabMode="fixed"
-        android:background="@color/colorPrimary"
-        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
-        app:tabIndicatorColor="@color/google_green"
-        app:tabSelectedTextColor="@color/google_yellow"
-        app:tabTextColor="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </android.support.design.widget.TabLayout>
+    <!-- COMMON
+        title
+        description
+        type of complaint
+        time stamp
+        status
+        current authority
+        thread list-->
+    <!-- INDIVIDUAL
+        ??
+    -->
+    <!-- COMMUNITY
+        Vote up vote down -->
+    <!-- DO ABLES
+        @@ relodge complaint higher authority
+        @@ relodge complaint same authority
+        @@ mark as resolved
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        @@ upvote
+        @@ downvote
+    -->
 
-    </android.support.v4.view.ViewPager>
+    <!-- THREAD
+        title
+        description
+        time stamp
+        posted by
+        comment list
+    -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Title" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Description" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Title" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Title" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Title" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Title" />
 
 </FrameLayout>
+</ScrollView>

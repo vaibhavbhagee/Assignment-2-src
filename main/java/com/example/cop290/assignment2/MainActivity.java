@@ -1,11 +1,9 @@
 package com.example.cop290.assignment2;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -18,6 +16,8 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,12 +25,15 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
+        swipeRefreshLayout.setColorSchemeResources(R.color.google_blue,
+                R.color.google_green,
+                R.color.google_red,
+                R.color.google_yellow);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onRefresh() {
+                on_refresh();
             }
         });
 
@@ -91,7 +94,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_complaint) {
             FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
             fragmentTransaction
-                    .replace(R.id.content_frame, new Complaint_Fragment())
+                    .replace(R.id.content_frame, new Tab_Fragment())
                     .commit();
 
         } else if (id == R.id.nav_new_complaint) {
@@ -100,16 +103,19 @@ public class MainActivity extends AppCompatActivity
                     .replace(R.id.content_frame, new New_Complaint_Fragment())
                     .commit();
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_logout) {
+            //TODO : Logout here
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+    private void on_refresh() {
+        //TODO : On refresh kya karna hai???
+    }
 }
+
+
