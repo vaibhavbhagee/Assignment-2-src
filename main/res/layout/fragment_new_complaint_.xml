@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.cop290.assignment2.New_Complaint_Fragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
