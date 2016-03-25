@@ -8,6 +8,8 @@ var crypto = require('crypto');
 
 var secret = "vaibhavshreyanaayancop290assignment2";
 
+//TODO: Add Hierarchy JSON object here
+
 var port = process.env.PORT || 8081;
 
 app.use(bodyParser.urlencoded({
@@ -111,7 +113,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
   });
 
   /**
-  *  API for LOGIN authentication and Token generation for special users
+  *  API for LOGIN authentication and Token generation for special users (src: https://scotch.io/tutorials/authenticate-a-node-js-api-with-json-web-tokens)
   */
 
   apiRoutes.post('/special_login',function(req,res)
@@ -148,6 +150,10 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
     });
 
   });
+
+  /**
+  *  API to check and decode token
+  */
 
   apiRoutes.use(function(req, res, next) {
 
@@ -194,6 +200,101 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
     });
   });
 
+  /**
+  *  API to add a user to the database
+  */
+
+  //TODO: Add checks for the request being made by a special user only
+
+  apiRoutes.post('/add_user', function(req, res) {
+    var password = crypto.createHash('sha1').update(req.body.password).digest('hex'); // Hash the string password to SHA-1
+    
+    users.find({"unique_id":req.body.unique_id}).toArray(function(err,result)
+    {
+      if (err)
+        throw err;
+
+      if (result.length == 0)
+        users.insert({"unique_id":req.body.unique_id,"name":req.body.name,"password":password,"department":req.body.department,"contact_info":req.body.contact_info,"tags":req.body.tags,"course_list":req.body.course_list,"complaint_list":[]},function(err,result1)
+        {
+          if (err)
+            throw err;
+
+            res.send({success:true,message:"User Added Successfully"});
+        });    
+      else
+        res.send({success:false,message:"User Already Exists"});
+    });
+  });
+
+  /**
+  *  API to delete a user from the database
+  */
+
+  apiRoutes.post('/delete_user', function(req, res) {
+    
+    users.find({"unique_id":req.body.unique_id}).toArray(function(err,result)
+    {
+      if (err)
+        throw err;
+
+      if (result.length != 0)
+        users.remove({"unique_id":req.body.unique_id},function(err,result1)
+        {
+          if (err)
+            throw err;
+
+            res.send({success:true,message:"User Deleted Successfully"});
+        });    
+      else
+        res.send({success:false,message:"User Not Found"});
+    });
+  });
+
+  /**
+  *  API to update the details of a user
+  */
+
+  apiRoutes.post('/update_user_details', function(req, res) {
+    var password = crypto.createHash('sha1').update(req.body.password).digest('hex'); // Hash the string password to SHA-1
+    
+    users.find({"unique_id":req.body.unique_id}).toArray(function(err,result)
+    {
+      if (err)
+        throw err;
+
+      if (result.length == 0)
+        users.insert({"unique_id":req.body.unique_id,"name":req.body.name,"password":password,"department":req.body.department,"contact_info":req.body.contact_info,"tags":req.body.tags,"course_list":req.body.course_list,"complaint_list":[]},function(err,result1)
+        {
+          if (err)
+            throw err;
+
+            res.send({success:true,message:"User Added Successfully"});
+        });    
+      else
+        res.send({success:false,message:"User Already Exists"});
+    });
+  });
+
+  /**
+  *  API to get list of complaints of a user
+  */
+
+  // parameter passed in URL as /api/complaintlist?unique_id=<unique_id_of_the_user>
+
+  apiRoutes.get('/complaintlist', function(req, res) {
+    
+    users.find({"unique_id":req.query.unique_id}).toArray(function(err,result)
+    {
+      if (err)
+        throw err;
+
+      if (result.length == 0)
+            res.send({success:false,message:"User Not found"});
+      else
+        res.send({success:false,complaintlist:result[0].complaint_list});
+    });
+  });
 
   app.use('/api', apiRoutes);
 
