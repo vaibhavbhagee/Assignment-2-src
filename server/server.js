@@ -302,16 +302,76 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 
   apiRoutes.post('/complaint_details', function(req, res) {
 
+      (complaints.find({"complaint_id":{$in: req.body.complaint_list}}).toArray(function(err,result)
+      {
+        if (err)
+          throw err;
+
+          res.send({success:true,complaints:result});
+      }));
+  });
+
+  /**
+  *  API to get list of notifications
+  */
+
+  apiRoutes.post('/notifications', function(req, res) {
+
+      (notifications.find({"complaint_id":{$in: req.body.complaint_list}}).toArray(function(err,result)
+      {
+        if (err)
+          throw err;
+
+          res.send({success:true,notifications:result});
+      }));
+  });
+
+  /**
+  *  API to post a new Thread to a complaint
+  */
+
+  apiRoutes.post('/new_thread', function(req, res) {
+
       (complaints.find({"complaint_id":req.body.complaint_id}).toArray(function(err,result)
       {
         if (err)
           throw err;
 
         if (result.length == 0)
-          res.send({success:false,message:"Complaint not found"});
+          res.send({success:false,message:"Incorrect complaint ID"});
         else
         {
-          res.send({success:true,complaint:result[0]});
+          var thread_obj = {
+            thread_id:req.body.complaint_id+"_th"+result[0]["threads"].length,
+            complaint_id:req.body.complaint_id,
+            title:req.body.title,
+            description:req.body.description,
+            last_updated:new Date(),
+            comments:[]
+          }
+
+          result[0]["threads"].push(thread_obj); //TODO: Check for undefined symbol thread
+
+          (complaints.update({"complaint_id":req.body.complaint_id},{$set:{"threads":result[0]["threads"]}},function(err,result1)
+          {
+            if (err)
+              throw err;
+
+            var notif = {
+              complaint_id:req.body.complaint_id,
+              timestamp: new Date(),
+              content: req.decoded.name + " posted a new thread under complaint id "+req.body.complaint_id
+            }
+
+            notifications.insert(notif,function(err,result2)
+            {
+              if (err)
+                throw err;
+
+                res.send({success:true,message:"Thread Added Successfully",complaint:result[0],notification:notif});
+            });    
+
+          }));          
         }
       }));
   });
