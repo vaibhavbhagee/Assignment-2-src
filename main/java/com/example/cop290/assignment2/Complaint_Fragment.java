@@ -36,19 +36,26 @@ public class Complaint_Fragment extends Fragment {
         TextView updated_on = (TextView) view.findViewById(R.id.updated_on);
         TextView description = (TextView) view.findViewById(R.id.description);
         TextView current_authority = (TextView) view.findViewById(R.id.current_authority);
+        RelativeLayout layout = (RelativeLayout) view.findViewById(R.id.layout);
 
-        complaint_type.setText("");
-        title.setText("");
-        lodged_on.setText("");
-        updated_on.setText("");
-        description.setText("");
-        current_authority.setText("");
+        // TODO : Set these values
+        complaint_type.setText("Community");
+        title.setText("Title of the complaint");
+        lodged_on.setText("14th December 2016");
+        updated_on.setText("15th December 2016");
+        description.setText("Bla Bla Bla Bla. Ion kya kar raha hai, kya chahata hai?");
+        current_authority.setText("Current Authority");
+
+        String current_status = "resolved";
+        if(current_status.equals("resolved")) layout.setBackgroundColor(getResources().getColor(R.color.resolved));
+        else if(current_status.equals("under_resolution")) layout.setBackgroundColor(getResources().getColor(R.color.under_resolution));
+        else layout.setBackgroundColor(getResources().getColor(R.color.unresolved));
 
 
         ArrayList<fraud> list = new ArrayList<fraud>();
         // TODO : add elements to the thread list
         for(int i=0; i<10; ++i ){
-            //list.add(new fraud("Title ka naam kya hona chaiyeh?? Ion madarboard hai.\n New line karke kya milega tujhe? "+i, "Lodger "+i, "bla"));
+            list.add(new fraud("Title "+i, "Lodger "+i, "bla"));
         }
         UserAdapter adapter = new UserAdapter(getActivity(), list);
         ListView listView = (ListView) view.findViewById(R.id.listView);
