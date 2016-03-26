@@ -816,6 +816,8 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 
     var lodged_by = req.decoded.unique_id;
 
+    var lodger_name = req.decoded.name;
+
     var complaint_id = "c"+crypto.createHash('sha1').update((new Date())+"").digest('hex');
     
     if (req.body.type === "mess_complaint" || req.body.type === "maintenance_complaint" )
@@ -841,6 +843,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
               var complaint = {
                 complaint_id: complaint_id,
                 lodged_by: lodged_by,
+                lodger_name: lodger_name,
                 title: req.body.title,
                 description: req.body.description,
                 timestamp: timestamp,
@@ -883,6 +886,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
           var complaint = {
             complaint_id: complaint_id,
             lodged_by: lodged_by,
+            lodger_name: lodger_name,
             title: req.body.title,
             description: req.body.description,
             timestamp: timestamp,
@@ -930,6 +934,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
               var complaint = {
                 complaint_id: complaint_id,
                 lodged_by: lodged_by,
+                lodger_name: lodger_name,
                 title: req.body.title,
                 description: req.body.description,
                 timestamp: timestamp,
@@ -972,6 +977,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
           var complaint = {
             complaint_id: complaint_id,
             lodged_by: lodged_by,
+            lodger_name: lodger_name,
             title: req.body.title,
             description: req.body.description,
             timestamp: timestamp,
@@ -1019,6 +1025,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
               var complaint = {
                 complaint_id: complaint_id,
                 lodged_by: lodged_by,
+                lodger_name: lodger_name,
                 title: req.body.title,
                 description: req.body.description,
                 timestamp: timestamp,
@@ -1061,6 +1068,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
           var complaint = {
             complaint_id: complaint_id,
             lodged_by: lodged_by,
+            lodger_name: lodger_name,
             title: req.body.title,
             description: req.body.description,
             timestamp: timestamp,
@@ -1108,6 +1116,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
               var complaint = {
                 complaint_id: complaint_id,
                 lodged_by: lodged_by,
+                lodger_name: lodger_name,
                 title: req.body.title,
                 description: req.body.description,
                 timestamp: timestamp,
@@ -1150,6 +1159,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
           var complaint = {
             complaint_id: complaint_id,
             lodged_by: lodged_by,
+            lodger_name: lodger_name,
             title: req.body.title,
             description: req.body.description,
             timestamp: timestamp,
