@@ -41,5 +41,10 @@
         android:paddingLeft="20dp"
         android:id="@+id/lodger" />
 
-    <!-- TODO: Make the format of complaint-->
+    <TextView
+        android:id="@+id/complaint_id"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </RelativeLayout>

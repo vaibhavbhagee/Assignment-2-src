@@ -16,6 +16,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -112,15 +114,7 @@ public class MainActivity extends AppCompatActivity
                     .commit();
 
         } else if (id == R.id.nav_logout) {
-            //TODO : Logout here
-            sharedpreferences = getSharedPreferences(SharedPref, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedpreferences.edit();
-            editor.putString("kerbID", "");
-            editor.putString("password", "");
-            editor.commit();
-
-            Intent intent = new Intent(thisContext, LoginActivity.class);
-            startActivity(intent);
+            logout();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -135,6 +129,19 @@ public class MainActivity extends AppCompatActivity
 
     public void navigate_to_complaint(View view) {
         //TODO : Navigate to the individual complaint page
+        RelativeLayout rl = (RelativeLayout)view;
+        TextView t = (TextView) rl.findViewById(R.id.complaint_id);
+    }
+
+    private void logout() {
+        sharedpreferences = getSharedPreferences(SharedPref, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString("kerbID", "");
+        editor.putString("password", "");
+        editor.commit();
+        //TODO : Logout Properly!!!!!!!
+        Intent intent = new Intent(thisContext, LoginActivity.class);
+        startActivity(intent);
     }
 }
 

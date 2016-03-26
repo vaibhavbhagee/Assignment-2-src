@@ -6,7 +6,9 @@
     <color name="colorAccent">#FF4081</color>
     -->
 
-    <color name="unresolved"></color>
+    <color name="unresolved">#ffd4cc</color>
+    <color name="under_resolution">#fffdcc</color>
+    <color name="resolved">#ccffcc</color>
 
     <color name="colorPrimary">#303030</color>
     <color name="colorPrimaryDark">#212121</color>
