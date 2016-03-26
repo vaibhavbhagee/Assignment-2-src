@@ -1201,8 +1201,8 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
           }
           else
           {
-
-            result[0]["current_level"] = result[0]["hierarchy"][Object.keys(result[0]["hierarchy"])[result[0]["current_level_index"]-1]];            
+            var hierarchy = result[0]["authority_hierarchy"];
+            result[0]["current_level"] = hierarchy[Object.keys(hierarchy)[result[0]["current_level_index"]-1]];            
             result[0]["current_level_index"] = result[0]["current_level_index"]-1;
 
           (complaints.update({"complaint_id":req.body.complaint_id},{$set:result[0]},function(err,result1)
@@ -1221,7 +1221,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
               if (err)
                 throw err;
 
-                users.update({"unique_id":{$in: [current_level]}},{ $addToSet: { complaint_list: complaint_id } },function(err,result2)
+                users.update({"unique_id":{$in: [result[0]["current_level"]]}},{ $addToSet: { complaint_list: req.body.complaint_id } },function(err,result2)
                 {
                   if (err)
                     throw err;
