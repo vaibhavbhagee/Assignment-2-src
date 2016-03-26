@@ -8,4 +8,12 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="planets_array">
+        <item>Maintainence</item>
+        <item>Mess</item>
+        <item>Student Welfare</item>
+        <item>Infrastructure</item>
+
+    </string-array>
 </resources>

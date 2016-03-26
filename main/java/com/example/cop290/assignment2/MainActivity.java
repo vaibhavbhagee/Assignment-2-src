@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -142,6 +143,13 @@ public class MainActivity extends AppCompatActivity
         //TODO : Logout Properly!!!!!!!
         Intent intent = new Intent(thisContext, LoginActivity.class);
         startActivity(intent);
+    }
+
+    public void submit_new_complaint(View view) {
+        // TODO : Submit new complaint
+        RelativeLayout parent = (RelativeLayout)view.getParent();
+        EditText title = (EditText) parent.findViewById(R.id.title);
+        EditText description = (EditText) parent.findViewById(R.id.description);
     }
 }
 
