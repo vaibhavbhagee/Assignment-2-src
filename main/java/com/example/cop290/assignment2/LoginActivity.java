@@ -66,49 +66,15 @@ public class LoginActivity extends AppCompatActivity {
         editor.commit();
 
 
+        LoadData loadDataObject = new LoadData();
+        loadDataObject.setContext(thisContext);
+        loadDataObject.login_request(kerberosIDString,passwordString);
 
 
-            //The following event handler listens for response from server and takes appropriate action
+        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+        startActivity(intent);
 
-            final String ServerURL = "http://cm-system-iitd.herokuapp.com/api/login";
-
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, ServerURL,
-                    new Response.Listener<String>() {
-                        @Override
-                        //On valid response
-                        public void onResponse(String response) {
-
-                            Intent intent = new Intent(thisContext, MainActivity.class);
-                            System.out.println(response);
-                            Bundle b = new Bundle();
-                            startActivity(intent);
-
-                        }
-                    },
-                    //Launched when server return error
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(LoginActivity.this, "Server Error. Please check your internet connection.", Toast.LENGTH_LONG).show();
-                        }
-                    }) {
-                @Override
-                //Organises data as JSON to be sent to server through POST request
-                protected Map<String, String> getParams() {
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put("username", ((EditText) findViewById(R.id.kerbID)).getText().toString());
-                    params.put("password", ((EditText) findViewById(R.id.password)).getText().toString());
-                    return params;
-                }
-
-            };
-            //Manages the queue of requests
-            RequestQueue requestQueue = Volley.newRequestQueue(this);
-            requestQueue.add(stringRequest);
-
-
-
-
+        //TODO: Unsuccesful login, Store token in Shared Preferences
 
 
        /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
