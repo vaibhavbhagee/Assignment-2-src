@@ -432,7 +432,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
   });
 
   /**
-  *  API to post a new Comment to a thread of a complaint
+  *  API to mark a complaint as resolved
   */
 
   apiRoutes.post('/mark_resolved', function(req, res) {
@@ -475,6 +475,108 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
             });    
 
           }));          
+        }
+      }));
+  });
+
+  /**
+  *  API to relodge a complaint with the same authority
+  */
+
+  apiRoutes.post('/relodge_same_authority', function(req, res) {
+
+      (complaints.find({"complaint_id":req.body.complaint_id}).toArray(function(err,result) // Fetch the required complaint
+      {
+        if (err)
+          throw err;
+
+        if (result.length == 0)
+          res.send({success:false,message:"Incorrect complaint ID"});
+        else
+        {
+          var status = "unresolved";
+
+          result[0]["current_status"] = status;
+
+          (complaints.update({"complaint_id":req.body.complaint_id},{$set:{"current_status":status}},function(err,result1)
+          {
+            if (err)
+              throw err;
+
+            var notif = {
+              complaint_id:req.body.complaint_id,
+              timestamp: new Date(),
+              content: req.decoded.name + " relodged the complaint with "+result[0]["current_level"]
+            }
+
+            notifications.insert(notif,function(err,result2)
+            {
+              if (err)
+                throw err;
+
+                res.send({success:true,message:"Complaint Relodged Successfully",complaint:result[0],notification:notif});
+            });    
+
+          }));          
+        }
+      }));
+  });
+
+  /**
+  *  API to vote
+  */
+
+  apiRoutes.post('/vote', function(req, res) {
+
+      (complaints.find({"complaint_id":req.body.complaint_id}).toArray(function(err,result) // Fetch the required complaint
+      {
+        if (err)
+          throw err;
+
+        if (result.length == 0)
+          res.send({success:false,message:"Incorrect complaint ID"});
+        else
+        {
+          var flag = false;
+          for( var i = 0; i < result[0]["votes"]["voted"].length; i++)
+          {
+            if (result[0]["votes"]["voted"][i] === req.decoded.unique_id)
+            {
+              res.send({success:false,message:"Already Voted"});
+              flag = true;
+            }
+          }
+          
+          if(!flag)
+          {
+            if (req.body.type === "upvote")
+              result[0]["votes"]["upvotes"]+=1;
+            else
+              result[0]["votes"]["downvotes"]+=1;
+
+            result[0]["votes"]["voted"].push(req.decoded.unique_id);
+
+            (complaints.update({"complaint_id":req.body.complaint_id},{$set:result[0]},function(err,result1)
+            {
+              if (err)
+                throw err;
+
+              var notif = {
+                complaint_id:req.body.complaint_id,
+                timestamp: new Date(),
+                content: req.decoded.name + " "+req.body.type+"d the complaint "+req.body.complaint_id
+              }
+
+              notifications.insert(notif,function(err,result2)
+              {
+                if (err)
+                  throw err;
+
+                  res.send({success:true,message:"Voted Successfully",complaint:result[0],notification:notif});
+              });    
+
+            }));
+          }          
         }
       }));
   });
