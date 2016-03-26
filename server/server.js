@@ -200,7 +200,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
   });
 
   apiRoutes.get('/', function(req, res) {
-    res.send({ message: 'Welcome to the coolest API on earth!' });
+    res.send({ message: 'Welcome to the Complaints Management System!' });
   });
 
   /**
@@ -828,12 +828,12 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
         var timestamp = {lodging:new Date(),update:new Date()};
 
-        users.update({"tags":{$in: [req.decoded.tags[0]]}},{ $push: { complaint_list: complaint_id } },{ multi: true },function(err,result)
+        users.update({"tags":{$in: [req.decoded.tags[0]]}},{ $addToSet: { complaint_list: complaint_id } },{ multi: true },function(err,result)
         {
           if (err)
             throw err;
 
-            users.update({"unique_id":{$in: [current_level]}},{ $push: { complaint_list: complaint_id } },function(err,result2)
+            users.update({"unique_id":{$in: [current_level]}},{ $addToSet: { complaint_list: complaint_id } },function(err,result2)
             {
               if (err)
                 throw err;
@@ -875,7 +875,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
         var timestamp = {lodging:new Date(),update:new Date()};
 
-        users.update({"unique_id":{$in: [current_level,lodged_by]}},{ $push: { complaint_list: complaint_id } },function(err,result2)
+        users.update({"unique_id":{$in: [current_level,lodged_by]}},{ $addToSet: { complaint_list: complaint_id } },function(err,result2)
         {
           if (err)
             throw err;
@@ -917,12 +917,12 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
         var timestamp = {lodging:new Date(),update:new Date()};
 
-        users.update({"tags":{$in: [req.decoded.tags[1]]}},{ $push: { complaint_list: complaint_id } },{ multi: true },function(err,result)
+        users.update({"tags":{$in: [req.decoded.tags[1]]}},{ $addToSet: { complaint_list: complaint_id } },{ multi: true },function(err,result)
         {
           if (err)
             throw err;
 
-            users.update({"unique_id":{$in: [current_level]}},{ $push: { complaint_list: complaint_id } },function(err,result2)
+            users.update({"unique_id":{$in: [current_level]}},{ $addToSet: { complaint_list: complaint_id } },function(err,result2)
             {
               if (err)
                 throw err;
@@ -964,7 +964,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
         var timestamp = {lodging:new Date(),update:new Date()};
 
-        users.update({"unique_id":{$in: [current_level,lodged_by]}},{ $push: { complaint_list: complaint_id } },function(err,result2)
+        users.update({"unique_id":{$in: [current_level,lodged_by]}},{ $addToSet: { complaint_list: complaint_id } },function(err,result2)
         {
           if (err)
             throw err;
@@ -1006,12 +1006,12 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
         var timestamp = {lodging:new Date(),update:new Date()};
 
-        users.update({"course_list":{$in: [req.body.course_id]}},{ $push: { complaint_list: complaint_id } },{ multi: true },function(err,result)
+        users.update({"course_list":{$in: [req.body.course_id]}},{ $addToSet: { complaint_list: complaint_id } },{ multi: true },function(err,result)
         {
           if (err)
             throw err;
 
-            users.update({"unique_id":{$in: [current_level]}},{ $push: { complaint_list: complaint_id } },function(err,result2)
+            users.update({"unique_id":{$in: [current_level]}},{ $addToSet: { complaint_list: complaint_id } },function(err,result2)
             {
               if (err)
                 throw err;
@@ -1053,7 +1053,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
         var timestamp = {lodging:new Date(),update:new Date()};
 
-        users.update({"unique_id":{$in: [current_level,lodged_by]}},{ $push: { complaint_list: complaint_id } },function(err,result2)
+        users.update({"unique_id":{$in: [current_level,lodged_by]}},{ $addToSet: { complaint_list: complaint_id } },function(err,result2)
         {
           if (err)
             throw err;
@@ -1095,12 +1095,12 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
         var timestamp = {lodging:new Date(),update:new Date()};
 
-        users.update({},{ $push: { complaint_list: complaint_id } },{ multi: true },function(err,result)
+        users.update({},{ $addToSet: { complaint_list: complaint_id } },{ multi: true },function(err,result)
         {
           if (err)
             throw err;
 
-            users.update({"unique_id":{$in: [current_level]}},{ $push: { complaint_list: complaint_id } },function(err,result2)
+            users.update({"unique_id":{$in: [current_level]}},{ $addToSet: { complaint_list: complaint_id } },function(err,result2)
             {
               if (err)
                 throw err;
@@ -1142,7 +1142,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
         var timestamp = {lodging:new Date(),update:new Date()};
 
-        users.update({"unique_id":{$in: [current_level,lodged_by]}},{ $push: { complaint_list: complaint_id } },function(err,result2)
+        users.update({"unique_id":{$in: [current_level,lodged_by]}},{ $addToSet: { complaint_list: complaint_id } },function(err,result2)
         {
           if (err)
             throw err;
@@ -1221,7 +1221,12 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
               if (err)
                 throw err;
 
-                res.send({success:true,message:"Complaint Relodged Successfully",complaint:result[0],notification:notif});
+                users.update({"unique_id":{$in: [current_level]}},{ $addToSet: { complaint_list: complaint_id } },function(err,result2)
+                {
+                  if (err)
+                    throw err;
+                  res.send({success:true,message:"Complaint Relodged Successfully",complaint:result[0],notification:notif});
+                });
             });    
 
           })); 
