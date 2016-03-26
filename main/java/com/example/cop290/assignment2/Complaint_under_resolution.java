@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -54,20 +55,25 @@ public class Complaint_under_resolution extends Fragment {
             }
             // TODO : populate the elements of the list view here
 
-            // TextView slno = (TextView) convertView.findViewById(R.id.slno);
-            // slno.setText((position+1)+"");
+            TextView slno = (TextView) convertView.findViewById(R.id.slno);
+            TextView title = (TextView) convertView.findViewById(R.id.title);
+            TextView lodger = (TextView) convertView.findViewById(R.id.lodger);
+
+            slno.setText((position+1)+"");
+            title.setText(item.title);
+            lodger.setText(item.lodger);
 
             return convertView;
         }
     }
     public class fraud
     {
-        public String notification;
-        public String time;
+        public String title;
+        public String lodger;
 
-        public fraud(String notification,String time) {
-            this.notification = notification;
-            this.time = time;
+        public fraud(String title,String lodger) {
+            this.title = title;
+            this.lodger = lodger;
         }
     }
 }

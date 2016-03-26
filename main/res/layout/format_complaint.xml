@@ -1,9 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+    android:onClick="navigate_to_complaint"
     android:id="@+id/layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="1"
+        android:textColor="#528812"
+        android:textSize="60dp"
+        android:paddingTop="20dp"
+        android:paddingLeft="20dp"
+        android:id="@+id/slno" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Title"
+        android:paddingTop="20dp"
+        android:textSize="25dp"
+        android:textStyle="italic"
+        android:layout_toRightOf="@+id/slno"
+        android:paddingLeft="20dp"
+        android:id="@+id/title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Lodger"
+        android:textSize="18dp"
+        android:paddingBottom="20dp"
+        android:layout_toRightOf="@+id/slno"
+        android:layout_below="@+id/title"
+        android:paddingLeft="20dp"
+        android:id="@+id/lodger" />
 
     <!-- TODO: Make the format of complaint-->
 </RelativeLayout>

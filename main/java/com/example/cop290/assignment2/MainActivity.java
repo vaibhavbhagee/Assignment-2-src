@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -115,6 +116,10 @@ public class MainActivity extends AppCompatActivity
 
     private void on_refresh() {
         //TODO : On refresh kya karna hai???
+    }
+
+    public void navigate_to_complaint(View view) {
+        //TODO : Navigate to the individual complaint page
     }
 }
 

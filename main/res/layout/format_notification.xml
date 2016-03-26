@@ -6,35 +6,39 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/slno"
-        android:textSize="60dp"
-        android:paddingLeft="20dp"
-        android:paddingTop="15dp"
-        android:textColor="#528812"
-        android:paddingBottom="0dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1" />
-    <TextView
-        android:layout_marginTop="0dp"
-        android:layout_below="@+id/time"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="80dp"
-        android:id="@+id/notification"
-        android:minHeight="50dp"
-        android:maxHeight="50dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=" notification " />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="1"
+        android:textColor="#528812"
+        android:textSize="60dp"
+        android:paddingTop="20dp"
+        android:paddingLeft="20dp"
+        android:id="@+id/slno" />
 
     <TextView
-        android:id="@+id/time"
-        android:paddingTop="20dp"
-        android:gravity="right"
-        android:paddingRight="20dp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" time " />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Description"
+        android:paddingTop="20dp"
+        android:textSize="25dp"
+        android:textStyle="italic"
+        android:layout_toRightOf="@+id/slno"
+        android:paddingLeft="20dp"
+        android:id="@+id/description" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Time Stamp"
+        android:textSize="18dp"
+        android:paddingBottom="20dp"
+        android:layout_toRightOf="@+id/slno"
+        android:layout_below="@+id/description"
+        android:paddingLeft="20dp"
+        android:id="@+id/time" />
 
 
 </RelativeLayout>
