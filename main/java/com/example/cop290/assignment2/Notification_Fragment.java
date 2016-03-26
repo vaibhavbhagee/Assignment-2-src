@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 
 
@@ -31,9 +33,13 @@ public class Notification_Fragment extends Fragment {
         ArrayList<fraud> list = new ArrayList<fraud>();
 
         // TODO : add elements to the list
-        // for(int i=0; i<something.length; ++i ){
-        //     list.add(new fraud(bla, bla, bla));
-        // }
+        for(int i=0; i<10; ++i ){
+            list.add(new fraud("Description "+i, "time "+i, "bla"));
+        }
+        if(list.size()==0){
+            TextView t = (TextView) view.findViewById(R.id.no_notification);
+            t.setVisibility(View.VISIBLE);
+        }
 
         UserAdapter adapter = new UserAdapter(getActivity(), list);
         ListView listView = (ListView) view.findViewById(R.id.listView);
@@ -54,20 +60,29 @@ public class Notification_Fragment extends Fragment {
             }
             // TODO : populate the elements of the list view here
 
-            // TextView slno = (TextView) convertView.findViewById(R.id.slno);
-            // slno.setText((position+1)+"");
+            TextView slno = (TextView) convertView.findViewById(R.id.slno);
+            TextView desc = (TextView) convertView.findViewById(R.id.description);
+            TextView time = (TextView) convertView.findViewById(R.id.time);
+            TextView complaint_id = (TextView) convertView.findViewById(R.id.complaint_id);
+
+            slno.setText((position+1)+"");
+            desc.setText(item.desc);
+            time.setText(item.time);
+            complaint_id.setText(item.complaint_id);
 
             return convertView;
         }
     }
     public class fraud
     {
-        public String notification;
+        public String desc;
         public String time;
+        public String complaint_id;
 
-        public fraud(String notification,String time) {
-            this.notification = notification;
+        public fraud(String desc,String time, String complaint_id) {
+            this.desc = desc;
             this.time = time;
+            this.complaint_id = complaint_id;
         }
     }
 }

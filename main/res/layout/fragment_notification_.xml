@@ -6,8 +6,18 @@
 
     <ListView
         android:id="@+id/listView"
+        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </ListView>
+    <TextView
+        android:id="@+id/no_notification"
+        android:visibility="invisible"
+        android:layout_marginTop="78dp"
+        android:textSize="28dp"
+        android:textAlignment="center"
+        android:text="Yay! No Notification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </FrameLayout>

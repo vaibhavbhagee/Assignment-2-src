@@ -1,5 +1,8 @@
 package com.example.cop290.assignment2;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -12,9 +15,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static final String SharedPref = "MahPrefs";
+    SharedPreferences sharedpreferences;
+    Context thisContext = this;
 
     SwipeRefreshLayout swipeRefreshLayout;
 
@@ -104,7 +114,7 @@ public class MainActivity extends AppCompatActivity
                     .commit();
 
         } else if (id == R.id.nav_logout) {
-            //TODO : Logout here
+            logout();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -115,6 +125,23 @@ public class MainActivity extends AppCompatActivity
 
     private void on_refresh() {
         //TODO : On refresh kya karna hai???
+    }
+
+    public void navigate_to_complaint(View view) {
+        //TODO : Navigate to the individual complaint page
+        RelativeLayout rl = (RelativeLayout)view;
+        TextView t = (TextView) rl.findViewById(R.id.complaint_id);
+    }
+
+    private void logout() {
+        sharedpreferences = getSharedPreferences(SharedPref, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString("kerbID", "");
+        editor.putString("password", "");
+        editor.commit();
+        //TODO : Logout Properly!!!!!!!
+        Intent intent = new Intent(thisContext, LoginActivity.class);
+        startActivity(intent);
     }
 }
 

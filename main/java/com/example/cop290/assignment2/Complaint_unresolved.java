@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -31,9 +33,9 @@ public class Complaint_unresolved extends Fragment {
         ArrayList<fraud> list = new ArrayList<fraud>();
 
         // TODO : add elements to the list
-        // for(int i=0; i<something.length; ++i ){
-        //     list.add(new fraud(bla, bla, bla));
-        // }
+        for(int i=0; i<10; ++i ){
+            list.add(new fraud("Title ka naam kya hona chaiyeh?? Ion madarboard hai.\n New line karke kya milega tujhe? "+i, "Lodger "+i, "bla"));
+        }
 
         UserAdapter adapter = new UserAdapter(getActivity(), list);
         ListView listView = (ListView) view.findViewById(R.id.listView);
@@ -54,20 +56,31 @@ public class Complaint_unresolved extends Fragment {
             }
             // TODO : populate the elements of the list view here
 
-            // TextView slno = (TextView) convertView.findViewById(R.id.slno);
-            // slno.setText((position+1)+"");
+            TextView slno = (TextView) convertView.findViewById(R.id.slno);
+            TextView title = (TextView) convertView.findViewById(R.id.title);
+            TextView lodger = (TextView) convertView.findViewById(R.id.lodger);
+            RelativeLayout layout = (RelativeLayout) convertView.findViewById(R.id.layout);
+            TextView complaint_id = (TextView) convertView.findViewById(R.id.complaint_id);
+
+            slno.setText((position+1)+"");
+            title.setText(item.title);
+            lodger.setText(item.lodger);
+            layout.setBackgroundColor(getResources().getColor(R.color.unresolved));
+            complaint_id.setText(item.complaint_id);
 
             return convertView;
         }
     }
     public class fraud
     {
-        public String notification;
-        public String time;
+        public String title;
+        public String lodger;
+        public String complaint_id;
 
-        public fraud(String notification,String time) {
-            this.notification = notification;
-            this.time = time;
+        public fraud(String title,String lodger, String complaint_id) {
+            this.title = title;
+            this.lodger = lodger;
+            this.complaint_id = complaint_id;
         }
     }
 }
