@@ -8,7 +8,160 @@ var crypto = require('crypto');
 
 var secret = "vaibhavshreyanaayancop290assignment2";
 
-//TODO: Add Hierarchy JSON object here
+var hierarchy_json = {
+          "mess_complaint":{
+                  "kumaon":{
+                        "director":"director_id",
+                        "dosa":"dosa_id",
+                        "asso_dean_hm":"asso_dean_hm_id",
+                        "warden":"warden_kumaon_id",
+                        "house_secy":"house_secy_kumaon_id",
+                        "mess_secy":"mess_secy_kumaon_id"
+                  },
+                  "vindhyachal":{
+                        "director":"director_id",
+                        "dosa":"dosa_id",
+                        "asso_dean_hm":"asso_dean_hm_id",
+                        "warden":"warden_vindhyachal_id",
+                        "house_secy":"house_secy_vindhyachal_id",
+                        "mess_secy":"mess_secy_vindhyachal_id"
+                  }
+          },
+          "maintenance_complaint":{
+                  "kumaon":{
+                        "director":"director_id",
+                        "dosa":"dosa_id",
+                        "asso_dean_hm":"asso_dean_hm_id",
+                        "warden":"warden_kumaon_id",
+                        "house_secy":"house_secy_kumaon_id",
+                        "maintenance_secy":"maintenance_secy_kumaon_id"
+                  },
+                  "vindhyachal":{
+                        "director":"director_id",
+                        "dosa":"dosa_id",
+                        "assodean_hm":"assodean_hm_id",
+                        "warden":"warden_vindhyachal_id",
+                        "housesecy":"housesecy_vindhyachal_id",
+                        "maintenance_secy":"maintenance_secy_vindhyachal_id"
+                  }
+          },
+          "welfare_complaint":{
+                  "director":"director_id",
+                  "dosa":"dosa_id",
+                  "president_sac":"president_sac_id",
+                  "sac_gensec":"sac_gensec_id",
+                  "bsw_gensec":"bsw_gensec_id"
+          },
+          "infrastructure_complaint":{
+                  "director":"director_id",
+                  "dosa":"dosa_id",
+                  "president_sac":"president_sac_id",
+                  "sac_gensec":"sac_gensec_id",
+                  "bhm_gensec":"bhm_gensec_id"
+          },
+          "course_complaint":{
+                  "cop290":{
+                        "director":"director_id",
+                        "doa":"doa_id",
+                        "hod":"hod_cse_id",
+                        "course_coordinator":"course_coordinator_cop290_id"
+                  },
+                  "col202":{
+                        "director":"director_id",
+                        "doa":"doa_id",
+                        "hod":"hod_cse_id",
+                        "course_coordinator":"course_coordinator_col202_id"
+                  },
+                  "ell231":{
+                        "director":"director_id",
+                        "doa":"doa_id",
+                        "hod":"hod_ee_id",
+                        "course_coordinator":"course_coordinator_ell231_id"
+                  }
+          },
+          "nnn_complaint":{
+            "nso":{
+                  "director":"director_id",
+                  "doa":"doa_id",
+                  "president_nso":"president_nso_id",
+                  "gensec_nso":"gensec_nso_id"
+            },
+            "ncc":{
+                  "director":"director_id",
+                  "doa":"doa_id",
+                  "president_ncc":"president_ncc_id",
+                  "gensec_ncc":"gensec_ncc_id"
+            },
+            "nss":{
+                  "director":"director_id",
+                  "doa":"doa_id",
+                  "president_nss":"president_nss_id",
+                  "gensec_nss":"gensec_nss_id"
+            }
+          },
+          "security_complaint":{
+                  "director":"director_id",
+                  "security_officer":"security_officer_id"
+          }
+};
+
+var input_users = [
+//MESS COMPLAINT
+{"unique_id":"cs5140297","name":"Vaibhav Bhagee","password":"d7218156761eff363a67505eca3fd90fde37ce08","department":"cse","contact_info":"9999988888","tags":["vindhyachal","nss"],"course_list":["cop290","col226"],"complaint_list":[]}
+,
+{"unique_id":"director_id","name":"Director","password":"b85b179882f31c43324ef124feaa3dd4ddae2915","department":"cse","contact_info":"9999988889","tags":[],"course_list":[],"complaint_list":[]}
+,
+{"unique_id":"dosa_id","name":"Dosa","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"ee","contact_info":"9999988890","tags":[],"course_list":[],"complaint_list":[]}
+,
+{"unique_id":"asso_dean_hm_id","name":"Asso Dean HM","password":"ce0dae246586bc69f8a98a6592184ceceda49185","department":"ee","contact_info":"9999988891","tags":[],"course_list":[],"complaint_list":[]}
+,
+{"unique_id":"warden_kumaon_id","name":"Dosa","password":"d51d283f6542727e2904e68c828b091f8460c5dd","department":"ee","contact_info":"9999988892","tags":[],"course_list":[],"complaint_list":[]}
+,
+{"unique_id":"house_secy_kumaon_id","name":"House Secy Kumaon","password":"48abcff594f9be1ff4b1d5a983f84d072798a8b6","department":"ee","contact_info":"9999988893","tags":["kumaon","nss"],"course_list":["ell231"],"complaint_list":[]}
+ ,   //Kumaon
+{"unique_id":"mess_secy_kumaon_id","name":"Mess Secy Kumaon","password":"2563f6aed4c92a732169c7e1195d46b589565c6d","department":"ee","contact_info":"9999988894","tags":["kumaon","nso"],"course_list":["cop290"],"complaint_list":[]}
+  ,  //Vindy
+{"unique_id":"mess_secy_vindhyachal_id","name":"Mess Secy Vindhyachal","password":"867b72ec6dd6c43e60422d54c7cedd7411e1c2bf","department":"cse","contact_info":"9999988895","tags":["vindhyachal","nso"],"course_list":["cop290"],"complaint_list":[]}
+//MAINTENANCE COMPLAINT
+,    //Kumaon
+{"unique_id":"maintenance_secy_kumaon_id","name":"Maintenance Secy Kumaon","password":"1c870916e3e44e3f496ffbcc8bc88f2973a74667","department":"cse","contact_info":"9999988896","tags":["kumaon","ncc"],"course_list":["cop290","col202"],"complaint_list":[]}
+,    //Vindy
+{"unique_id":"maintenance_secy_vindhyachal_id","name":"Maintenance Secy Vindhyachal","password":"e53633a42b35eff05d273f06a40fa8a72b0d1425","department":"cse","contact_info":"9999988897","tags":["vindhyachal","nss"],"course_list":["cop290","ell231"],"complaint_list":[]}
+,//WELFARE COMPLAINT
+{"unique_id":"president_sac_id","name":"President SAC","password":"5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8","department":"cse","contact_info":"9999988898","tags":[],"course_list":[],"complaint_list":[]}
+,
+{"unique_id":"sac_gensec_id","name":"SAC GenSec","password":"5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8","department":"ee","contact_info":"9999988899","tags":["kumaon","nso"],"course_list":["cop290"],"complaint_list":[]}
+,
+{"unique_id":"bsw_gensec_id","name":"BSW GenSec","password":"5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8","department":"ee","contact_info":"9999988900","tags":["vindhyachal","ncc"],"course_list":["ell231"],"complaint_list":[]}
+,//INFRASTRUCTURE COMPLAINT
+{"unique_id":"bhm_gensec_id","name":"BHM GenSec","password":"5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8","department":"ee","contact_info":"9999988901","tags":["vindhyachal","nss"],"course_list":["col202"],"complaint_list":[]}
+,//COURSE COMPLAINT
+{"unique_id":"doa_id","name":"Doa","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"ee","contact_info":"9999988902","tags":[],"course_list":[],"complaint_list":[]}
+,//CSE
+{"unique_id":"hod_cse_id","name":"HOD CSE","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"cse","contact_info":"9999988903","tags":[],"course_list":[],"complaint_list":[]}
+,
+{"unique_id":"course_coordinator_cop290_id","name":"Course Coordinator COP 290","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"cse","contact_info":"9999988904","tags":[],"course_list":["cop290"],"complaint_list":[]}
+,
+{"unique_id":"course_coordinator_col202_id","name":"Course Coordinator COL 202","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"cse","contact_info":"9999988905","tags":[],"course_list":["col202"],"complaint_list":[]}
+,//EE
+{"unique_id":"hod_ee_id","name":"HOD EE","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"ee","contact_info":"9999988906","tags":[],"course_list":[],"complaint_list":[]}
+,
+{"unique_id":"course_coordinator_ell231_id","name":"Course Coordinator ELL 231","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"ee","contact_info":"9999988907","tags":[],"course_list":["ell231"],"complaint_list":[]}
+,//NSO
+{"unique_id":"president_nso_id","name":"President NSO","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"ee","contact_info":"9999988908","tags":[],"course_list":[],"complaint_list":[]}
+,
+{"unique_id":"gensec_nso_id","name":"GenSec NSO","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"ee","contact_info":"9999988909","tags":["kumaon","nso"],"course_list":["cop290"],"complaint_list":[]}
+,//NSS
+{"unique_id":"president_nss_id","name":"President NSS","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"ee","contact_info":"9999988910","tags":[],"course_list":[],"complaint_list":[]}
+,
+{"unique_id":"gensec_nss_id","name":"GenSec NSS","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"ee","contact_info":"9999988909","tags":["kumaon","nss"],"course_list":["cop290"],"complaint_list":[]}
+,//NCC
+{"unique_id":"president_ncc_id","name":"President NCC","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"ee","contact_info":"9999988911","tags":[],"course_list":[],"complaint_list":[]}
+,
+{"unique_id":"gensec_ncc_id","name":"GenSec NCC","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"ee","contact_info":"9999988912","tags":["vindhyachal","ncc"],"course_list":["col202"],"complaint_list":[]}
+,//SECURITY
+{"unique_id":"security_officer_id","name":"Security Officer","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"cse","contact_info":"9999988913","tags":[],"course_list":[],"complaint_list":[]}
+]
 
 var port = process.env.PORT || 8081;
 
@@ -61,7 +214,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         throw err;
 
       if (result.length == 0)
-        users.insert({"unique_id":"2014CS50297","name":"Vaibhav Bhagee","password":"d7218156761eff363a67505eca3fd90fde37ce08","department":"Computer Science","contact_info":"9999988888","tags":["Vindhyachal","NSS"],"course_list":["COP290","COL226"],"complaint_list":[]},function(error,result1)
+        users.insert(input_users,function(error,result1)
         {
           if (err)
             throw err;
@@ -70,6 +223,48 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         });
       else
         res.send({success:false,message:"Database contains data which can be overwritten"});
+    });
+  });
+
+  /**
+  *  API to empty user collection
+  */
+
+  apiRoutes.get('/empty_users', function(req, res) {
+    users.remove({},function(err,result)
+    {
+      if (err)
+        throw err;
+
+        res.send({success:true,message:"User Collection Emptied successfully"});
+    });
+  });
+
+  /**
+  *  API to empty complaints collection
+  */
+
+  apiRoutes.get('/empty_complaints', function(req, res) {
+    complaints.remove({},function(err,result)
+    {
+      if (err)
+        throw err;
+
+        res.send({success:true,message:"Complaints Collection Emptied successfully"});
+    });
+  });
+
+  /**
+  *  API to empty notifications collection
+  */
+
+  apiRoutes.get('/empty_notifications', function(req, res) {
+    notifications.remove({},function(err,result)
+    {
+      if (err)
+        throw err;
+
+        res.send({success:true,message:"Notifications Collection Emptied successfully"});
     });
   });
 
@@ -189,6 +384,34 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 //Temporary API to get users
   apiRoutes.get('/users', function(req, res) {
     users.find().toArray(function(err,result)
+    {
+      if (err)
+        throw err;
+
+      if (result.length == 0)
+        res.send("Empty collection");
+      else
+        res.send(result);
+    });
+  });
+
+//Temporary API to get all notifications
+  apiRoutes.get('/all_notifications', function(req, res) {
+    notifications.find().toArray(function(err,result)
+    {
+      if (err)
+        throw err;
+
+      if (result.length == 0)
+        res.send("Empty collection");
+      else
+        res.send(result);
+    });
+  });
+
+//Temporary API to get complaints
+  apiRoutes.get('/all_complaints', function(req, res) {
+    complaints.find().toArray(function(err,result)
     {
       if (err)
         throw err;
@@ -577,6 +800,432 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 
             }));
           }          
+        }
+      }));
+  });
+
+  // TODO: relodge with higher authority
+
+  /**
+  *  API to make a new complaint
+  */
+
+  apiRoutes.post('/new_complaint', function(req, res) {
+
+    var hierarchy;
+
+    var lodged_by = req.decoded.unique_id;
+
+    var complaint_id = "c"+crypto.createHash('sha1').update((new Date())+"").digest('hex');
+    
+    if (req.body.type === "mess_complaint" || req.body.type === "maintenance_complaint" )
+    {  
+      hierarchy = hierarchy_json[req.body.type][(req.decoded.tags[0]).toLowerCase()];
+
+      if (req.body.is_community === true)
+      {
+        // var complaint_id = "c"+crypto.createHash('sha1').update(new Date()+"").digest('hex');
+        var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
+        var timestamp = {lodging:new Date(),update:new Date()};
+
+        users.update({"tags":{$in: [req.decoded.tags[0]]}},{ $push: { complaint_list: complaint_id } },{ multi: true },function(err,result)
+        {
+          if (err)
+            throw err;
+
+            users.update({"unique_id":{$in: [current_level]}},{ $push: { complaint_list: complaint_id } },function(err,result2)
+            {
+              if (err)
+                throw err;
+
+              var complaint = {
+                complaint_id: complaint_id,
+                lodged_by: lodged_by,
+                title: req.body.title,
+                description: req.body.description,
+                timestamp: timestamp,
+                is_community: true,
+                type: req.body.type,
+                authority_hierarchy: hierarchy,
+                current_level: current_level,
+                current_level_index: Object.keys(hierarchy).length-1,
+                current_status: "unresolved",
+                votes: {
+                  upvotes:0,
+                  downvotes:0,
+                  voted:[]
+                },
+                threads: []
+              }
+
+              complaints.insert(complaint,function(err,result1){
+
+                if (err)
+                  throw err;
+                res.send({success:true,complaint:complaint});
+
+              });
+
+            });            
+        });
+      }
+      else
+      {
+        // var complaint_id = "c"+crypto.createHash('sha1').update(new Date()).digest('hex');
+        var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
+        var timestamp = {lodging:new Date(),update:new Date()};
+
+        users.update({"unique_id":{$in: [current_level,lodged_by]}},{ $push: { complaint_list: complaint_id } },function(err,result2)
+        {
+          if (err)
+            throw err;
+
+          var complaint = {
+            complaint_id: complaint_id,
+            lodged_by: lodged_by,
+            title: req.body.title,
+            description: req.body.description,
+            timestamp: timestamp,
+            is_community: false,
+            type: req.body.type,
+            authority_hierarchy: hierarchy,
+            current_level: current_level,
+            current_level_index: Object.keys(hierarchy).length-1,
+            current_status: "unresolved",
+            threads: []
+          }
+
+          complaints.insert(complaint,function(err,result1){
+
+            if (err)
+              throw err;
+            res.send({success:true,complaint:complaint});
+
+          });
+
+        });
+
+      }
+    }
+    else if (req.body.type === "nnn_complaint" )
+    {  
+      hierarchy = hierarchy_json[req.body.type][req.decoded.tags[1]];
+
+      if (req.body.is_community === true)
+      {
+        // var complaint_id = "c"+crypto.createHash('sha1').update(new Date()).digest('hex');
+        var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
+        var timestamp = {lodging:new Date(),update:new Date()};
+
+        users.update({"tags":{$in: [req.decoded.tags[1]]}},{ $push: { complaint_list: complaint_id } },{ multi: true },function(err,result)
+        {
+          if (err)
+            throw err;
+
+            users.update({"unique_id":{$in: [current_level]}},{ $push: { complaint_list: complaint_id } },function(err,result2)
+            {
+              if (err)
+                throw err;
+
+              var complaint = {
+                complaint_id: complaint_id,
+                lodged_by: lodged_by,
+                title: req.body.title,
+                description: req.body.description,
+                timestamp: timestamp,
+                is_community: true,
+                type: req.body.type,
+                authority_hierarchy: hierarchy,
+                current_level: current_level,
+                current_level_index: Object.keys(hierarchy).length-1,
+                current_status: "unresolved",
+                votes: {
+                  upvotes:0,
+                  downvotes:0,
+                  voted:[]
+                },
+                threads: []
+              }
+
+              complaints.insert(complaint,function(err,result1){
+
+                if (err)
+                  throw err;
+                res.send({success:true,complaint:complaint});
+
+              });
+
+            });            
+        });
+      }
+      else
+      {
+        // var complaint_id = "c"+crypto.createHash('sha1').update(new Date()).digest('hex');
+        var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
+        var timestamp = {lodging:new Date(),update:new Date()};
+
+        users.update({"unique_id":{$in: [current_level,lodged_by]}},{ $push: { complaint_list: complaint_id } },function(err,result2)
+        {
+          if (err)
+            throw err;
+
+          var complaint = {
+            complaint_id: complaint_id,
+            lodged_by: lodged_by,
+            title: req.body.title,
+            description: req.body.description,
+            timestamp: timestamp,
+            is_community: false,
+            type: req.body.type,
+            authority_hierarchy: hierarchy,
+            current_level: current_level,
+            current_level_index: Object.keys(hierarchy).length-1,
+            current_status: "unresolved",
+            threads: []
+          }
+
+          complaints.insert(complaint,function(err,result1){
+
+            if (err)
+              throw err;
+            res.send({success:true,complaint:complaint});
+
+          });
+
+        });
+
+      }
+    }
+    else if (req.body.type === "course_complaint")
+    {
+      hierarchy = hierarchy_json[req.body.type][req.body.course_id];
+
+      if (req.body.is_community === true)
+      {
+        // var complaint_id = "c"+crypto.createHash('sha1').update(new Date()).digest('hex');
+        var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
+        var timestamp = {lodging:new Date(),update:new Date()};
+
+        users.update({"course_list":{$in: [req.body.course_id]}},{ $push: { complaint_list: complaint_id } },{ multi: true },function(err,result)
+        {
+          if (err)
+            throw err;
+
+            users.update({"unique_id":{$in: [current_level]}},{ $push: { complaint_list: complaint_id } },function(err,result2)
+            {
+              if (err)
+                throw err;
+
+              var complaint = {
+                complaint_id: complaint_id,
+                lodged_by: lodged_by,
+                title: req.body.title,
+                description: req.body.description,
+                timestamp: timestamp,
+                is_community: true,
+                type: req.body.type,
+                authority_hierarchy: hierarchy,
+                current_level: current_level,
+                current_level_index: Object.keys(hierarchy).length-1,
+                current_status: "unresolved",
+                votes: {
+                  upvotes:0,
+                  downvotes:0,
+                  voted:[]
+                },
+                threads: []
+              }
+
+              complaints.insert(complaint,function(err,result1){
+
+                if (err)
+                  throw err;
+                res.send({success:true,complaint:complaint});
+
+              });
+
+            });            
+        });
+      }
+      else
+      {
+        // var complaint_id = "c"+crypto.createHash('sha1').update(new Date()).digest('hex');
+        var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
+        var timestamp = {lodging:new Date(),update:new Date()};
+
+        users.update({"unique_id":{$in: [current_level,lodged_by]}},{ $push: { complaint_list: complaint_id } },function(err,result2)
+        {
+          if (err)
+            throw err;
+
+          var complaint = {
+            complaint_id: complaint_id,
+            lodged_by: lodged_by,
+            title: req.body.title,
+            description: req.body.description,
+            timestamp: timestamp,
+            is_community: false,
+            type: req.body.type,
+            authority_hierarchy: hierarchy,
+            current_level: current_level,
+            current_level_index: Object.keys(hierarchy).length-1,
+            current_status: "unresolved",
+            threads: []
+          }
+
+          complaints.insert(complaint,function(err,result1){
+
+            if (err)
+              throw err;
+            res.send({success:true,complaint:complaint});
+
+          });
+
+        });
+
+      }
+    }
+    else
+    {
+      hierarchy = hierarchy_json[req.body.type];
+
+      if (req.body.is_community === true)
+      {
+        // var complaint_id = "c"+crypto.createHash('sha1').update(new Date()).digest('hex');
+        var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
+        var timestamp = {lodging:new Date(),update:new Date()};
+
+        users.update({},{ $push: { complaint_list: complaint_id } },{ multi: true },function(err,result)
+        {
+          if (err)
+            throw err;
+
+            users.update({"unique_id":{$in: [current_level]}},{ $push: { complaint_list: complaint_id } },function(err,result2)
+            {
+              if (err)
+                throw err;
+
+              var complaint = {
+                complaint_id: complaint_id,
+                lodged_by: lodged_by,
+                title: req.body.title,
+                description: req.body.description,
+                timestamp: timestamp,
+                is_community: true,
+                type: req.body.type,
+                authority_hierarchy: hierarchy,
+                current_level: current_level,
+                current_level_index: Object.keys(hierarchy).length-1,
+                current_status: "unresolved",
+                votes: {
+                  upvotes:0,
+                  downvotes:0,
+                  voted:[]
+                },
+                threads: []
+              }
+
+              complaints.insert(complaint,function(err,result1){
+
+                if (err)
+                  throw err;
+                res.send({success:true,complaint:complaint});
+
+              });
+
+            });            
+        });
+      }
+      else
+      {
+        // var complaint_id = "c"+crypto.createHash('sha1').update(new Date()).digest('hex');
+        var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
+        var timestamp = {lodging:new Date(),update:new Date()};
+
+        users.update({"unique_id":{$in: [current_level,lodged_by]}},{ $push: { complaint_list: complaint_id } },function(err,result2)
+        {
+          if (err)
+            throw err;
+
+          var complaint = {
+            complaint_id: complaint_id,
+            lodged_by: lodged_by,
+            title: req.body.title,
+            description: req.body.description,
+            timestamp: timestamp,
+            is_community: false,
+            type: req.body.type,
+            authority_hierarchy: hierarchy,
+            current_level: current_level,
+            current_level_index: Object.keys(hierarchy).length-1,
+            current_status: "unresolved",
+            threads: []
+          }
+
+          complaints.insert(complaint,function(err,result1){
+
+            if (err)
+              throw err;
+            res.send({success:true,complaint:complaint});
+
+          });
+
+        });
+
+      }
+    }
+  });
+
+  /**
+  *  API to relodge a complaint with the next Higher authority
+  */
+
+  apiRoutes.post('/relodge_same_authority', function(req, res) {
+
+      (complaints.find({"complaint_id":req.body.complaint_id}).toArray(function(err,result) // Fetch the required complaint
+      {
+        if (err)
+          throw err;
+
+        if (result.length == 0)
+          res.send({success:false,message:"Incorrect complaint ID"});
+        else
+        {
+          var status = "unresolved";
+
+          result[0]["current_status"] = status;
+
+          if (result[0]["current_level_index"] === 0)
+          {
+            res.send({success:false,message:"Already at the highest level"})
+          }
+          else
+          {
+
+            result[0]["current_level"] = result[0]["hierarchy"][Object.keys(result[0]["hierarchy"])[result[0]["current_level_index"]-1]];            
+            result[0]["current_level_index"] = result[0]["current_level_index"]-1;
+
+          (complaints.update({"complaint_id":req.body.complaint_id},{$set:result[0]},function(err,result1)
+          {
+            if (err)
+              throw err;
+
+            var notif = {
+              complaint_id:req.body.complaint_id,
+              timestamp: new Date(),
+              content: req.decoded.name + " relodged the complaint with "+result[0]["current_level"]
+            }
+
+            notifications.insert(notif,function(err,result2)
+            {
+              if (err)
+                throw err;
+
+                res.send({success:true,message:"Complaint Relodged Successfully",complaint:result[0],notification:notif});
+            });    
+
+          })); 
+          }         
         }
       }));
   });
