@@ -132,6 +132,11 @@ public class MainActivity extends AppCompatActivity
         //TODO : Navigate to the individual complaint page
         RelativeLayout rl = (RelativeLayout)view;
         TextView t = (TextView) rl.findViewById(R.id.complaint_id);
+
+        FragmentManager mFragmentManager = getSupportFragmentManager();
+        FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+        Complaint_Fragment f = new Complaint_Fragment();
+        xfragmentTransaction.replace(R.id.content_frame, f).addToBackStack(null).commit();
     }
 
     private void logout() {

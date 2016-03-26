@@ -1,24 +1,26 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.cop290.assignment2.Complaint_Fragment">
 
     <!-- COMMON
-        title
-        description
-        type of complaint
-        lodged by
-        ## is_community?
-        time stamp (date of lodging)
-        time stamp (date of last update)
-        ## status (determined by colour)
-        current authority
-        thread list-->
+title
+description
+type of complaint
+lodged by
+## is_community?
+time stamp (date of lodging)
+time stamp (date of last update)
+## status (determined by colour)
+current authority
+thread list-->
     <!-- COMMUNITY
         Vote up vote down -->
     <!-- DO ABLES user/ authority
@@ -40,34 +42,82 @@
 
         @@ post new comment
     -->
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Title" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingLeft="20dp"
+        android:id="@+id/type"
+        android:text="Type Of Complaint" />
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:paddingTop="20dp"
+        android:paddingLeft="20dp"
+        android:id="@+id/title"
+        android:layout_below="@+id/type"  />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lodged_on"
+        android:paddingTop="20dp"
+        android:paddingLeft="20dp"
+        android:layout_below="@+id/title"
+        android:text="Lodged On: " />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/updated_on"
+        android:paddingTop="20dp"
+        android:paddingLeft="20dp"
+        android:layout_below="@+id/lodged_on"
+        android:text="Updated On: " />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingLeft="20dp"
+        android:id="@+id/description"
+        android:layout_below="@+id/updated_on"
         android:text="Description" />
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Time Stamp" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingLeft="20dp"
+        android:id="@+id/current_authority"
+        android:layout_below="@+id/description"
+
         android:text="Current Authority" />
     <ListView
         android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:paddingTop="20dp"
+        android:paddingLeft="20dp"
+        android:layout_below="@+id/current_authority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
     <EditText
         android:hint="Thread Title"
+        android:id="@+id/thread_title"
+        android:paddingTop="20dp"
+        android:paddingLeft="20dp"
         android:layout_width="wrap_content"
+        android:layout_below="@+id/listView"
         android:layout_height="wrap_content" />
     <EditText
         android:hint="Description"
+        android:paddingTop="20dp"
+        android:paddingLeft="20dp"
+        android:id="@+id/thread_description"
+        android:layout_below="@+id/thread_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+
     <android.support.design.widget.FloatingActionButton
         app:backgroundTint="@color/google_green"
         android:onClick="post_new_thread"
@@ -77,8 +127,11 @@
         android:src="@android:drawable/ic_menu_send"
         android:layout_marginLeft="@dimen/fab_margin"
         android:layout_marginRight="@dimen/fab_margin"
-        android:layout_marginTop="20dp"
-        android:layout_alignParentTop="true"
+        android:layout_alignBaseline="@+id/thread_title"
         android:layout_alignParentEnd="true" />
-</FrameLayout>
-</ScrollView>
+
+</RelativeLayout>
+
+    <!--
+    </ScrollView>
+    -->
