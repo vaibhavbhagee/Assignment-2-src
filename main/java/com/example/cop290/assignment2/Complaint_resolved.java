@@ -31,10 +31,9 @@ public class Complaint_resolved extends Fragment {
         ArrayList<fraud> list = new ArrayList<fraud>();
 
         // TODO : add elements to the list
-        // for(int i=0; i<something.length; ++i ){
-        //     list.add(new fraud(bla, bla, bla));
-        // }
-
+        for(int i=0; i<10; ++i ){
+            list.add(new fraud("Title ka naam kya hona chaiyeh?? Ion madarboard hai.\n New line karke kya milega tujhe? "+i, "Lodger "+i));
+        }
         UserAdapter adapter = new UserAdapter(getActivity(), list);
         ListView listView = (ListView) view.findViewById(R.id.listView);
         listView.setAdapter(adapter);

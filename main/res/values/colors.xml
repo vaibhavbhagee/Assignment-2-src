@@ -6,6 +6,8 @@
     <color name="colorAccent">#FF4081</color>
     -->
 
+    <color name="unresolved"></color>
+
     <color name="colorPrimary">#303030</color>
     <color name="colorPrimaryDark">#212121</color>
     <color name="colorAccent">#FF4081</color>

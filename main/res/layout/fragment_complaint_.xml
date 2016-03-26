@@ -12,22 +12,23 @@
         title
         description
         type of complaint
-        time stamp
-        status
+        lodged by
+        ## is_community?
+        time stamp (date of lodging)
+        time stamp (date of last update)
+        ## status (determined by colour)
         current authority
         thread list-->
-    <!-- INDIVIDUAL
-        ??
-    -->
     <!-- COMMUNITY
         Vote up vote down -->
-    <!-- DO ABLES
+    <!-- DO ABLES user/ authority
         @@ relodge complaint higher authority
         @@ relodge complaint same authority
         @@ mark as resolved
-
         @@ upvote
         @@ downvote
+
+        @@ post new thread
     -->
 
     <!-- THREAD
@@ -36,6 +37,8 @@
         time stamp
         posted by
         comment list
+
+        @@ post new comment
     -->
     <TextView
         android:layout_width="match_parent"
