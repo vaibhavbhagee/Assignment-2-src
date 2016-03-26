@@ -27,10 +27,10 @@ public class LoginActivity extends AppCompatActivity {
         final EditText kerbID = (EditText) findViewById(R.id.kerbID);
         final EditText password = (EditText) findViewById(R.id.password);
         sharedpreferences = getSharedPreferences(SharedPref, Context.MODE_PRIVATE);
-        kerbID.setText(sharedpreferences.getString("kerbID",""));
-        password.setText(sharedpreferences.getString("password",""));
+        kerbID.setText(sharedpreferences.getString("kerbID", ""));
+        password.setText(sharedpreferences.getString("password", ""));
 
-        if(kerbID.getText().toString() != "" || password.getText().toString() != "")
+        if( !(sharedpreferences.getString("kerbID","") == "") && !(sharedpreferences.getString("password","") == "") )
             login(kerbID,password);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

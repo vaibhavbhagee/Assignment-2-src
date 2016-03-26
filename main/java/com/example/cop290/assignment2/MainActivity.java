@@ -1,5 +1,8 @@
 package com.example.cop290.assignment2;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -16,6 +19,10 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static final String SharedPref = "MahPrefs";
+    SharedPreferences sharedpreferences;
+    Context thisContext = this;
 
     SwipeRefreshLayout swipeRefreshLayout;
 
@@ -106,6 +113,14 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_logout) {
             //TODO : Logout here
+            sharedpreferences = getSharedPreferences(SharedPref, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.putString("kerbID", "");
+            editor.putString("password", "");
+            editor.commit();
+
+            Intent intent = new Intent(thisContext, LoginActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
