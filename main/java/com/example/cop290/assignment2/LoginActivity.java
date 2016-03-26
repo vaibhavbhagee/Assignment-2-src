@@ -10,6 +10,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -53,10 +65,56 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("password", passwordString);
         editor.commit();
 
+
+
+
+            //The following event handler listens for response from server and takes appropriate action
+
+            final String ServerURL = "http://cm-system-iitd.herokuapp.com/api/login";
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, ServerURL,
+                    new Response.Listener<String>() {
+                        @Override
+                        //On valid response
+                        public void onResponse(String response) {
+
+                            Intent intent = new Intent(thisContext, MainActivity.class);
+                            System.out.println(response);
+                            Bundle b = new Bundle();
+                            startActivity(intent);
+
+                        }
+                    },
+                    //Launched when server return error
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(LoginActivity.this, "Server Error. Please check your internet connection.", Toast.LENGTH_LONG).show();
+                        }
+                    }) {
+                @Override
+                //Organises data as JSON to be sent to server through POST request
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("username", ((EditText) findViewById(R.id.kerbID)).getText().toString());
+                    params.put("password", ((EditText) findViewById(R.id.password)).getText().toString());
+                    return params;
+                }
+
+            };
+            //Manages the queue of requests
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(stringRequest);
+
+
+
+
+
+
        /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();*/
-        Intent intent = new Intent(thisContext, MainActivity.class);
-        startActivity(intent);
+     /*   Intent intent = new Intent(thisContext, MainActivity.class);
+        startActivity(intent);*/
     }
 
 
