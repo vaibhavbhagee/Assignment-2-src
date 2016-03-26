@@ -38,7 +38,7 @@ public class Tab_Fragment extends Fragment {
 
         viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
 
-        ((Toolbar)getActivity().findViewById(R.id.toolbar)).setTitle("Title Kya Rakhna Hai?");
+        ((Toolbar)getActivity().findViewById(R.id.toolbar)).setTitle("Complaint List");
 
 
         tabLayout.post(new Runnable() {

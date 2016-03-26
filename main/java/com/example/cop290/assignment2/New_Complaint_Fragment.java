@@ -3,6 +3,7 @@ package com.example.cop290.assignment2;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ public class New_Complaint_Fragment extends Fragment implements AdapterView.OnIt
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_new_complaint_, container, false);
+        ((Toolbar)getActivity().findViewById(R.id.toolbar)).setTitle("New Complaint");
         populate_spinner(view);
         return view;
     }
@@ -35,6 +37,7 @@ public class New_Complaint_Fragment extends Fragment implements AdapterView.OnIt
         spinner.setOnItemSelectedListener(this);
 
         // Spinner Drop down elements
+        // TODO: Populate the spinner list
         List<String> categories = new ArrayList<String>();
         categories.add("Automobile");
         categories.add("Business Services");

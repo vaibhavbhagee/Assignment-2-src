@@ -17,7 +17,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
@@ -155,6 +157,28 @@ public class MainActivity extends AppCompatActivity
         RelativeLayout parent = (RelativeLayout)view.getParent();
         EditText title = (EditText) parent.findViewById(R.id.title);
         EditText description = (EditText) parent.findViewById(R.id.description);
+        RadioButton r = (RadioButton) parent.findViewById((R.id.individual));
+        Spinner spin = (Spinner) parent.findViewById(R.id.spinner);
+
+        String selected_item = spin.getSelectedItem().toString();
+
+        if(r.isChecked()){
+            // kuch karo, kuch karo, inn radio buttons ka kuch karo
+        }else{
+
+        }
+    }
+
+    public void post_thread_comment(View view) {
+        // TODO : Post a new comment on a given thread
+    }
+
+    public void post_new_thread(View view) {
+        // TODO : post a new thread on a given complaint
+    }
+
+    public void navigate_to_thread(View view) {
+        // TODO : Navigate to thread
     }
 }
 

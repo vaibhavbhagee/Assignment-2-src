@@ -49,7 +49,11 @@ public class LoginActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                login(kerbID,password);
+                // login(kerbID,password);
+
+                // By pass login
+                Intent intent = new Intent(thisContext, MainActivity.class);
+                startActivity(intent);
 
             }
         });

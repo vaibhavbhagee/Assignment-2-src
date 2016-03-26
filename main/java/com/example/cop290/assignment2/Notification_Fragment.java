@@ -4,6 +4,7 @@ package com.example.cop290.assignment2;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ public class Notification_Fragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_notification_, container, false);
+        ((Toolbar)getActivity().findViewById(R.id.toolbar)).setTitle("Notifications");
         populateListView(view);
         return view;
     }
