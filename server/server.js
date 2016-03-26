@@ -865,7 +865,20 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 
                 if (err)
                   throw err;
-                res.send({success:true,complaint:complaint});
+                
+                var notif = {
+                    complaint_id:complaint_id,
+                    timestamp: new Date(),
+                    content: req.decoded.name + " relodged a new complaint."
+                  }
+
+                  notifications.insert(notif,function(err,result2)
+                  {
+                    if (err)
+                      throw err;
+
+                        res.send({success:true,message:"Complaint lodged Successfully",complaint:complaint,notification:notif});
+                  });
 
               });
 
@@ -903,7 +916,19 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 
             if (err)
               throw err;
-            res.send({success:true,complaint:complaint});
+            var notif = {
+                    complaint_id:complaint_id,
+                    timestamp: new Date(),
+                    content: req.decoded.name + " relodged a new complaint."
+                  }
+
+                  notifications.insert(notif,function(err,result2)
+                  {
+                    if (err)
+                      throw err;
+
+                        res.send({success:true,message:"Complaint lodged Successfully",complaint:complaint,notification:notif});
+                  });
 
           });
 
@@ -956,7 +981,20 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 
                 if (err)
                   throw err;
-                res.send({success:true,complaint:complaint});
+                
+                var notif = {
+                    complaint_id:complaint_id,
+                    timestamp: new Date(),
+                    content: req.decoded.name + " relodged a new complaint."
+                  }
+
+                  notifications.insert(notif,function(err,result2)
+                  {
+                    if (err)
+                      throw err;
+
+                        res.send({success:true,message:"Complaint lodged Successfully",complaint:complaint,notification:notif});
+                  });
 
               });
 
@@ -994,7 +1032,20 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 
             if (err)
               throw err;
-            res.send({success:true,complaint:complaint});
+            
+            var notif = {
+                    complaint_id:complaint_id,
+                    timestamp: new Date(),
+                    content: req.decoded.name + " relodged a new complaint."
+                  }
+
+                  notifications.insert(notif,function(err,result2)
+                  {
+                    if (err)
+                      throw err;
+
+                        res.send({success:true,message:"Complaint lodged Successfully",complaint:complaint,notification:notif});
+                  });
 
           });
 
@@ -1047,7 +1098,20 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 
                 if (err)
                   throw err;
-                res.send({success:true,complaint:complaint});
+                
+                var notif = {
+                    complaint_id:complaint_id,
+                    timestamp: new Date(),
+                    content: req.decoded.name + " relodged a new complaint."
+                  }
+
+                  notifications.insert(notif,function(err,result2)
+                  {
+                    if (err)
+                      throw err;
+
+                        res.send({success:true,message:"Complaint lodged Successfully",complaint:complaint,notification:notif});
+                  });
 
               });
 
@@ -1085,7 +1149,20 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 
             if (err)
               throw err;
-            res.send({success:true,complaint:complaint});
+            
+            var notif = {
+                    complaint_id:complaint_id,
+                    timestamp: new Date(),
+                    content: req.decoded.name + " relodged a new complaint."
+                  }
+
+                  notifications.insert(notif,function(err,result2)
+                  {
+                    if (err)
+                      throw err;
+
+                        res.send({success:true,message:"Complaint lodged Successfully",complaint:complaint,notification:notif});
+                  });
 
           });
 
@@ -1138,7 +1215,20 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 
                 if (err)
                   throw err;
-                res.send({success:true,complaint:complaint});
+
+                var notif = {
+                    complaint_id:complaint_id,
+                    timestamp: new Date(),
+                    content: req.decoded.name + " relodged a new complaint."
+                  }
+
+                  notifications.insert(notif,function(err,result2)
+                  {
+                    if (err)
+                      throw err;
+
+                        res.send({success:true,message:"Complaint lodged Successfully",complaint:complaint,notification:notif});
+                  });
 
               });
 
@@ -1176,7 +1266,20 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 
             if (err)
               throw err;
-            res.send({success:true,complaint:complaint});
+
+            var notif = {
+              complaint_id:complaint_id,
+              timestamp: new Date(),
+              content: req.decoded.name + " relodged a new complaint."
+            }
+
+            notifications.insert(notif,function(err,result2)
+            {
+              if (err)
+                throw err;
+
+                  res.send({success:true,message:"Complaint lodged Successfully",complaint:complaint,notification:notif});
+            });
 
           });
 
@@ -1184,6 +1287,65 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 
       }
     }
+  });
+
+  /**
+  *  API to relodge a complaint with the next Higher authority
+  */
+
+  apiRoutes.post('/relodge_next_authority', function(req, res) {
+
+      (complaints.find({"complaint_id":req.body.complaint_id}).toArray(function(err,result) // Fetch the required complaint
+      {
+        if (err)
+          throw err;
+
+        if (result.length == 0)
+          res.send({success:false,message:"Incorrect complaint ID"});
+        else
+        {
+          var status = "unresolved";
+
+          result[0]["current_status"] = status;
+
+          if (result[0]["current_level_index"] === 0)
+          {
+            res.send({success:false,message:"Already at the highest level"})
+          }
+          else
+          {
+            var hierarchy = result[0]["authority_hierarchy"];
+            result[0]["current_level"] = hierarchy[Object.keys(hierarchy)[result[0]["current_level_index"]-1]];            
+            result[0]["current_level_index"] = result[0]["current_level_index"]-1;
+
+          (complaints.update({"complaint_id":req.body.complaint_id},{$set:result[0]},function(err,result1)
+          {
+            if (err)
+              throw err;
+
+            var notif = {
+              complaint_id:req.body.complaint_id,
+              timestamp: new Date(),
+              content: req.decoded.name + " relodged the complaint with "+result[0]["current_level"]
+            }
+
+            notifications.insert(notif,function(err,result2)
+            {
+              if (err)
+                throw err;
+
+                users.update({"unique_id":{$in: [result[0]["current_level"]]}},{ $addToSet: { complaint_list: req.body.complaint_id } },function(err,result2)
+                {
+                  if (err)
+                    throw err;
+                  res.send({success:true,message:"Complaint Relodged Successfully",complaint:result[0],notification:notif});
+                });
+            });    
+
+          })); 
+          }         
+        }
+      }));
   });
 
   /**
