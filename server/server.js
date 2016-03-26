@@ -213,7 +213,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
       if (err)
         res.send({success:false,message:"incorrect request"});
 
-      if (result.length == 0)
+      else if (result.length == 0)
         users.insert(input_users,function(error,result1)
         {
           if (err)
@@ -235,7 +235,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
     {
       if (err)
         res.send({success:false,message:"incorrect request"});
-
+      else
         res.send({success:true,message:"User Collection Emptied successfully"});
     });
   });
@@ -249,7 +249,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
     {
       if (err)
         res.send({success:false,message:"incorrect request"});
-
+      else
         res.send({success:true,message:"Complaints Collection Emptied successfully"});
     });
   });
@@ -263,7 +263,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
     {
       if (err)
         res.send({success:false,message:"incorrect request"});
-
+      else
         res.send({success:true,message:"Notifications Collection Emptied successfully"});
     });
   });
@@ -282,7 +282,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
       if (err)
         res.send({success:false,message:"incorrect request"});
 
-      if (result.length == 0)
+      else if (result.length == 0)
         res.send({"Success":false,"Message":"Incorrect Credentials"});
       else
       {
@@ -321,7 +321,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
       if (err)
         res.send({success:false,message:"incorrect request"});
 
-      if (result.length == 0)
+      else if (result.length == 0)
         res.send({"Success":false,"Message":"Incorrect Credentials"});
       else
       {
@@ -388,7 +388,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
       if (err)
         res.send({success:false,message:"incorrect request"});
 
-      if (result.length == 0)
+      else if (result.length == 0)
         res.send("Empty collection");
       else
         res.send(result);
@@ -402,7 +402,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
       if (err)
         res.send({success:false,message:"incorrect request"});
 
-      if (result.length == 0)
+      else if (result.length == 0)
         res.send("Empty collection");
       else
         res.send(result);
@@ -416,7 +416,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
       if (err)
         res.send({success:false,message:"incorrect request"});
 
-      if (result.length == 0)
+      else if (result.length == 0)
         res.send("Empty collection");
       else
         res.send(result);
@@ -437,12 +437,12 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
       if (err)
         res.send({success:false,message:"incorrect request"});
 
-      if (result.length == 0)
+      else if (result.length == 0)
         users.insert({"unique_id":req.body.unique_id,"name":req.body.name,"password":password,"department":req.body.department,"contact_info":req.body.contact_info,"tags":req.body.tags,"course_list":req.body.course_list,"complaint_list":[]},function(err,result1)
         {
           if (err)
             res.send({success:false,message:"incorrect request"});
-
+          else
             res.send({success:true,message:"User Added Successfully"});
         });    
       else
@@ -461,12 +461,12 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
       if (err)
         res.send({success:false,message:"incorrect request"});
 
-      if (result.length != 0)
+      else if (result.length != 0)
         users.remove({"unique_id":req.body.unique_id},function(err,result1)
         {
           if (err)
             res.send({success:false,message:"incorrect request"});
-
+          else
             res.send({success:true,message:"User Deleted Successfully"});
         });    
       else
@@ -486,12 +486,12 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
       if (err)
         res.send({success:false,message:"incorrect request"});
 
-      if (result.length != 0)
+      else if (result.length != 0)
         users.update({"unique_id":req.body.unique_id},{$set:{"unique_id":req.body.unique_id,"name":req.body.name,"password":password,"department":req.body.department,"contact_info":req.body.contact_info,"tags":req.body.tags,"course_list":req.body.course_list,"complaint_list":[]}},function(err,result1)
         {
           if (err)
             res.send({success:false,message:"incorrect request"});
-
+          else
             res.send({success:true,message:"User Updated Successfully"});
         });    
       else
@@ -512,7 +512,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
       if (err)
         res.send({success:false,message:"incorrect request"});
 
-      if (result.length == 0)
+      else if (result.length == 0)
             res.send({success:false,message:"User Not found"});
       else
         res.send({success:false,complaintlist:result[0].complaint_list});
@@ -529,7 +529,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
       {
         if (err)
           res.send({success:false,message:"incorrect request"});
-
+        else
           res.send({success:true,complaints:result});
       }));
   });
@@ -544,7 +544,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
       {
         if (err)
           res.send({success:false,message:"incorrect request"});
-
+        else
           res.send({success:true,notifications:result});
       }));
   });
@@ -560,7 +560,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         if (err)
           res.send({success:false,message:"incorrect request"});
 
-        if (result.length == 0)
+        else if (result.length == 0)
           res.send({success:false,message:"Incorrect complaint ID"});
         else
         {
@@ -581,22 +581,23 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
           {
             if (err)
               res.send({success:false,message:"incorrect request"});
-
-            var notif = {
-              complaint_id:req.body.complaint_id,
-              timestamp: new Date(),
-              content: req.decoded.name + " posted a new thread under complaint id "+req.body.complaint_id
-            }
-
-            // Generate the required notification
-            notifications.insert(notif,function(err,result2)
+            else
             {
-              if (err)
-                res.send({success:false,message:"incorrect request"});
+              var notif = {
+                complaint_id:req.body.complaint_id,
+                timestamp: new Date(),
+                content: req.decoded.name + " posted a new thread under complaint id "+req.body.complaint_id
+              }
 
-                res.send({success:true,message:"Thread Added Successfully",complaint:result[0],notification:notif});
-            });    
-
+              // Generate the required notification
+              notifications.insert(notif,function(err,result2)
+              {
+                if (err)
+                  res.send({success:false,message:"incorrect request"});
+                else
+                  res.send({success:true,message:"Thread Added Successfully",complaint:result[0],notification:notif});
+              });    
+            }
           }));          
         }
       }));
@@ -613,7 +614,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         if (err)
           res.send({success:false,message:"incorrect request"});
 
-        if (result.length == 0)
+        else if (result.length == 0)
           res.send({success:false,message:"Incorrect complaint ID"});
         else
         {
@@ -634,21 +635,22 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
           {
             if (err)
               res.send({success:false,message:"incorrect request"});
-
-            var notif = {
-              complaint_id:req.body.complaint_id,
-              timestamp: new Date(),
-              content: req.decoded.name + " posted a new comment on the thread "+req.body.thread_id+" under complaint id "+req.body.complaint_id
-            }
-
-            notifications.insert(notif,function(err,result2)
+            else
             {
-              if (err)
-                res.send({success:false,message:"incorrect request"});
+              var notif = {
+                complaint_id:req.body.complaint_id,
+                timestamp: new Date(),
+                content: req.decoded.name + " posted a new comment on the thread "+req.body.thread_id+" under complaint id "+req.body.complaint_id
+              }
 
-                res.send({success:true,message:"Thread Added Successfully",complaint:result[0],notification:notif});
-            });    
-
+              notifications.insert(notif,function(err,result2)
+              {
+                if (err)
+                  res.send({success:false,message:"incorrect request"});
+                else
+                  res.send({success:true,message:"Thread Added Successfully",complaint:result[0],notification:notif});
+              });    
+            }
           }));          
         }
       }));
@@ -665,7 +667,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         if (err)
           res.send({success:false,message:"incorrect request"});
 
-        if (result.length == 0)
+        else if (result.length == 0)
           res.send({success:false,message:"Incorrect complaint ID"});
         else
         {
@@ -682,21 +684,22 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
           {
             if (err)
               res.send({success:false,message:"incorrect request"});
-
-            var notif = {
-              complaint_id:req.body.complaint_id,
-              timestamp: new Date(),
-              content: req.decoded.name + " marked the complaint "+req.body.complaint_id+" as "+status
-            }
-
-            notifications.insert(notif,function(err,result2)
+            else
             {
-              if (err)
-                res.send({success:false,message:"incorrect request"});
+              var notif = {
+                complaint_id:req.body.complaint_id,
+                timestamp: new Date(),
+                content: req.decoded.name + " marked the complaint "+req.body.complaint_id+" as "+status
+              }
 
-                res.send({success:true,message:"Complaint Status Changed Successfully",complaint:result[0],notification:notif});
-            });    
-
+              notifications.insert(notif,function(err,result2)
+              {
+                if (err)
+                  res.send({success:false,message:"incorrect request"});
+                else
+                  res.send({success:true,message:"Complaint Status Changed Successfully",complaint:result[0],notification:notif});
+              });    
+            }
           }));          
         }
       }));
@@ -713,7 +716,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         if (err)
           res.send({success:false,message:"incorrect request"});
 
-        if (result.length == 0)
+        else if (result.length == 0)
           res.send({success:false,message:"Incorrect complaint ID"});
         else
         {
@@ -725,21 +728,22 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
           {
             if (err)
               res.send({success:false,message:"incorrect request"});
-
-            var notif = {
-              complaint_id:req.body.complaint_id,
-              timestamp: new Date(),
-              content: req.decoded.name + " relodged the complaint with "+result[0]["current_level"]
-            }
-
-            notifications.insert(notif,function(err,result2)
+            else
             {
-              if (err)
-                res.send({success:false,message:"incorrect request"});
+              var notif = {
+                complaint_id:req.body.complaint_id,
+                timestamp: new Date(),
+                content: req.decoded.name + " relodged the complaint with "+result[0]["current_level"]
+              }
 
-                res.send({success:true,message:"Complaint Relodged Successfully",complaint:result[0],notification:notif});
-            });    
-
+              notifications.insert(notif,function(err,result2)
+              {
+                if (err)
+                  res.send({success:false,message:"incorrect request"});
+                else
+                  res.send({success:true,message:"Complaint Relodged Successfully",complaint:result[0],notification:notif});
+              });    
+            }
           }));          
         }
       }));
@@ -756,7 +760,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         if (err)
           res.send({success:false,message:"incorrect request"});
 
-        if (result.length == 0)
+        else if (result.length == 0)
           res.send({success:false,message:"Incorrect complaint ID"});
         else
         {
@@ -783,28 +787,28 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
             {
               if (err)
                 res.send({success:false,message:"incorrect request"});
-
-              var notif = {
-                complaint_id:req.body.complaint_id,
-                timestamp: new Date(),
-                content: req.decoded.name + " "+req.body.type+"d the complaint "+req.body.complaint_id
-              }
-
-              notifications.insert(notif,function(err,result2)
+              else
               {
-                if (err)
-                  res.send({success:false,message:"incorrect request"});
+                var notif = {
+                  complaint_id:req.body.complaint_id,
+                  timestamp: new Date(),
+                  content: req.decoded.name + " "+req.body.type+"d the complaint "+req.body.complaint_id
+                }
 
-                  res.send({success:true,message:"Voted Successfully",complaint:result[0],notification:notif});
-              });    
+                notifications.insert(notif,function(err,result2)
+                {
+                  if (err)
+                    res.send({success:false,message:"incorrect request"});
 
+                    res.send({success:true,message:"Voted Successfully",complaint:result[0],notification:notif});
+                });    
+              }
             }));
           }          
         }
       }));
   });
 
-  // TODO: relodge with higher authority
 
   /**
   *  API to make a new complaint
@@ -834,54 +838,56 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         {
           if (err)
             res.send({success:false,message:"incorrect request"});
-
+          else
             users.update({"unique_id":{$in: [current_level]}},{ $addToSet: { complaint_list: complaint_id } },function(err,result2)
             {
               if (err)
                 res.send({success:false,message:"incorrect request"});
+              else
+              {
+                var complaint = {
+                  complaint_id: complaint_id,
+                  lodged_by: lodged_by,
+                  lodger_name: lodger_name,
+                  title: req.body.title,
+                  description: req.body.description,
+                  timestamp: timestamp,
+                  is_community: true,
+                  type: req.body.type,
+                  authority_hierarchy: hierarchy,
+                  current_level: current_level,
+                  current_level_index: Object.keys(hierarchy).length-1,
+                  current_status: "unresolved",
+                  votes: {
+                    upvotes:0,
+                    downvotes:0,
+                    voted:[]
+                  },
+                  threads: []
+                }
 
-              var complaint = {
-                complaint_id: complaint_id,
-                lodged_by: lodged_by,
-                lodger_name: lodger_name,
-                title: req.body.title,
-                description: req.body.description,
-                timestamp: timestamp,
-                is_community: true,
-                type: req.body.type,
-                authority_hierarchy: hierarchy,
-                current_level: current_level,
-                current_level_index: Object.keys(hierarchy).length-1,
-                current_status: "unresolved",
-                votes: {
-                  upvotes:0,
-                  downvotes:0,
-                  voted:[]
-                },
-                threads: []
-              }
+                complaints.insert(complaint,function(err,result1){
 
-              complaints.insert(complaint,function(err,result1){
-
-                if (err)
-                  res.send({success:false,message:"incorrect request"});
-                
-                var notif = {
-                    complaint_id:complaint_id,
-                    timestamp: new Date(),
-                    content: req.decoded.name + " lodged a new complaint."
-                  }
-
-                  notifications.insert(notif,function(err,result2)
+                  if (err)
+                    res.send({success:false,message:"incorrect request"});
+                  else
                   {
-                    if (err)
-                      res.send({success:false,message:"incorrect request"});
+                  var notif = {
+                      complaint_id:complaint_id,
+                      timestamp: new Date(),
+                      content: req.decoded.name + " lodged a new complaint."
+                    }
 
-                        res.send({success:true,message:"Complaint lodged Successfully",complaint:complaint,notification:notif});
-                  });
-
-              });
-
+                    notifications.insert(notif,function(err,result2)
+                    {
+                      if (err)
+                        res.send({success:false,message:"incorrect request"});
+                      else
+                          res.send({success:true,message:"Complaint lodged Successfully",complaint:complaint,notification:notif});
+                    });
+                  }
+                });
+              }
             });            
         });
       }
@@ -895,7 +901,8 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         {
           if (err)
             res.send({success:false,message:"incorrect request"});
-
+          else
+          {
           var complaint = {
             complaint_id: complaint_id,
             lodged_by: lodged_by,
@@ -916,6 +923,8 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 
             if (err)
               res.send({success:false,message:"incorrect request"});
+            else
+            {
             var notif = {
                     complaint_id:complaint_id,
                     timestamp: new Date(),
@@ -926,12 +935,12 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
                   {
                     if (err)
                       res.send({success:false,message:"incorrect request"});
-
+                    else
                         res.send({success:true,message:"Complaint lodged Successfully",complaint:complaint,notification:notif});
                   });
-
+            }
           });
-
+        }
         });
 
       }
@@ -950,12 +959,13 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         {
           if (err)
             res.send({success:false,message:"incorrect request"});
-
+          else
             users.update({"unique_id":{$in: [current_level]}},{ $addToSet: { complaint_list: complaint_id } },function(err,result2)
             {
               if (err)
                 res.send({success:false,message:"incorrect request"});
-
+              else
+              {
               var complaint = {
                 complaint_id: complaint_id,
                 lodged_by: lodged_by,
@@ -981,7 +991,8 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 
                 if (err)
                   res.send({success:false,message:"incorrect request"});
-                
+                else
+                {
                 var notif = {
                     complaint_id:complaint_id,
                     timestamp: new Date(),
@@ -992,12 +1003,12 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
                   {
                     if (err)
                       res.send({success:false,message:"incorrect request"});
-
+                    else
                         res.send({success:true,message:"Complaint lodged Successfully",complaint:complaint,notification:notif});
                   });
-
+                }
               });
-
+            }
             });            
         });
       }
@@ -1011,7 +1022,8 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         {
           if (err)
             res.send({success:false,message:"incorrect request"});
-
+          else
+          {
           var complaint = {
             complaint_id: complaint_id,
             lodged_by: lodged_by,
@@ -1032,7 +1044,8 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 
             if (err)
               res.send({success:false,message:"incorrect request"});
-            
+            else
+            {
             var notif = {
                     complaint_id:complaint_id,
                     timestamp: new Date(),
@@ -1043,12 +1056,12 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
                   {
                     if (err)
                       res.send({success:false,message:"incorrect request"});
-
+                    else
                         res.send({success:true,message:"Complaint lodged Successfully",complaint:complaint,notification:notif});
                   });
-
+            }
           });
-
+        }
         });
 
       }
@@ -1067,12 +1080,13 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         {
           if (err)
             res.send({success:false,message:"incorrect request"});
-
+          else
             users.update({"unique_id":{$in: [current_level]}},{ $addToSet: { complaint_list: complaint_id } },function(err,result2)
             {
               if (err)
                 res.send({success:false,message:"incorrect request"});
-
+              else
+              {
               var complaint = {
                 complaint_id: complaint_id,
                 lodged_by: lodged_by,
@@ -1098,7 +1112,8 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 
                 if (err)
                   res.send({success:false,message:"incorrect request"});
-                
+                else
+                {
                 var notif = {
                     complaint_id:complaint_id,
                     timestamp: new Date(),
@@ -1109,12 +1124,12 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
                   {
                     if (err)
                       res.send({success:false,message:"incorrect request"});
-
+                    else
                         res.send({success:true,message:"Complaint lodged Successfully",complaint:complaint,notification:notif});
                   });
-
+                }
               });
-
+            }
             });            
         });
       }
@@ -1128,7 +1143,8 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         {
           if (err)
             res.send({success:false,message:"incorrect request"});
-
+          else
+          {
           var complaint = {
             complaint_id: complaint_id,
             lodged_by: lodged_by,
@@ -1149,7 +1165,8 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 
             if (err)
               res.send({success:false,message:"incorrect request"});
-            
+            else
+            {
             var notif = {
                     complaint_id:complaint_id,
                     timestamp: new Date(),
@@ -1160,12 +1177,12 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
                   {
                     if (err)
                       res.send({success:false,message:"incorrect request"});
-
+                    else
                         res.send({success:true,message:"Complaint lodged Successfully",complaint:complaint,notification:notif});
                   });
-
+            }
           });
-
+        }
         });
 
       }
@@ -1184,12 +1201,13 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         {
           if (err)
             res.send({success:false,message:"incorrect request"});
-
+          else
             users.update({"unique_id":{$in: [current_level]}},{ $addToSet: { complaint_list: complaint_id } },function(err,result2)
             {
               if (err)
                 res.send({success:false,message:"incorrect request"});
-
+              else
+              {
               var complaint = {
                 complaint_id: complaint_id,
                 lodged_by: lodged_by,
@@ -1215,7 +1233,8 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 
                 if (err)
                   res.send({success:false,message:"incorrect request"});
-
+                else
+                {
                 var notif = {
                     complaint_id:complaint_id,
                     timestamp: new Date(),
@@ -1226,12 +1245,12 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
                   {
                     if (err)
                       res.send({success:false,message:"incorrect request"});
-
+                    else
                         res.send({success:true,message:"Complaint lodged Successfully",complaint:complaint,notification:notif});
                   });
-
+                }
               });
-
+            }
             });            
         });
       }
@@ -1245,7 +1264,8 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         {
           if (err)
             res.send({success:false,message:"incorrect request"});
-
+          else
+          {
           var complaint = {
             complaint_id: complaint_id,
             lodged_by: lodged_by,
@@ -1266,7 +1286,8 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 
             if (err)
               res.send({success:false,message:"incorrect request"});
-
+            else
+            {
             var notif = {
               complaint_id:complaint_id,
               timestamp: new Date(),
@@ -1277,12 +1298,12 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
             {
               if (err)
                 res.send({success:false,message:"incorrect request"});
-
+              else
                   res.send({success:true,message:"Complaint lodged Successfully",complaint:complaint,notification:notif});
             });
-
+          }
           });
-
+        }
         });
 
       }
@@ -1300,7 +1321,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         if (err)
           res.send({success:false,message:"incorrect request"});
 
-        if (result.length == 0)
+        else if (result.length == 0)
           res.send({success:false,message:"Incorrect complaint ID"});
         else
         {
@@ -1322,7 +1343,8 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
           {
             if (err)
               res.send({success:false,message:"incorrect request"});
-
+            else
+            {
             var notif = {
               complaint_id:req.body.complaint_id,
               timestamp: new Date(),
@@ -1333,74 +1355,16 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
             {
               if (err)
                 res.send({success:false,message:"incorrect request"});
-
+              else
                 users.update({"unique_id":{$in: [result[0]["current_level"]]}},{ $addToSet: { complaint_list: req.body.complaint_id } },function(err,result2)
                 {
                   if (err)
                     res.send({success:false,message:"incorrect request"});
+                  else
                   res.send({success:true,message:"Complaint Relodged Successfully",complaint:result[0],notification:notif});
                 });
             });    
-
-          })); 
-          }         
-        }
-      }));
-  });
-
-  /**
-  *  API to relodge a complaint with the next Higher authority
-  */
-
-  apiRoutes.post('/relodge_next_authority', function(req, res) {
-
-      (complaints.find({"complaint_id":req.body.complaint_id}).toArray(function(err,result) // Fetch the required complaint
-      {
-        if (err)
-          res.send({success:false,message:"incorrect request"});
-
-        if (result.length == 0)
-          res.send({success:false,message:"Incorrect complaint ID"});
-        else
-        {
-          var status = "unresolved";
-
-          result[0]["current_status"] = status;
-
-          if (result[0]["current_level_index"] === 0)
-          {
-            res.send({success:false,message:"Already at the highest level"})
           }
-          else
-          {
-            var hierarchy = result[0]["authority_hierarchy"];
-            result[0]["current_level"] = hierarchy[Object.keys(hierarchy)[result[0]["current_level_index"]-1]];            
-            result[0]["current_level_index"] = result[0]["current_level_index"]-1;
-
-          (complaints.update({"complaint_id":req.body.complaint_id},{$set:result[0]},function(err,result1)
-          {
-            if (err)
-              res.send({success:false,message:"incorrect request"});
-
-            var notif = {
-              complaint_id:req.body.complaint_id,
-              timestamp: new Date(),
-              content: req.decoded.name + " relodged the complaint with "+result[0]["current_level"]
-            }
-
-            notifications.insert(notif,function(err,result2)
-            {
-              if (err)
-                res.send({success:false,message:"incorrect request"});
-
-                users.update({"unique_id":{$in: [result[0]["current_level"]]}},{ $addToSet: { complaint_list: req.body.complaint_id } },function(err,result2)
-                {
-                  if (err)
-                    res.send({success:false,message:"incorrect request"});
-                  res.send({success:true,message:"Complaint Relodged Successfully",complaint:result[0],notification:notif});
-                });
-            });    
-
           })); 
           }         
         }
