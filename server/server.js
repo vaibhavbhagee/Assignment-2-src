@@ -1180,7 +1180,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
   *  API to relodge a complaint with the next Higher authority
   */
 
-  apiRoutes.post('/relodge_same_authority', function(req, res) {
+  apiRoutes.post('/relodge_next_authority', function(req, res) {
 
       (complaints.find({"complaint_id":req.body.complaint_id}).toArray(function(err,result) // Fetch the required complaint
       {
