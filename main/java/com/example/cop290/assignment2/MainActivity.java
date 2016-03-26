@@ -156,6 +156,18 @@ public class MainActivity extends AppCompatActivity
         EditText title = (EditText) parent.findViewById(R.id.title);
         EditText description = (EditText) parent.findViewById(R.id.description);
     }
+
+    public void post_thread_comment(View view) {
+        // TODO : Post a new comment on a given thread
+    }
+
+    public void post_new_thread(View view) {
+        // TODO : post a new thread on a given complaint
+    }
+
+    public void navigate_to_thread(View view) {
+        // TODO : Navigate to thread
+    }
 }
 
 
