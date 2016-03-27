@@ -30,10 +30,14 @@ public class Thread_Fragment extends Fragment {
 
     private void populate_data(View view) {
 
+        TextView thread_id = (TextView) view.findViewById(R.id.thread_id);
+        TextView complaint_id = (TextView) view.findViewById(R.id.complaint_id);
         TextView thread_title = (TextView) view.findViewById(R.id.thread_title);
         TextView thread_description = (TextView) view.findViewById(R.id.thread_description);
         TextView time = (TextView) view.findViewById(R.id.time);
 
+        thread_id.setText("");
+        complaint_id.setText("");
         thread_title.setText("");
         thread_description.setText("");
         time.setText("");

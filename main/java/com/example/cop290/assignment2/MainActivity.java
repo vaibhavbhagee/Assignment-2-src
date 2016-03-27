@@ -128,6 +128,8 @@ public class MainActivity extends AppCompatActivity
 
     private void on_refresh() {
         //TODO : On refresh kya karna hai???
+        Intent intent = new Intent(thisContext, LoginActivity.class);
+        startActivity(intent);
     }
 
     public void navigate_to_complaint(View view) {
@@ -162,20 +164,57 @@ public class MainActivity extends AppCompatActivity
         Spinner spin = (Spinner) parent.findViewById(R.id.spinner);
 
         String selected_item = spin.getSelectedItem().toString();
+        String t = title.getText().toString();
+        String d = description.getText().toString();
+        String isCommunity;
 
-        if(r.isChecked()){
-            // kuch karo, kuch karo, inn radio buttons ka kuch karo
-        }else{
+        if(r.isChecked()) isCommunity = "false";
+        else isCommunity = "true";
 
-        }
+        final LoadData l = new LoadData();
+        l.setContext(thisContext);
+
+        // TODO : figure out what to set for token and courseID
+        l.add_complaint_request(new String("token"), isCommunity, selected_item, t, d, new String("courseID"));
+        //add_complaint_request(String token,String isCommunity,String Type,String Title,String Description, final String courseID)
     }
 
     public void post_thread_comment(View view) {
         // TODO : Post a new comment on a given thread
+        RelativeLayout parent = (RelativeLayout)view.getParent();
+        TextView complaint_id = (TextView) parent.findViewById(R.id.complaint_id);
+        TextView thread_id = (TextView) parent.findViewById(R.id.thread_id);
+        EditText description = (EditText) parent.findViewById(R.id.comment);
+
+        String c_id = complaint_id.getText().toString();
+        String t_id = thread_id.getText().toString();
+        String d = description.getText().toString();
+
+        final LoadData l = new LoadData();
+        l.setContext(thisContext);
+
+        // TODO : figure out token and posted by and time stamp
+        l.new_comment_request(new String("token"),c_id, t_id, new String("posted by"), d, new String("time stamp"));
+        //public void new_comment_request(final String token,final String complaintID,final String threadID, final String postedBy, final String description, final String timestamp)
     }
 
     public void post_new_thread(View view) {
         // TODO : post a new thread on a given complaint
+        RelativeLayout parent = (RelativeLayout)view.getParent();
+        TextView complaint_id = (TextView) parent.findViewById(R.id.complaint_id);
+        EditText title = (EditText) parent.findViewById(R.id.thread_title);
+        EditText description = (EditText) parent.findViewById(R.id.thread_description);
+
+        String id = complaint_id.getText().toString();
+        String t = title.getText().toString();
+        String d = description.getText().toString();
+
+        final LoadData l = new LoadData();
+        l.setContext(thisContext);
+
+        // TODO : Figure out what to set for token
+        l.new_thread_request(new String("token"), id, t, d);
+        //public void new_thread_request(final String token,final String complaintID,final String Title, final String Description)
     }
 
     public void navigate_to_thread(View view) {
