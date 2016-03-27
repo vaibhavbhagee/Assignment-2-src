@@ -2,6 +2,8 @@ package com.example.cop290.assignment2;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -22,8 +24,13 @@ import java.util.Map;
  */
 public class LoadData extends Activity {
 
+
+    public static final String SharedPref = "MahPrefs";
+    SharedPreferences sharedpreferences;
+
     public static boolean[] flag = new boolean[11];
 
+    public static String token;
     public static String LoginResponseJSON;
     public static String loginResponse;
     public static String getComplaintsResponse;
@@ -39,11 +46,11 @@ public class LoadData extends Activity {
     public static Context thisContext = null;
 
 
-    private String ServerURL = "http://141.8.224.169:8081/api";
-
 /*
-    private String ServerURL = "http://10.192.45.162:8081/api";
+    private String ServerURL = "http://141.8.224.169:8081/api";
 */
+
+    private String ServerURL = "http://cm-system-iitd.herokuapp.com/api";
 
 
     public void setContext(Context c)
@@ -60,9 +67,22 @@ public class LoadData extends Activity {
                     //On valid response
                     public void onResponse(String response) {
 
+                    try {
                         loginResponse = response;
-                        System.out.println(loginResponse );
+                        ParseLoginJSON p = new ParseLoginJSON(response);
+                        token = p.token;
+                        SharedPreferences.Editor editor = sharedpreferences.edit();
+                        editor.putString("token", token);
+                        editor.commit();
+                        System.out.println("ServerLoginResponseReceivedSucces value: " + p.success + ":" + loginResponse);
+
+                        if(p.success == true) {
+                            /*System.out.println("Sucess!" + p.success);*/
                             flag[0] = true;
+                        }
+
+
+                    }catch(Exception e){}
                     }
                 },
                 //Launched when server return error
@@ -119,7 +139,7 @@ public class LoadData extends Activity {
 
 
     /*flag[2]*/
-    public void add_complaint_request(final String token,final String isCommunity,final String Type, final String Title, final String Description, final String courseID) {
+    public void add_complaint_request( final String isCommunity,final String Type, final String Title, final String Description, final String courseID) {
         final String sRequest = ServerURL + "/new_complaint";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, sRequest,
                 new Response.Listener<String>() {
@@ -160,8 +180,8 @@ public class LoadData extends Activity {
 
 
 
-    /*flag[3]*/
-    public void new_thread_request(final String token,final String complaintID,final String Title, final String Description) {
+        /*flag[3]*/
+    public void new_thread_request( final String complaintID,final String Title, final String Description) {
         final String sRequest = ServerURL + "/new_thread";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, sRequest,
                 new Response.Listener<String>() {
@@ -199,10 +219,8 @@ public class LoadData extends Activity {
     }
 
 
-
-
     /*flag[4]*/
-    public void new_comment_request(final String token,final String complaintID,final String threadID, final String postedBy, final String description, final String timestamp) {
+    public void new_comment_request( final String complaintID,final String threadID, final String postedBy, final String description, final String timestamp) {
         final String sRequest = ServerURL + "/new_comment";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, sRequest,
                 new Response.Listener<String>() {
@@ -242,9 +260,8 @@ public class LoadData extends Activity {
     }
 
 
-
     /*flag[5]*/
-    public void mark_resolved_request(final String token,final String complaintID) {
+    public void mark_resolved_request( final String complaintID) {
         final String sRequest = ServerURL + "/mark_resolved";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, sRequest,
                 new Response.Listener<String>() {
@@ -281,7 +298,7 @@ public class LoadData extends Activity {
 
 
     /*flag[6]*/
-    public void relodge_higher_request(final String token,final String complaintID) {
+    public void relodge_higher_request( final String complaintID) {
         final String sRequest = ServerURL + "/relodge_higher";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, sRequest,
                 new Response.Listener<String>() {
@@ -317,9 +334,8 @@ public class LoadData extends Activity {
     }
 
 
-
     /*flag[7]*/
-    public void relodge_same_request(final String token,final String complaintID) {
+    public void relodge_same_request( final String complaintID) {
         final String sRequest = ServerURL + "/relodge_same";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, sRequest,
                 new Response.Listener<String>() {
@@ -355,10 +371,8 @@ public class LoadData extends Activity {
     }
 
 
-
-
     /*flag[8]*/
-    public void vote_request(final String token,final String complaintID, final String userID, final String UpDown) {
+    public void vote_request( final String complaintID, final String userID, final String UpDown) {
         final String sRequest = ServerURL + "/vote";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, sRequest,
                 new Response.Listener<String>() {
