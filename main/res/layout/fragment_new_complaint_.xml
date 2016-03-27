@@ -1,3 +1,6 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -5,50 +8,72 @@
 
     <!--atleast 50 dp ki jagah upar chhod dena-->
     <EditText
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="90dp"
         android:hint="Title"
-        android:layout_width="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="70dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/title" />
 
     <RadioGroup
         android:id="@+id/radiogroup"
         android:layout_below="@+id/title"
+        android:paddingTop="20dp"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <RadioButton
             android:id="@+id/individual"
             android:text="Individual"
+            android:layout_marginLeft="20dp"
             android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <RadioButton
             android:id="@+id/community"
             android:text="Community"
+            android:layout_marginLeft="50dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RadioGroup>
 
+    <TextView
+        android:id="@+id/random"
+        android:text="Choose category\nof complaint"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:layout_below="@+id/radiogroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <Spinner
         android:layout_below="@+id/radiogroup"
+        android:layout_toRightOf="@+id/random"
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner" />
     <EditText
         android:id="@+id/description"
         android:hint="Description"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_below="@+id/spinner"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/post"
         android:onClick="submit_new_complaint"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
-        android:layout_alignEnd="@id/spinner"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
         android:src="@android:drawable/ic_dialog_email" />
 
 </RelativeLayout>
+</ScrollView>

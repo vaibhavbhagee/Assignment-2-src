@@ -176,6 +176,7 @@ public class MainActivity extends AppCompatActivity
 
         // TODO : figure out what to set for token and courseID
         l.add_complaint_request( isCommunity, selected_item, t, d, new String("courseID"));
+
         //add_complaint_request(String token,String isCommunity,String Type,String Title,String Description, final String courseID)
     }
 
@@ -214,6 +215,7 @@ public class MainActivity extends AppCompatActivity
 
         // TODO : Figure out what to set for token
         l.new_thread_request( id, t, d);
+
         //public void new_thread_request(final String token,final String complaintID,final String Title, final String Description)
     }
 

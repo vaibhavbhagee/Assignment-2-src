@@ -64,11 +64,13 @@ public class LoadData extends Activity {
         thisContext = c;
     }
 
-    public void login_request(final String un, final String pw) {
+//flag[0]
+   public void login_request(final String un, final String pw) {
 
         Map<String, String> jsonParams = new HashMap<String, String>();
         jsonParams.put("username", un);
         jsonParams.put("password", pw);
+
 
         final String loginRequest = ServerURL + "/login";
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, loginRequest, new JSONObject(jsonParams),
@@ -116,6 +118,9 @@ public class LoadData extends Activity {
 
 
     public void get_complaints_request(final String uid) {
+
+    /*flag[1]*/
+
         final String sRequest = ServerURL + "/complaintlist?unique_id="+uid;
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, sRequest, null,
                 new Response.Listener<JSONObject>() {
@@ -124,7 +129,9 @@ public class LoadData extends Activity {
                     public void onResponse(JSONObject response) {
 
                         getComplaintsResponse = response;
-                             flag[0] = true;
+
+                        System.out.println(getComplaintsResponse);
+                             flag[1] = true;
                     }
                 },
                 //Launched when server return error
@@ -183,6 +190,8 @@ public class LoadData extends Activity {
 
 
 
+    /*flag[2]*/
+
     public void add_complaint_request( final String isCommunity,final String Type, final String Title, final String Description, final String courseID) {
         final String sRequest = ServerURL + "/new_complaint";
         Map<String, String> jsonParams = new HashMap<String, String>();
@@ -199,7 +208,9 @@ public class LoadData extends Activity {
                     public void onResponse(JSONObject response) {
 
                         addComplaintResponse = response;
-                        flag[0] = true;
+
+                        System.out.println(addComplaintResponse);
+                        flag[2] = true;
                     }
                 },
                 //Launched when server return error
@@ -225,7 +236,7 @@ public class LoadData extends Activity {
 
 
 
-
+        /*flag[3]*/
     public void new_thread_request( final String complaintID,final String Title, final String Description) {
         final String sRequest = ServerURL + "/new_thread";
         Map<String, String> params = new HashMap<String, String>();
@@ -240,7 +251,9 @@ public class LoadData extends Activity {
                     public void onResponse(JSONObject response) {
 
                         newThreadResponse = response;
-                        flag[0] = true;
+
+                        System.out.println(newThreadResponse);
+                        flag[3] = true;
                     }
                 },
                 //Launched when server return error
@@ -265,9 +278,7 @@ public class LoadData extends Activity {
     }
 
 
-
-
-
+    /*flag[4]*/
     public void new_comment_request( final String complaintID,final String threadID, final String postedBy, final String description, final String timestamp) {
         final String sRequest = ServerURL + "/new_comment";
         Map<String, String> params = new HashMap<String, String>();
@@ -284,7 +295,9 @@ public class LoadData extends Activity {
                     public void onResponse(JSONObject response) {
 
                         newCommentResponse = response;
-                        flag[0] = true;
+
+                        System.out.println(newCommentResponse);
+                        flag[4] = true;
                     }
                 },
                 //Launched when server return error
@@ -309,9 +322,8 @@ public class LoadData extends Activity {
     }
 
 
-
-
-    public void mark_resolved_request( final String complaintID) {
+    /*flag[5]*/
+    public void mark_resolved_request(final String complaintID) {
         final String sRequest = ServerURL + "/mark_resolved";
         Map<String, String> params = new HashMap<String, String>();
         params.put("complaint_id",complaintID);
@@ -323,7 +335,9 @@ public class LoadData extends Activity {
                     public void onResponse(JSONObject response) {
 
                         markResolvedResponse = response;
-                        flag[0] = true;
+
+                        System.out.println(markResolvedResponse);
+                        flag[5] = true;
                     }
                 },
                 //Launched when server return error
@@ -348,7 +362,7 @@ public class LoadData extends Activity {
     }
 
 
-
+    /*flag[6]*/
     public void relodge_higher_request( final String complaintID) {
         final String sRequest = ServerURL + "/relodge_higher";
         Map<String, String> params = new HashMap<String, String>();
@@ -362,7 +376,9 @@ public class LoadData extends Activity {
                     public void onResponse(JSONObject response) {
 
                         relodgeHigherResponse = response;
-                        flag[0] = true;
+
+                        System.out.println(relodgeHigherResponse);
+                        flag[6] = true;
                     }
                 },
                 //Launched when server return error
@@ -387,8 +403,7 @@ public class LoadData extends Activity {
     }
 
 
-
-
+    /*flag[7]*/
     public void relodge_same_request( final String complaintID) {
         final String sRequest = ServerURL + "/relodge_same";
         Map<String, String> params = new HashMap<String, String>();
@@ -401,7 +416,9 @@ public class LoadData extends Activity {
                     public void onResponse(JSONObject response) {
 
                         relodgeSameResponse = response;
-                        flag[0] = true;
+
+                        System.out.println(relodgeSameResponse);
+                        flag[7] = true;
                     }
                 },
                 //Launched when server return error
@@ -426,9 +443,7 @@ public class LoadData extends Activity {
     }
 
 
-
-
-
+    /*flag[8]*/
     public void vote_request( final String complaintID, final String userID, final String UpDown) {
         final String sRequest = ServerURL + "/vote";
         Map<String, String> params = new HashMap<String, String>();
@@ -443,7 +458,9 @@ public class LoadData extends Activity {
                     public void onResponse(JSONObject response) {
 
                         voteResponse = response;
-                        flag[0] = true;
+
+                        System.out.println(voteResponse);
+                        flag[8] = true;
                     }
                 },
                 //Launched when server return error
