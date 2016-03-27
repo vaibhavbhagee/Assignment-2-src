@@ -78,11 +78,9 @@ public class LoginActivity extends AppCompatActivity {
         loadDataObject.login_request(kerberosIDString, passwordString);
 
         //TODO: Always loggs in
-        try {
-            wait(10000);
-        }catch (Exception e){}
-        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-        startActivity(intent);
+
+        /*Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+        startActivity(intent);*/
 
         //TODO: Unsuccesful login, Store token in Shared Preferences
 

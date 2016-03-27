@@ -1,5 +1,7 @@
 package com.example.cop290.assignment2;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,38 +23,31 @@ public class ParseLoginJSON {
 
     public ParseLoginJSON(String inputString) throws JSONException
     {
-        JSONObject responseJSON = new JSONObject(inputString);
-        this.success = responseJSON.getBoolean("success");
-
-        if(this.success == true)
+        //JSONObject responseJSON = new JSONObject(inputString);
+        //this.success = responseJSON.getBoolean("success");
+        //System.out.print(this.success);
+        //Log.i("bhaggu","sabdjiandsdjkdshcodscdsojcdsdsncjkdcd" +);
+        /*if(this.success == true)
         {
             this.token = responseJSON.getString("token");
+            System.out.println("tokenbc");
             this.unique_id = responseJSON.getString("unique_id");
+            System.out.println("idbc");
             this.name = responseJSON.getString("name");
+            System.out.println("namebc");
             this.department = responseJSON.getString("department");
+            System.out.println("deptbc");
             this.contact_info = responseJSON.getString("contact_info");
-            JSONArray tags_t = responseJSON.getJSONArray("tags");
-            JSONArray course_list_t = responseJSON.getJSONArray("course_list");
-            JSONArray complaint_list_t = responseJSON.getJSONArray("complaint_list");
+            System.out.println("contactbc");
+            *//*this.tags = (String[])responseJSON.get("tags");
+            System.out.println("tagsbc");
+            this.course_list = (String[])responseJSON.get("course_list");
+            System.out.println("coursebc");
+            this.complaint_list = (String[])responseJSON.get("complaint_list");
+            System.out.println("complaintsbc");
+*//*
 
-            tags = new String[tags_t.length()];
-            for(int i = 0; i < tags_t.length(); i ++ )
-            {
-                tags[i] = tags_t.getString(i);
-            }
-
-            course_list = new String[course_list_t.length()];
-            for(int i = 0; i < course_list_t.length(); i ++ )
-            {
-                course_list[i] = course_list_t.getString(i);
-            }
-
-            complaint_list = new String[complaint_list_t.length()];
-            for(int i = 0; i < complaint_list_t.length(); i ++ )
-            {
-                complaint_list[i] = complaint_list_t.getString(i);
-            }
-        }
-        System.out.println(inputString);
+        }*/
+        Log.i("bhaggu","eyyafyallayokul" + inputString);
     }
 }
