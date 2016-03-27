@@ -25,6 +25,8 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
+
+    public static boolean login_control;
     public static final String SharedPref = "MahPrefs";
     Context thisContext = this;
     SharedPreferences sharedpreferences;
@@ -49,11 +51,12 @@ public class LoginActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // login(kerbID,password);
+                 login(kerbID,password);
 
+                //Unbypassed
                 // By pass login
-                Intent intent = new Intent(thisContext, MainActivity.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(thisContext, MainActivity.class);
+                startActivity(intent);*/
 
             }
         });
@@ -72,9 +75,12 @@ public class LoginActivity extends AppCompatActivity {
 
         LoadData loadDataObject = new LoadData();
         loadDataObject.setContext(thisContext);
-        loadDataObject.login_request(kerberosIDString,passwordString);
+        loadDataObject.login_request(kerberosIDString, passwordString);
 
-
+        //TODO: Always loggs in
+        try {
+            wait(10000);
+        }catch (Exception e){}
         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
         startActivity(intent);
 
@@ -86,6 +92,8 @@ public class LoginActivity extends AppCompatActivity {
      /*   Intent intent = new Intent(thisContext, MainActivity.class);
         startActivity(intent);*/
     }
+
+
 
 
 }

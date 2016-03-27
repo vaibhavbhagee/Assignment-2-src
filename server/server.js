@@ -515,7 +515,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
       else if (result.length == 0)
             res.send({success:false,message:"User Not found"});
       else
-        res.send({success:false,complaintlist:result[0].complaint_list});
+        res.send({success:true,complaintlist:result[0].complaint_list});
     });
   });
 

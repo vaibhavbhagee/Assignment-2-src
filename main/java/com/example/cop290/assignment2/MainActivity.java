@@ -146,6 +146,7 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.putString("kerbID", "");
         editor.putString("password", "");
+        editor.putString("token", "");
         editor.commit();
         //TODO : Logout Properly!!!!!!!
         Intent intent = new Intent(thisContext, LoginActivity.class);
