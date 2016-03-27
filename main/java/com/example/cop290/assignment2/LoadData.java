@@ -25,16 +25,16 @@ public class LoadData extends Activity {
     public static boolean[] flag = new boolean[11];
 
     public static String LoginResponseJSON;
-    private String loginResponse;
-    private String getComplaintsResponse;
-    private String complaintDetailsResponse;
-    private String addComplaintResponse;
-    private String newThreadResponse;
-    private String newCommentResponse;
-    private String markResolvedResponse;
-    private String relodgeHigherResponse;
-    private String relodgeSameResponse;
-    private String voteResponse;
+    public static String loginResponse;
+    public static String getComplaintsResponse;
+    public static String complaintDetailsResponse;
+    public static String addComplaintResponse;
+    public static String newThreadResponse;
+    public static String newCommentResponse;
+    public static String markResolvedResponse;
+    public static String relodgeHigherResponse;
+    public static String relodgeSameResponse;
+    public static String voteResponse;
 
     public static Context thisContext = null;
 

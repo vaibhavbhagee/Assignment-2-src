@@ -30,6 +30,7 @@ public class Complaint_Fragment extends Fragment {
 
     private void populate_data(View view) {
 
+        TextView complaint_id = (TextView) view.findViewById(R.id.complaint_id);
         TextView complaint_type = (TextView) view.findViewById(R.id.type);
         TextView title = (TextView) view.findViewById(R.id.title);
         TextView lodged_on = (TextView) view.findViewById(R.id.lodged_on);
@@ -39,6 +40,7 @@ public class Complaint_Fragment extends Fragment {
         RelativeLayout layout = (RelativeLayout) view.findViewById(R.id.layout);
 
         // TODO : Set these values
+        complaint_id.setText("Complaint ID");
         complaint_type.setText("Community");
         title.setText("Title of the complaint");
         lodged_on.setText("14th December 2016");

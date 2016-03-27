@@ -1,10 +1,18 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.cop290.assignment2.Thread_Fragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <TextView
+        android:id="@+id/complaint_id"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/thread_id"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/thread_title"
         android:text="thread_title"
@@ -34,8 +42,6 @@
         android:text="time"
         android:textSize="12dp"
         android:id="@+id/time"
-        android:layout_toRightOf="@+id/thread_created_at"
-        android:layout_alignBaseline="@+id/thread_created_at"
         android:gravity="right"
         android:paddingRight="20dp"
         android:layout_width="match_parent"
@@ -47,29 +53,25 @@
         android:maxLines="3"
         android:minLines="1"
         android:gravity="bottom"
-        android:id="@+id/new_comment"
+        android:id="@+id/comment"
         android:layout_width="match_parent"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="80dp"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/post_comment"
         app:backgroundTint="@color/google_green"
         android:onClick="post_thread_comment"
-        android:id="@+id/post_comment"
         android:layout_width="wrap_content"
+        android:layout_alignEnd="@id/spinner"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_menu_send"
-        android:layout_gravity="bottom|end"
-        android:layout_alignBottom="@+id/new_comment"
-        android:layout_alignEnd="@+id/listView"
         android:layout_margin="@dimen/fab_margin"
-        />
+        android:src="@android:drawable/ic_menu_send" />
     <!--android:layout_marginLeft="@dimen/fab_margin"
             android:layout_marginRight="@dimen/fab_margin"-->
 
     <ListView
-        android:layout_below="@id/thread_created_at"
         android:id="@+id/listView"
         android:paddingLeft="5dp"
         android:paddingTop="5dp"
@@ -77,4 +79,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></ListView>
 
-</FrameLayout>
+</RelativeLayout>
