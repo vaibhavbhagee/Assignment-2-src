@@ -51,7 +51,8 @@ public class LoadData extends Activity {
         thisContext = c;
     }
 
-    public void login_request(final String un, final String pw) {
+    /*flag[0]*/
+    public void login_request(final String un, final String pw){
         final String loginRequest = ServerURL + "/login";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, loginRequest,
                 new Response.Listener<String>() {
@@ -86,7 +87,8 @@ public class LoadData extends Activity {
     }
 
 
-    public void get_complaints_request(final String token,final String uid) {
+    /*flag[1]*/
+    public void get_complaints_request(final String token,final String uid){
         final String sRequest = ServerURL + "/complaintlist?unique_id="+uid;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, sRequest,
                 new Response.Listener<String>() {
@@ -96,7 +98,7 @@ public class LoadData extends Activity {
 
                         getComplaintsResponse = response;
                         System.out.println(getComplaintsResponse);
-                             flag[0] = true;
+                             flag[1] = true;
                     }
                 },
                 //Launched when server return error
@@ -115,6 +117,283 @@ public class LoadData extends Activity {
         requestQueue.add(stringRequest);
     }
 
+
+    /*flag[2]*/
+    public void add_complaint_request(final String token,final String isCommunity,final String Type, final String Title, final String Description, final String courseID) {
+        final String sRequest = ServerURL + "/new_complaint";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, sRequest,
+                new Response.Listener<String>() {
+                    @Override
+                    //On valid response
+                    public void onResponse(String response) {
+
+                        addComplaintResponse = response;
+                        System.out.println(addComplaintResponse);
+                        flag[2] = true;
+                    }
+                },
+                //Launched when server return error
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Add_complaint Error: " + error.toString()).setNeutralButton("Close", null).show();
+
+                    }
+                }) {
+
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("is_community", isCommunity);
+                params.put("type", Type);
+                params.put("title", Title);
+                params.put("description", Description);
+                params.put("course_id",courseID);
+                params.put("x-access-token",token);
+                return params;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(thisContext);
+        requestQueue.add(stringRequest);
+    }
+
+
+
+    /*flag[3]*/
+    public void new_thread_request(final String token,final String complaintID,final String Title, final String Description) {
+        final String sRequest = ServerURL + "/new_thread";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, sRequest,
+                new Response.Listener<String>() {
+                    @Override
+                    //On valid response
+                    public void onResponse(String response) {
+
+                        newThreadResponse = response;
+                        System.out.println(newThreadResponse);
+                        flag[3] = true;
+                    }
+                },
+                //Launched when server return error
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("New_Thread Error: " + error.toString()).setNeutralButton("Close", null).show();
+
+                    }
+                }) {
+
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("title", Title);
+                params.put("description", Description);
+                params.put("complaint_id",complaintID);
+                params.put("x-access-token",token);
+                return params;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(thisContext);
+        requestQueue.add(stringRequest);
+    }
+
+
+
+
+    /*flag[4]*/
+    public void new_comment_request(final String token,final String complaintID,final String threadID, final String postedBy, final String description, final String timestamp) {
+        final String sRequest = ServerURL + "/new_comment";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, sRequest,
+                new Response.Listener<String>() {
+                    @Override
+                    //On valid response
+                    public void onResponse(String response) {
+
+                        newCommentResponse = response;
+                        System.out.println(newCommentResponse);
+                        flag[4] = true;
+                    }
+                },
+                //Launched when server return error
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("New_comment Error: " + error.toString()).setNeutralButton("Close", null).show();
+
+                    }
+                }) {
+
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("thread_id", threadID);
+                params.put("posted_by", postedBy);
+                params.put("complaint_id",complaintID);
+                params.put("timestamp", timestamp);
+                params.put("description", description);
+                params.put("x-access-token",token);
+                return params;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(thisContext);
+        requestQueue.add(stringRequest);
+    }
+
+
+
+    /*flag[5]*/
+    public void mark_resolved_request(final String token,final String complaintID) {
+        final String sRequest = ServerURL + "/mark_resolved";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, sRequest,
+                new Response.Listener<String>() {
+                    @Override
+                    //On valid response
+                    public void onResponse(String response) {
+
+                        markResolvedResponse = response;
+                        System.out.println(markResolvedResponse);
+                        flag[5] = true;
+                    }
+                },
+                //Launched when server return error
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Mark_Resolved Error: " + error.toString()).setNeutralButton("Close", null).show();
+
+                    }
+                }) {
+
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("complaint_id",complaintID);
+                params.put("x-access-token",token);
+                return params;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(thisContext);
+        requestQueue.add(stringRequest);
+    }
+
+
+    /*flag[6]*/
+    public void relodge_higher_request(final String token,final String complaintID) {
+        final String sRequest = ServerURL + "/relodge_higher";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, sRequest,
+                new Response.Listener<String>() {
+                    @Override
+                    //On valid response
+                    public void onResponse(String response) {
+
+                        relodgeHigherResponse = response;
+                        System.out.println(relodgeHigherResponse);
+                        flag[6] = true;
+                    }
+                },
+                //Launched when server return error
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Relodge_higehr Error: " + error.toString()).setNeutralButton("Close", null).show();
+
+                    }
+                }) {
+
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("complaint_id",complaintID);
+                params.put("x-access-token",token);
+                return params;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(thisContext);
+        requestQueue.add(stringRequest);
+    }
+
+
+
+    /*flag[7]*/
+    public void relodge_same_request(final String token,final String complaintID) {
+        final String sRequest = ServerURL + "/relodge_same";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, sRequest,
+                new Response.Listener<String>() {
+                    @Override
+                    //On valid response
+                    public void onResponse(String response) {
+
+                        relodgeSameResponse = response;
+                        System.out.println(relodgeSameResponse);
+                        flag[7] = true;
+                    }
+                },
+                //Launched when server return error
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Reldoge_same Error: " + error.toString()).setNeutralButton("Close", null).show();
+
+                    }
+                }) {
+
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("complaint_id",complaintID);
+                params.put("x-access-token",token);
+                return params;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(thisContext);
+        requestQueue.add(stringRequest);
+    }
+
+
+
+
+    /*flag[8]*/
+    public void vote_request(final String token,final String complaintID, final String userID, final String UpDown) {
+        final String sRequest = ServerURL + "/vote";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, sRequest,
+                new Response.Listener<String>() {
+                    @Override
+                    //On valid response
+                    public void onResponse(String response) {
+
+                        voteResponse = response;
+                        System.out.println(voteResponse);
+                        flag[8] = true;
+                    }
+                },
+                //Launched when server return error
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Vote Error: " + error.toString()).setNeutralButton("Close", null).show();
+
+                    }
+                }) {
+
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("complaint_id",complaintID);
+                params.put("user_id",userID);
+                params.put("type",UpDown);
+                params.put("x-access-token",token);
+                return params;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(thisContext);
+        requestQueue.add(stringRequest);
+    }
 
 
    /* public void get_complaint_details_request(final String token,final String[] listOfComplaints ) {
@@ -151,284 +430,4 @@ public class LoadData extends Activity {
         requestQueue.add(stringRequest);
     }
 */
-
-
-    public void add_complaint_request(final String token,final String isCommunity,final String Type, final String Title, final String Description, final String courseID) {
-        final String sRequest = ServerURL + "/new_complaint";
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, sRequest,
-                new Response.Listener<String>() {
-                    @Override
-                    //On valid response
-                    public void onResponse(String response) {
-
-                        addComplaintResponse = response;
-                        System.out.println(addComplaintResponse);
-                        flag[0] = true;
-                    }
-                },
-                //Launched when server return error
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Add_complaint Error: " + error.toString()).setNeutralButton("Close", null).show();
-
-                    }
-                }) {
-
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("is_community", isCommunity);
-                params.put("type", Type);
-                params.put("title", Title);
-                params.put("description", Description);
-                params.put("course_id",courseID);
-                params.put("x-access-token",token);
-                return params;
-            }
-
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(thisContext);
-        requestQueue.add(stringRequest);
-    }
-
-
-
-
-    public void new_thread_request(final String token,final String complaintID,final String Title, final String Description) {
-        final String sRequest = ServerURL + "/new_thread";
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, sRequest,
-                new Response.Listener<String>() {
-                    @Override
-                    //On valid response
-                    public void onResponse(String response) {
-
-                        newThreadResponse = response;
-                        System.out.println(newThreadResponse);
-                        flag[0] = true;
-                    }
-                },
-                //Launched when server return error
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("New_Thread Error: " + error.toString()).setNeutralButton("Close", null).show();
-
-                    }
-                }) {
-
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("title", Title);
-                params.put("description", Description);
-                params.put("complaint_id",complaintID);
-                params.put("x-access-token",token);
-                return params;
-            }
-
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(thisContext);
-        requestQueue.add(stringRequest);
-    }
-
-
-
-
-
-    public void new_comment_request(final String token,final String complaintID,final String threadID, final String postedBy, final String description, final String timestamp) {
-        final String sRequest = ServerURL + "/new_comment";
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, sRequest,
-                new Response.Listener<String>() {
-                    @Override
-                    //On valid response
-                    public void onResponse(String response) {
-
-                        newCommentResponse = response;
-                        System.out.println(newCommentResponse);
-                        flag[0] = true;
-                    }
-                },
-                //Launched when server return error
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("New_comment Error: " + error.toString()).setNeutralButton("Close", null).show();
-
-                    }
-                }) {
-
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("thread_id", threadID);
-                params.put("posted_by", postedBy);
-                params.put("complaint_id",complaintID);
-                params.put("timestamp", timestamp);
-                params.put("description", description);
-                params.put("x-access-token",token);
-                return params;
-            }
-
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(thisContext);
-        requestQueue.add(stringRequest);
-    }
-
-
-
-
-    public void mark_resolved_request(final String token,final String complaintID) {
-        final String sRequest = ServerURL + "/mark_resolved";
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, sRequest,
-                new Response.Listener<String>() {
-                    @Override
-                    //On valid response
-                    public void onResponse(String response) {
-
-                        markResolvedResponse = response;
-                        System.out.println(markResolvedResponse);
-                        flag[0] = true;
-                    }
-                },
-                //Launched when server return error
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Mark_Resolved Error: " + error.toString()).setNeutralButton("Close", null).show();
-
-                    }
-                }) {
-
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("complaint_id",complaintID);
-                params.put("x-access-token",token);
-                return params;
-            }
-
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(thisContext);
-        requestQueue.add(stringRequest);
-    }
-
-
-
-    public void relodge_higher_request(final String token,final String complaintID) {
-        final String sRequest = ServerURL + "/relodge_higher";
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, sRequest,
-                new Response.Listener<String>() {
-                    @Override
-                    //On valid response
-                    public void onResponse(String response) {
-
-                        relodgeHigherResponse = response;
-                        System.out.println(relodgeHigherResponse);
-                        flag[0] = true;
-                    }
-                },
-                //Launched when server return error
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Relodge_higehr Error: " + error.toString()).setNeutralButton("Close", null).show();
-
-                    }
-                }) {
-
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("complaint_id",complaintID);
-                params.put("x-access-token",token);
-                return params;
-            }
-
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(thisContext);
-        requestQueue.add(stringRequest);
-    }
-
-
-
-
-    public void relodge_same_request(final String token,final String complaintID) {
-        final String sRequest = ServerURL + "/relodge_same";
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, sRequest,
-                new Response.Listener<String>() {
-                    @Override
-                    //On valid response
-                    public void onResponse(String response) {
-
-                        relodgeSameResponse = response;
-                        System.out.println(relodgeSameResponse);
-                        flag[0] = true;
-                    }
-                },
-                //Launched when server return error
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Reldoge_same Error: " + error.toString()).setNeutralButton("Close", null).show();
-
-                    }
-                }) {
-
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("complaint_id",complaintID);
-                params.put("x-access-token",token);
-                return params;
-            }
-
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(thisContext);
-        requestQueue.add(stringRequest);
-    }
-
-
-
-
-
-    public void vote_request(final String token,final String complaintID, final String userID, final String UpDown) {
-        final String sRequest = ServerURL + "/vote";
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, sRequest,
-                new Response.Listener<String>() {
-                    @Override
-                    //On valid response
-                    public void onResponse(String response) {
-
-                        voteResponse = response;
-                        System.out.println(voteResponse);
-                        flag[0] = true;
-                    }
-                },
-                //Launched when server return error
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Vote Error: " + error.toString()).setNeutralButton("Close", null).show();
-
-                    }
-                }) {
-
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("complaint_id",complaintID);
-                params.put("user_id",userID);
-                params.put("type",UpDown);
-                params.put("x-access-token",token);
-                return params;
-            }
-
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(thisContext);
-        requestQueue.add(stringRequest);
-    }
-
-
-
 }

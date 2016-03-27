@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity
         l.setContext(thisContext);
 
         // TODO : figure out what to set for token and courseID
-        l.add_complaint_request(new String("token"), isCommunity, selected_item, t, d, new String("courseID"));
+        l.add_complaint_request(isCommunity, selected_item, t, d, new String("courseID"));
         //add_complaint_request(String token,String isCommunity,String Type,String Title,String Description, final String courseID)
     }
 
@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity
         l.setContext(thisContext);
 
         // TODO : figure out token and posted by and time stamp
-        l.new_comment_request(new String("token"),c_id, t_id, new String("posted by"), d, new String("time stamp"));
+        l.new_comment_request(c_id, t_id, new String("posted by"), d, new String("time stamp"));
         //public void new_comment_request(final String token,final String complaintID,final String threadID, final String postedBy, final String description, final String timestamp)
     }
 
@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity
         l.setContext(thisContext);
 
         // TODO : Figure out what to set for token
-        l.new_thread_request(new String("token"), id, t, d);
+        l.new_thread_request(id, t, d);
         //public void new_thread_request(final String token,final String complaintID,final String Title, final String Description)
     }
 
