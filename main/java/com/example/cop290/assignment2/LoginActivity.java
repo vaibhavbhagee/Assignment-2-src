@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -68,6 +70,15 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
 
     public void login(EditText kerbID, EditText password)
     {
@@ -221,7 +232,7 @@ public class LoginActivity extends AppCompatActivity {
                             if (cdr.getBoolean("success")) {
 
                                 JSONArray comparr = (JSONArray) cdr.get("notifications");
-                                Log.i("sandj","sadjsakdas");
+                                Log.i("sandj", "sadjsakdas");
                                 l.notificationsArray = new JSONObject[comparr.length()];
                                 for ( int i = 0 ; i < comparr.length(); i ++ )
                                 {
