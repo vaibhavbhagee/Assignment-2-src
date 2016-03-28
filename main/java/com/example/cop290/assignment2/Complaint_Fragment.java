@@ -128,12 +128,13 @@ public class Complaint_Fragment extends Fragment {
         //    list.add(new fraud("Title "+i, "Lodger "+i, "bla"));
         //}
 
+        //PASS ARAMETERS INTO THREAD FRAGMENT
         Log.i("WTF","asd");
         try{
         for(int i = 0 ; i < threads.length(); i ++ )
         {
             Log.i("MNS",threads.length() + " ");
-            list.add(new fraud(threads.getJSONObject(i).getString("title"),threads.getJSONObject(i).getString("description"), threads.getJSONObject(i).getString("thread_id")));
+            list.add(new fraud(threads.getJSONObject(i).getString("title"),threads.getJSONObject(i).getString("description"), threads.getJSONObject(i).toString()));
         }
         }catch(Exception e){e.printStackTrace();}
 

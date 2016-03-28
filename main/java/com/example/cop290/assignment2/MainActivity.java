@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity
         //TODO : Navigate to the individual complaint page
         RelativeLayout rl = (RelativeLayout)view;
         TextView t = (TextView) rl.findViewById(R.id.complaint_id);
-Log.i("SHREYAN", ((TextView)((RelativeLayout) view).getChildAt(1)).getText().toString() );
+Log.i("SHREYAN", ((TextView)((RelativeLayout) view).getChildAt(3)).getText().toString() );
         Bundle bundle = new Bundle();
         bundle.putString("complaint_json",((TextView)((RelativeLayout) view).getChildAt(3)).getText().toString());
 
