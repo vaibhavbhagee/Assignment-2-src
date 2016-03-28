@@ -3,11 +3,13 @@ package com.example.cop290.assignment2;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -39,6 +41,11 @@ public class Complaint_Fragment extends Fragment {
         TextView updated_on = (TextView) view.findViewById(R.id.updated_on);
         TextView description = (TextView) view.findViewById(R.id.description);
         TextView current_authority = (TextView) view.findViewById(R.id.current_authority);
+        Button button1 = (Button) view.findViewById(R.id.button1);
+        Button button2 = (Button) view.findViewById(R.id.button2);
+        Button button3 = (Button) view.findViewById(R.id.button3);
+        FloatingActionButton upvote = (FloatingActionButton) view.findViewById(R.id.upvote);
+        FloatingActionButton downvote = (FloatingActionButton) view.findViewById(R.id.downvote);
         RelativeLayout layout = (RelativeLayout) view.findViewById(R.id.layout);
 
         // TODO : Set these values
@@ -49,12 +56,12 @@ public class Complaint_Fragment extends Fragment {
         updated_on.setText("15th December 2016");
         description.setText("Bla Bla Bla Bla. Shreyan kya kar raha hai, kya chahata hai?");
         current_authority.setText("Current Authority");
+        String current_status = "under_resolution";
 
-        String current_status = "resolved";
         if(current_status.equals("resolved")) layout.setBackgroundColor(getResources().getColor(R.color.resolved));
         else if(current_status.equals("under_resolution")) layout.setBackgroundColor(getResources().getColor(R.color.under_resolution));
         else layout.setBackgroundColor(getResources().getColor(R.color.unresolved));
-
+        
 
         list = new ArrayList<fraud>();
         // TODO ing : add elements to the thread list
@@ -85,13 +92,13 @@ public class Complaint_Fragment extends Fragment {
             TextView slno = (TextView) convertView.findViewById(R.id.slno);
             TextView title = (TextView) convertView.findViewById(R.id.title);
             TextView lodger = (TextView) convertView.findViewById(R.id.lodger);
-            RelativeLayout layout = (RelativeLayout) convertView.findViewById(R.id.layout);
+            //RelativeLayout layout = (RelativeLayout) convertView.findViewById(R.id.layout);
             TextView thread_id = (TextView) convertView.findViewById(R.id.thread_id);
 
             slno.setText((position+1)+"");
             title.setText(item.title);
             lodger.setText(item.lodger);
-            layout.setBackgroundColor(getResources().getColor(R.color.resolved));
+            //layout.setBackgroundColor(getResources().getColor(R.color.resolved));
             thread_id.setText(item.thread_id);
 
             return convertView;

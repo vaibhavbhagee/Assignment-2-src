@@ -2,7 +2,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">-->
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -49,14 +48,43 @@ thread list-->
         android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/upvote"
+        android:onClick="upvote"
+        android:layout_marginTop="65dp"
+        android:layout_toRightOf="@+id/type"
+        app:backgroundTint="@color/google_green"
+        app:fabSize="mini"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_send"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/downvote"
+        android:onClick="downvote"
+        android:layout_marginTop="65dp"
+        android:layout_toRightOf="@+id/upvote"
+        app:backgroundTint="@color/google_green"
+        app:fabSize="mini"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_send"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin" />
+
+
     <TextView
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="20dp"
         android:paddingLeft="20dp"
         android:id="@+id/type"
-        android:text="Type Of Complaint" />
+        android:text="Community" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -103,9 +131,10 @@ thread list-->
         android:text="Current Authority" />
     <ListView
         android:id="@+id/listView"
-        android:paddingTop="20dp"
-        android:paddingLeft="20dp"
-        android:layout_below="@+id/description"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/button1"
         android:layout_above="@+id/thread_title"
         android:layout_width="match_parent"
         android:layout_height="170dp" />
@@ -113,7 +142,7 @@ thread list-->
     <EditText
         android:hint="Thread Title"
         android:id="@+id/thread_title"
-        android:paddingTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="150dp"
         android:layout_above="@+id/thread_description"
@@ -142,6 +171,40 @@ thread list-->
         android:layout_marginBottom="@dimen/fab_margin"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true" />
+
+    <Button
+        android:layout_marginLeft="20dp"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button1"
+        android:textAllCaps="false"
+        android:textSize="12dp"
+        android:layout_below="@+id/description"
+        android:id="@+id/button1" />
+
+    <Button
+        android:layout_centerInParent="true"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button2"
+        android:textAllCaps="false"
+        android:textSize="12dp"
+        android:layout_below="@+id/description"
+        android:id="@+id/button2" />
+
+    <Button
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button3"
+        android:textAllCaps="false"
+        android:textSize="12dp"
+        android:layout_below="@+id/description"
+        android:id="@+id/button3" />
 
 </RelativeLayout>
 <!--

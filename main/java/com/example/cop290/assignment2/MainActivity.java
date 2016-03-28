@@ -229,6 +229,30 @@ Log.i("SHREYAN", view.toString());
     public void navigate_to_thread(View view) {
         // TODO : Navigate to thread
     }
+
+    public void upvote(View view) {
+        RelativeLayout parent = (RelativeLayout)view.getParent();
+        TextView complaint_id = (TextView) parent.findViewById(R.id.complaint_id);
+
+        String id = complaint_id.getText().toString();
+
+        final LoadData l = new LoadData();
+        l.setContext(thisContext);
+
+        l.vote_request(id,"upvote");
+    }
+
+    public void downvote(View view) {
+        RelativeLayout parent = (RelativeLayout)view.getParent();
+        TextView complaint_id = (TextView) parent.findViewById(R.id.complaint_id);
+
+        String id = complaint_id.getText().toString();
+
+        final LoadData l = new LoadData();
+        l.setContext(thisContext);
+
+        l.vote_request(id,"downvote");
+    }
 }
 
 
