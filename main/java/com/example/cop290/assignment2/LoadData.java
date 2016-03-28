@@ -443,11 +443,10 @@ public class LoadData extends Activity {
 
 
     /*flag[8]*/
-    public void vote_request( final String complaintID, final String userID, final String UpDown) {
+    public void vote_request( final String complaintID, final String UpDown) {
         final String sRequest = ServerURL + "/vote";
         Map<String, String> params = new HashMap<String, String>();
         params.put("complaint_id",complaintID);
-        params.put("user_id",userID);
         params.put("type",UpDown);
 
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, sRequest, new JSONObject(params),
