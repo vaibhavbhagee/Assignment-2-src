@@ -20,6 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 //TODO: FLAGS NOT SET AT ALL
 //TODO: TO BE ANNOUNCED
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -35,6 +36,8 @@ public class LoadData extends Activity {
 
 
     public static boolean[] flag = new boolean[11];
+
+    public static JSONObject[] complaintDetailsArray;
 
     public static String token;
     public static JSONObject loginResponseJSON;

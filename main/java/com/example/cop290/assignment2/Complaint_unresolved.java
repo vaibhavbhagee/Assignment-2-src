@@ -4,6 +4,7 @@ package com.example.cop290.assignment2;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 
@@ -19,6 +22,9 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class Complaint_unresolved extends Fragment {
+
+
+    ArrayList<fraud> list = new ArrayList<fraud>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,12 +36,24 @@ public class Complaint_unresolved extends Fragment {
 
     void populateListView(View view) {
 
-        ArrayList<fraud> list = new ArrayList<fraud>();
+        list = new ArrayList<fraud>();
 
-        // TODO : add elements to the list
-        for(int i=0; i<10; ++i ){
-            list.add(new fraud("Title ka naam kya hona chaiyeh?? Ion madarboard hai.\n New line karke kya milega tujhe? "+i, "Lodger "+i, "bla"));
-        }
+        LoadData l = new LoadData();
+        JSONObject loginR = l.loginResponseJSON;
+        try {
+
+            list = new ArrayList<fraud>();
+
+            for (int i = 0; i < l.complaintDetailsArray.length; i++) {
+                Log.i("sandj" + i, "sadjsakdas" + i);
+                String title = l.complaintDetailsArray[i].getString("title");
+                String l_name = l.complaintDetailsArray[i].getString("lodger_name");
+                String des = l.complaintDetailsArray[i].getString("description");
+                if(l.complaintDetailsArray[i].getString("current_status").equals("unresolved") )
+                list.add(new fraud(title, l_name, des));
+            }
+
+        }catch(Exception e){Log.i("terimaaki","");e.printStackTrace();}
 
         UserAdapter adapter = new UserAdapter(getActivity(), list);
         ListView listView = (ListView) view.findViewById(R.id.listView);
