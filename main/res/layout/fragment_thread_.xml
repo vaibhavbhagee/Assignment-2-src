@@ -18,10 +18,9 @@
         android:id="@+id/thread_title"
         android:text="thread_title"
         android:layout_marginTop="55dp"
-        android:textStyle="bold"
         android:paddingTop="5dp"
         android:paddingLeft="20dp"
-        android:textSize="30dp"
+        android:textSize="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

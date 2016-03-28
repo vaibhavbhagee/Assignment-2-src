@@ -106,24 +106,27 @@ thread list-->
         android:paddingTop="20dp"
         android:paddingLeft="20dp"
         android:layout_below="@+id/description"
-        android:layout_width="wrap_content"
+        android:layout_above="@+id/thread_title"
+        android:layout_width="match_parent"
         android:layout_height="170dp" />
 
     <EditText
         android:hint="Thread Title"
         android:id="@+id/thread_title"
-        android:paddingTop="20dp"
-        android:paddingLeft="20dp"
-        android:layout_below="@+id/listView"
-        android:layout_width="wrap_content"
+        android:paddingTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="150dp"
+        android:layout_above="@+id/thread_description"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
         android:hint="Description"
         android:id="@+id/thread_description"
-        android:paddingTop="20dp"
-        android:paddingLeft="20dp"
-        android:layout_below="@+id/thread_title"
-        android:layout_width="wrap_content"
+        android:paddingTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
 
