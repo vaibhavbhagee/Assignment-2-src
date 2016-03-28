@@ -38,10 +38,11 @@ public class LoadData extends Activity {
     public static boolean[] flag = new boolean[11];
 
     public static JSONObject[] complaintDetailsArray;
+    public static JSONObject[] notificationsArray;
 
     public static String token;
+    public static JSONObject notificationsJSON;
     public static JSONObject loginResponseJSON;
-    public static JSONObject loginResponse;
     public static JSONObject getComplaintsResponse;
     public static JSONObject complaintDetailsResponse;
     public static JSONObject addComplaintResponse;
@@ -151,7 +152,44 @@ public class LoadData extends Activity {
     }
 
 
-    // flag[9]
+    // flag[10]
+    public void get_notifications_request( final String[] listOfComplaints ) {
+        final String sRequest = ServerURL + "/notifications";
+        Map<String, String> jsonParams = new HashMap<String, String>();
+        jsonParams.put("complaint_list", concat(listOfComplaints));
+
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, sRequest, new JSONObject(jsonParams),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    //On valid response
+                    public void onResponse(JSONObject response) {
+
+                        notificationsJSON = response;
+                        flag[10] = true;
+                    }
+                },
+                //Launched when server return error
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Complaint_Details Error: " + error.toString()).setNeutralButton("Close", null).show();
+
+                    }
+                }) {
+
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> head = new HashMap<String, String>();
+                head.put("x-access-token", token);
+                return head;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(thisContext);
+        requestQueue.add(stringRequest);
+    }
+
+
     public void get_complaint_details_request( final String[] listOfComplaints ) {
         final String sRequest = ServerURL + "/complaint_details";
         Map<String, String> jsonParams = new HashMap<String, String>();
