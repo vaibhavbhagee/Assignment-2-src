@@ -138,11 +138,14 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
+
+
+
     public void navigate_to_complaint(View view) {
         //TODO : Navigate to the individual complaint page
         RelativeLayout rl = (RelativeLayout)view;
         TextView t = (TextView) rl.findViewById(R.id.complaint_id);
-Log.i("SHREYAN", ((TextView)((RelativeLayout) view).getChildAt(3)).getText().toString() );
+Log.i("SHREYAN", ((TextView)((RelativeLayout) view).getChildAt(1)).getText().toString() );
         Bundle bundle = new Bundle();
         bundle.putString("complaint_json",((TextView)((RelativeLayout) view).getChildAt(3)).getText().toString());
 
@@ -231,6 +234,17 @@ Log.i("SHREYAN", ((TextView)((RelativeLayout) view).getChildAt(3)).getText().toS
 
     public void navigate_to_thread(View view) {
         // TODO : Navigate to thread
+        RelativeLayout rl = (RelativeLayout)view;
+        TextView t = (TextView) rl.findViewById(R.id.complaint_id);
+        Log.i("SHREYAN2278194", ((TextView)((RelativeLayout) view).getChildAt(3)).getText().toString() );
+        Bundle bundle = new Bundle();
+        bundle.putString("thread_json",((TextView)((RelativeLayout) view).getChildAt(3)).getText().toString());
+
+        FragmentManager mFragmentManager = getSupportFragmentManager();
+        FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+        Thread_Fragment f = new Thread_Fragment();
+        f.setArguments(bundle);
+        xfragmentTransaction.replace(R.id.content_frame, f).addToBackStack(null).commit();
     }
 
     public void upvote(View view) {
@@ -254,7 +268,7 @@ Log.i("SHREYAN", ((TextView)((RelativeLayout) view).getChildAt(3)).getText().toS
         final LoadData l = new LoadData();
         l.setContext(thisContext);
 
-        l.vote_request(id,"downvote");
+        l.vote_request(id, "downvote");
     }
 
     public void relodge_same_authority(View view) {
