@@ -283,7 +283,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         res.send({success:false,message:"incorrect request"});
 
       else if (result.length == 0)
-        res.send({"Success":false,"Message":"Incorrect Credentials"});
+        res.send({"success":false,"Message":"Incorrect Credentials"});
       else
       {
         var token = jwt.sign(result[0], app.get('superSecret'), {
@@ -322,7 +322,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         res.send({success:false,message:"incorrect request"});
 
       else if (result.length == 0)
-        res.send({"Success":false,"Message":"Incorrect Credentials"});
+        res.send({"success":false,"Message":"Incorrect Credentials"});
       else
       {
         var token = jwt.sign(result[0], app.get('superSecret'), {
