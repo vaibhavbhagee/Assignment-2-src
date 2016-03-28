@@ -1,6 +1,7 @@
 package com.example.cop290.assignment2;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -140,13 +142,14 @@ public class MainActivity extends AppCompatActivity
         //TODO : Navigate to the individual complaint page
         RelativeLayout rl = (RelativeLayout)view;
         TextView t = (TextView) rl.findViewById(R.id.complaint_id);
-Log.i("SHREYAN", view.toString());
+Log.i("SHREYAN", ((TextView)((RelativeLayout) view).getChildAt(3)).getText().toString() );
         Bundle bundle = new Bundle();
-        //bundle.putString("complaint_id",)
+        bundle.putString("complaint_json",((TextView)((RelativeLayout) view).getChildAt(3)).getText().toString());
 
         FragmentManager mFragmentManager = getSupportFragmentManager();
         FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
         Complaint_Fragment f = new Complaint_Fragment();
+        f.setArguments(bundle);
         xfragmentTransaction.replace(R.id.content_frame, f).addToBackStack(null).commit();
     }
 
@@ -182,7 +185,7 @@ Log.i("SHREYAN", view.toString());
         l.setContext(thisContext);
 
         // TODO : figure out what to set for token and courseID
-        l.add_complaint_request( isCommunity, selected_item, t, d, new String("courseID"));
+        l.add_complaint_request(isCommunity, selected_item, t, d, new String("courseID"));
 
         //add_complaint_request(String token,String isCommunity,String Type,String Title,String Description, final String courseID)
     }
@@ -221,7 +224,7 @@ Log.i("SHREYAN", view.toString());
         l.setContext(thisContext);
 
         // TODO : Figure out what to set for token
-        l.new_thread_request( id, t, d);
+        l.new_thread_request(id, t, d);
 
         //public void new_thread_request(final String token,final String complaintID,final String Title, final String Description)
     }
@@ -239,7 +242,7 @@ Log.i("SHREYAN", view.toString());
         final LoadData l = new LoadData();
         l.setContext(thisContext);
 
-        l.vote_request(id,"upvote");
+        l.vote_request(id, "upvote");
     }
 
     public void downvote(View view) {
@@ -252,6 +255,43 @@ Log.i("SHREYAN", view.toString());
         l.setContext(thisContext);
 
         l.vote_request(id,"downvote");
+    }
+
+    public void relodge_same_authority(View view) {
+       // new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Vote Error: " + error.toString()).setNeutralButton("Close", null).show();
+
+    }
+
+    public void relodge_higher_authority(View view) {
+    }
+
+    public void mark_resolved(View view) {
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(thisContext);
+        alertDialogBuilder.setTitle("/*Aayan Kumar*/");
+        alertDialogBuilder
+                .setMessage("Are you sure you want to mark the complaint as resolved?")
+                .setCancelable(false)
+                .setPositiveButton("No",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // if this button is clicked, close
+                        // current activity
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton("Yes",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // if this button is clicked, just close
+                        // the dialog box and do nothing
+                        dialog.cancel();
+                    }
+                });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
     }
 }
 
