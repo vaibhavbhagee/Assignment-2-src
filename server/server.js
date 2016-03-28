@@ -525,7 +525,9 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 
   apiRoutes.post('/complaint_details', function(req, res) {
 
-      (complaints.find({"complaint_id":{$in: req.body.complaint_list}}).toArray(function(err,result)
+      var complaint_list = req.body.complaint_list.split(",");
+
+      (complaints.find({"complaint_id":{$in: complaint_list}}).toArray(function(err,result)
       {
         if (err)
           res.send({success:false,message:"incorrect request"});
