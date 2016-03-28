@@ -1,6 +1,7 @@
 package com.example.cop290.assignment2;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -251,6 +253,43 @@ public class MainActivity extends AppCompatActivity
         l.setContext(thisContext);
 
         l.vote_request(id,"downvote");
+    }
+
+    public void relodge_same_authority(View view) {
+       // new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Vote Error: " + error.toString()).setNeutralButton("Close", null).show();
+
+    }
+
+    public void relodge_higher_authority(View view) {
+    }
+
+    public void mark_resolved(View view) {
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(thisContext);
+        alertDialogBuilder.setTitle("/*Aayan Kumar*/");
+        alertDialogBuilder
+                .setMessage("Are you sure you want to mark the complaint as resolved?")
+                .setCancelable(false)
+                .setPositiveButton("No",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // if this button is clicked, close
+                        // current activity
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton("Yes",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // if this button is clicked, just close
+                        // the dialog box and do nothing
+                        dialog.cancel();
+                    }
+                });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
     }
 }
 

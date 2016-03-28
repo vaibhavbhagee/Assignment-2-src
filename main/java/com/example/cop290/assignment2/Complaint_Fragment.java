@@ -54,12 +54,32 @@ public class Complaint_Fragment extends Fragment {
         updated_on.setText("15th December 2016");
         description.setText("Bla Bla Bla Bla. Shreyan kya kar raha hai, kya chahata hai?");
         current_authority.setText("Current Authority");
-        String current_status = "under_resolution";
+        String current_status = "unresolved";
 
         if(current_status.equals("resolved")) layout.setBackgroundColor(getResources().getColor(R.color.resolved));
         else if(current_status.equals("under_resolution")) layout.setBackgroundColor(getResources().getColor(R.color.under_resolution));
         else layout.setBackgroundColor(getResources().getColor(R.color.unresolved));
-        
+
+        if(complaint_type.equals("individial")){
+            upvote.setVisibility(View.GONE);
+            downvote.setVisibility(View.GONE);
+        }
+
+        // TODO : IF THEN ELSE KE CHECKS LIKHNA HAI!!!
+        if(current_status.equals("unresolved") && (true) /* authority hai? */  ){
+            if(true /* highest authority hai */){
+                button1.setVisibility(View.GONE);
+                button2.setVisibility(View.GONE);
+            }else{
+                button1.setVisibility(View.GONE);
+            }
+        }else if(complaint_type.equals("under_resolution") && (true) /* user hai? */){
+
+        }else{
+            button1.setVisibility(View.GONE);
+            button2.setVisibility(View.GONE);
+            button3.setVisibility(View.GONE);
+        }
 
         ArrayList<fraud> list = new ArrayList<fraud>();
         // TODO : add elements to the thread list
