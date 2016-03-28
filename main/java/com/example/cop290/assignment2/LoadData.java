@@ -118,10 +118,8 @@ public class LoadData extends Activity {
         requestQueue.add(stringRequest);
     }
 
-
-    public void get_complaints_request(final String uid) {
-
     /*flag[1]*/
+   public void get_complaints_request(final String uid) {
 
         final String sRequest = ServerURL + "/complaintlist?unique_id="+uid;
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, sRequest, null,
@@ -153,7 +151,7 @@ public class LoadData extends Activity {
     }
 
 
-
+    // flag[9]
     public void get_complaint_details_request( final String[] listOfComplaints ) {
         final String sRequest = ServerURL + "/complaint_details";
         Map<String, String> jsonParams = new HashMap<String, String>();

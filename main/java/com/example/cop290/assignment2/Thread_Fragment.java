@@ -4,6 +4,7 @@ package com.example.cop290.assignment2;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -20,10 +24,34 @@ import java.util.ArrayList;
  */
 public class Thread_Fragment extends Fragment {
 
+    private String complaintID;
+    private String threadID;
+    private String tItle;
+    private String updatedon;
+    private String _description;
+    private JSONArray comments;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_thread_, container, false);
+
+        String threadjsonstr = getArguments().getString("thread_json");
+        try {
+            JSONObject threadjson = new JSONObject(threadjsonstr);
+            Log.i("THREADJSON", threadjson.toString());
+            threadID = threadjson.getString("thread_id");
+            complaintID = threadjson.getString("complaint_id");
+            tItle = threadjson.getString("title");
+            updatedon = threadjson.getString("last_updated");
+            _description = threadjson.getString("description");
+
+            comments = (JSONArray)threadjson.get("comments");
+
+
+        }catch(Exception e){e.printStackTrace();}
+
+
+
         populate_data(view);
         return view;
     }
@@ -36,17 +64,19 @@ public class Thread_Fragment extends Fragment {
         TextView thread_description = (TextView) view.findViewById(R.id.thread_description);
         TextView time = (TextView) view.findViewById(R.id.time);
 
-        thread_id.setText("");
-        complaint_id.setText("");
-        thread_title.setText("");
-        thread_description.setText("");
-        time.setText("");
+        thread_id.setText(threadID);
+        complaint_id.setText(complaintID);
+        thread_title.setText(tItle);
+        thread_description.setText(_description);
+        time.setText("Last updated:" + updatedon);
 
         ArrayList<fraud> list = new ArrayList<fraud>();
         // TODO : add elements to the thread list
-        for(int i=0; i<10; ++i ){
-            //list.add(new fraud("Title ka naam kya hona chaiyeh?? Ion madarboard hai.\n New line karke kya milega tujhe? "+i, "Lodger "+i, "bla"));
-        }
+        try {
+            for (int i = 0; i < 10; ++i) {
+                list.add(new fraud(comments.getJSONObject(i).getString("description"), comments.getJSONObject(i).getString("posted_by"), comments.getJSONObject(i).getString("timestamp")));
+            }
+        }catch(Exception e){e.printStackTrace();}
         UserAdapter adapter = new UserAdapter(getActivity(), list);
         ListView listView = (ListView) view.findViewById(R.id.listView);
         listView.setAdapter(adapter);
@@ -61,7 +91,7 @@ public class Thread_Fragment extends Fragment {
 
             fraud item = getItem(position);
             if (convertView == null) {
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.format_thread, parent, false);
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.format_comment, parent, false);
             }
             // TODO : populate the elements of the list view here
 

@@ -50,7 +50,7 @@ public class Complaint_resolved extends Fragment {
                 Log.i("sandj" + i, "sadjsakdas" + i);
                 String title = l.complaintDetailsArray[i].getString("title");
                 String l_name = l.complaintDetailsArray[i].getString("lodger_name");
-                String des = l.complaintDetailsArray[i].getString("complaint_id");
+                String des = l.complaintDetailsArray[i].toString();
                 if(l.complaintDetailsArray[i].getString("current_status").equals("resolved") )
                     list.add(new fraud(title, l_name, des));
             }

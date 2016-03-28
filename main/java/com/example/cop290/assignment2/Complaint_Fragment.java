@@ -1,5 +1,5 @@
 package com.example.cop290.assignment2;
-
+//TODO: YIF YNO YTHREAD YTHEN ERROR
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -28,13 +29,14 @@ public class Complaint_Fragment extends Fragment {
     ArrayList<fraud> list = new ArrayList<fraud>();
 
     private String complaintID;
-    private String community;
+    private boolean community;
     private String tItle;
     private String lodgedon;
     private String updatedon;
     private String _description;
     private String curauth;
     private String curstat = "unresolved" ;
+    private JSONArray threads;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,14 +49,17 @@ public class Complaint_Fragment extends Fragment {
             Log.i("COMPLAINTJSON", complaintjson.toString());
             complaintID = complaintjson.getString("complaint_id");
             Log.i("c",complaintID);
-            community = complaintjson.getString("is_community");
-            Log.i("c",community);
+            community = complaintjson.getBoolean("is_community");
+            Log.i("c",community + "yun");
             tItle = complaintjson.getString("title");
             lodgedon = complaintjson.getJSONObject("timestamp").getString("lodging");
             updatedon = complaintjson.getJSONObject("timestamp").getString("update");
             _description = complaintjson.getString("description");
             curauth = complaintjson.getString("current_level");
             curstat = complaintjson.getString("current_status");
+
+                threads = (JSONArray)complaintjson.get("threads");
+
 
         }catch(Exception e){e.printStackTrace();}
 
@@ -81,7 +86,7 @@ public class Complaint_Fragment extends Fragment {
 
         // TODO : Set these values
         complaint_id.setText(complaintID);
-        complaint_type.setText(community.equals("true")?"Community":"Individual");
+        complaint_type.setText(community==true?"Community":"Individual");
         title.setText(tItle);
         lodged_on.setText(lodgedon);
         updated_on.setText(updatedon);
@@ -119,9 +124,20 @@ public class Complaint_Fragment extends Fragment {
 
         //LoadData l = new LoadData();
 
-        for(int i=0; i<10; ++i ){
-            list.add(new fraud("Title "+i, "Lodger "+i, "bla"));
+        //for(int i=0; i<10; ++i ){
+        //    list.add(new fraud("Title "+i, "Lodger "+i, "bla"));
+        //}
+
+        //PASS ARAMETERS INTO THREAD FRAGMENT
+        Log.i("WTF","asd");
+        try{
+        for(int i = 0 ; i < threads.length(); i ++ )
+        {
+            Log.i("MNS",threads.length() + " ");
+            list.add(new fraud(threads.getJSONObject(i).getString("title"),threads.getJSONObject(i).getString("description"), threads.getJSONObject(i).toString()));
         }
+        }catch(Exception e){e.printStackTrace();}
+
         UserAdapter adapter = new UserAdapter(getActivity(), list);
         ListView listView = (ListView) view.findViewById(R.id.listView);
         listView.setAdapter(adapter);
