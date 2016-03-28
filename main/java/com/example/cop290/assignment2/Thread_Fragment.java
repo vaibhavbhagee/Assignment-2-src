@@ -45,7 +45,7 @@ public class Thread_Fragment extends Fragment {
         ArrayList<fraud> list = new ArrayList<fraud>();
         // TODO : add elements to the thread list
         for(int i=0; i<10; ++i ){
-            //list.add(new fraud("Title ka naam kya hona chaiyeh?? Ion madarboard hai.\n New line karke kya milega tujhe? "+i, "Lodger "+i, "bla"));
+            list.add(new fraud("Title ka naam kya hona chaiyeh?? Ion madarboard hai.\n New line karke kya milega tujhe? "+i, "Lodger "+i, "bla"));
         }
         UserAdapter adapter = new UserAdapter(getActivity(), list);
         ListView listView = (ListView) view.findViewById(R.id.listView);
@@ -69,9 +69,9 @@ public class Thread_Fragment extends Fragment {
             TextView posted_by = (TextView) convertView.findViewById(R.id.posted_by);
             TextView posted_on = (TextView) convertView.findViewById(R.id.posted_on);
 
-            description.setText(item.description);
-            posted_by.setText(item.posted_by);
-            posted_on.setText(item.posted_on);
+            //description.setText(item.description);
+            //posted_by.setText(item.posted_by);
+            //posted_on.setText(item.posted_on);
 
             return convertView;
         }
