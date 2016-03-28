@@ -38,6 +38,12 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        SharedPreferences sp = getSharedPreferences("MahPrefs",Context.MODE_PRIVATE);
+//TODO:DELETE THIS SHIT
+        //TODO:SPLASH SCREEN ADD KARDE
+        TextView tv = (TextView)findViewById(R.id.textView2);
+        tv.setText(sp.getString("kerbID","")+":"+sp.getString("password","")+":"+sp.getString("token",""));
+
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
         swipeRefreshLayout.setColorSchemeResources(R.color.google_blue,
                 R.color.google_green,

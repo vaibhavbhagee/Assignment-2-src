@@ -32,7 +32,7 @@ public class LoadData extends Activity {
 
 
     public static final String SharedPref = "MahPrefs";
-    SharedPreferences sharedpreferences;
+
 
     public static boolean[] flag = new boolean[11];
 
@@ -81,18 +81,17 @@ public class LoadData extends Activity {
 
                     try {
                         loginResponseJSON = response;
+                        Log.i("bhaggus",loginResponseJSON.toString());
 
                         if(response.getBoolean("success"))
                         {
                             flag[0] = true;
-                            SharedPreferences.Editor editor = sharedpreferences.edit();
-                            editor.putString("token", response.getString("token"));
-                            editor.commit();
+                            Log.i("ajsdas", Integer.toString(Context.MODE_PRIVATE));
                             token = response.getString("token");
                         }
 
 
-                    }catch(Exception e){System.out.println("Something went wrong in login");}
+                    }catch(Exception e){System.out.println(e.toString());}
                     }
                 },
                 //Launched when server return error

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -29,7 +30,6 @@ public class LoginActivity extends AppCompatActivity {
     public static boolean login_control;
     public static final String SharedPref = "MahPrefs";
     Context thisContext = this;
-    SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,10 @@ public class LoginActivity extends AppCompatActivity {
 
         final EditText kerbID = (EditText) findViewById(R.id.kerbID);
         final EditText password = (EditText) findViewById(R.id.password);
-        sharedpreferences = getSharedPreferences(SharedPref, Context.MODE_PRIVATE);
+
+        //SharedPreferences sharedpreferences = getSharedPreferences(SharedPref,Context.MODE_PRIVATE);
+
+        SharedPreferences sharedpreferences = getSharedPreferences(SharedPref, Context.MODE_PRIVATE);
         kerbID.setText(sharedpreferences.getString("kerbID", ""));
         password.setText(sharedpreferences.getString("password", ""));
 
@@ -67,6 +70,8 @@ public class LoginActivity extends AppCompatActivity {
         String kerberosIDString  = kerbID.getText().toString();
         String passwordString = password.getText().toString();
 
+        SharedPreferences sharedpreferences = getSharedPreferences(SharedPref, Context.MODE_PRIVATE);
+
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.putString("kerbID", kerberosIDString);
         editor.putString("password", passwordString);
@@ -76,7 +81,8 @@ public class LoginActivity extends AppCompatActivity {
         LoadData loadDataObject = new LoadData();
         loadDataObject.setContext(thisContext);
         loadDataObject.login_request(kerberosIDString, passwordString);
-
+        timer(1, loadDataObject, 0);
+        loadDataObject.flag[0] = false;
         //TODO: Always loggs in
 
         /*Intent intent = new Intent(LoginActivity.this,MainActivity.class);
@@ -92,6 +98,40 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+
+
+
+
+    public boolean timer(final int x, final LoadData l, final int whichflag){
+
+        new CountDownTimer(50, 1000) {
+            public void onTick(long millisUntilFinished) {
+
+            }
+            public void onFinish() {
+                if(x==100){
+                    Toast.makeText(LoginActivity.this,"Connection Timed Out", Toast.LENGTH_LONG).show();
+                }
+                else if(l.flag[whichflag]){
+                    if(whichflag == 0)
+                    {
+                        SharedPreferences sharedpreferences = getSharedPreferences(SharedPref, Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedpreferences.edit();
+                        editor.putString("token", l.token);
+                        editor.commit();
+
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+
+                    }
+
+                } else {
+                    timer(x+1,l, whichflag);
+                }
+            }
+        }.start();
+        return true;
+    }
 
 
 }
