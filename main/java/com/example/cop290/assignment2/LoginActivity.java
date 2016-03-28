@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -20,6 +21,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -120,6 +124,21 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("token", l.token);
                         editor.commit();
 
+                        JSONObject loginR = l.loginResponseJSON;
+                        try{
+                            String[] c_list = new String[loginR.getJSONArray("complaint_list").length()];
+                            for(int i = 0 ; i < loginR.getJSONArray("complaint_list").length(); i ++ )
+                                c_list[i] = loginR.getJSONArray("complaint_list").getString(i);
+
+                            l.get_complaint_details_request(c_list);
+                            timercomplaint(1, l, 9);
+                            l.flag[9] = false;
+
+                        }catch(Exception e){e.printStackTrace();}
+
+                        //timer(1, loadDataObject, 0);
+                        //loadDataObject.flag[0] = false;
+
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
 
@@ -134,4 +153,49 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+
+    public boolean timercomplaint(final int x, final LoadData l, final int whichflag){
+
+        new CountDownTimer(50, 1000) {
+            public void onTick(long millisUntilFinished) {
+
+            }
+            public void onFinish() {
+                if(x==100){
+                    //Toast.makeText(LoginActivity.this, "Connection Timed Out", Toast.LENGTH_LONG).show();
+                }
+                else if(l.flag[whichflag]){
+                    if(whichflag == 9)
+                    {
+                        Log.i("gaand", "sajdas");
+                        try {
+                            JSONObject cdr = l.complaintDetailsResponse;
+                            Log.i("gaandu","sajdaus");
+
+                            if (cdr.getBoolean("success")) {
+                                Log.i("gaandusuc","sajdaussuc");
+
+                                JSONArray comparr = (JSONArray) cdr.get("complaints");
+                                Log.i("sandj","sadjsakdas");
+                                l.complaintDetailsArray = new JSONObject[comparr.length()];
+                                for ( int i = 0 ; i < comparr.length(); i ++ )
+                                {
+                                    l.complaintDetailsArray[i] = comparr.getJSONObject(i);
+                                }
+                            }
+                            //list.add(new fraud("Title ka naam kya hona chaiyeh?? Shreyan madarboard hai.\n New line karke kya milega tujhe? " + i, "Lodger " + i, "bla"));
+                        }catch(Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                } else {
+                    timercomplaint(x + 1, l, whichflag);
+                }
+            }
+        }.start();
+        return true;
+    }
 }

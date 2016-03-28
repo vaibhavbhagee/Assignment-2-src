@@ -44,17 +44,16 @@ public class Complaint_resolved extends Fragment {
         JSONObject loginR = l.loginResponseJSON;
         try {
 
-            Log.i("swag", (l.loginResponseJSON.getJSONArray("complaint_list").getString(0)));
-            String[] c_list = new String[loginR.getJSONArray("complaint_list").length()];
+            list = new ArrayList<fraud>();
 
-            for(int i = 0 ; i < loginR.getJSONArray("complaint_list").length(); i ++ )
-                    c_list[i] = loginR.getJSONArray("complaint_list").getString(i);
+            for (int i = 0; i < l.complaintDetailsArray.length; i++) {
+                Log.i("sandj" + i, "sadjsakdas" + i);
+                String title = l.complaintDetailsArray[i].getString("title");
+                String l_name = l.complaintDetailsArray[i].getString("lodger_name");
+                String des = l.complaintDetailsArray[i].getString("description");
+                list.add(new fraud(title, l_name, des));
+            }
 
-
-
-            l.get_complaint_details_request(c_list);
-            timer(1, l, 9);
-            l.flag[9] = false;
         }catch(Exception e){Log.i("terimaaki","");e.printStackTrace();}
 
         // TODO ing : add elements to the list
@@ -108,52 +107,5 @@ public class Complaint_resolved extends Fragment {
         }
     }
 
-    public boolean timer(final int x, final LoadData l, final int whichflag){
-
-        new CountDownTimer(50, 1000) {
-            public void onTick(long millisUntilFinished) {
-
-            }
-            public void onFinish() {
-                if(x==100){
-                    //Toast.makeText(LoginActivity.this, "Connection Timed Out", Toast.LENGTH_LONG).show();
-                }
-                else if(l.flag[whichflag]){
-                    if(whichflag == 9)
-                    {
-                        Log.i("gaand","sajdas");
-                        try {
-                            JSONObject cdr = l.complaintDetailsResponse;
-                            Log.i("gaandu","sajdaus");
-
-                            if (cdr.getBoolean("success")) {
-                                Log.i("gaandusuc","sajdaussuc");
-
-                                JSONArray comparr = (JSONArray) cdr.get("complaints");
-                                Log.i("sandj","sadjsakdas");
-                                for ( int i = 0 ; i < comparr.length(); i ++ )
-                                {
-                                    Log.i("sandj" + i,"sadjsakdas" + i);
-                                    String title = comparr.getJSONObject(i).getString("title");
-                                    String l_name = comparr.getJSONObject(i).getString("lodger_name");
-                                    String des = comparr.getJSONObject(i).getString("description");
-                                    list.add(new fraud(title, l_name, des));
-                                }
-                            }
-                            //list.add(new fraud("Title ka naam kya hona chaiyeh?? Shreyan madarboard hai.\n New line karke kya milega tujhe? " + i, "Lodger " + i, "bla"));
-                        }catch(Exception e)
-                        {
-                            e.printStackTrace();
-                        }
-
-                    }
-
-                } else {
-                    timer(x+1,l, whichflag);
-                }
-            }
-        }.start();
-        return true;
-    }
 
 }
