@@ -652,7 +652,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
                 if (err)
                   res.send({success:false,message:"incorrect request"});
                 else
-                  res.send({success:true,message:"Thread Added Successfully",complaint:result[0],notification:notif});
+                  res.send({success:true,message:"Comment Added Successfully",complaint:result[0],notification:notif});
               });    
             }
           }));          
