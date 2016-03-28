@@ -45,7 +45,7 @@ public class Complaint_Fragment extends Fragment {
         title.setText("Title of the complaint");
         lodged_on.setText("14th December 2016");
         updated_on.setText("15th December 2016");
-        description.setText("Bla Bla Bla Bla. Ion kya kar raha hai, kya chahata hai?");
+        description.setText("Bla Bla Bla Bla. Shreyan kya kar raha hai, kya chahata hai?");
         current_authority.setText("Current Authority");
 
         String current_status = "resolved";

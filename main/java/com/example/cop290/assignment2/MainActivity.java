@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity
         editor.putString("password", "");
         editor.putString("token", "");
         editor.commit();
-        //TODO : Logout Properly!!!!!!!
+        //TODO : Logout Properly!!!!!!! Done dana done done
         Intent intent = new Intent(thisContext, LoginActivity.class);
         startActivity(intent);
     }

@@ -163,7 +163,7 @@ public class LoadData extends Activity {
                     public void onResponse(JSONObject response) {
 
                         complaintDetailsResponse = response;
-                        flag[0] = true;
+                        flag[9] = true;
                     }
                 },
                 //Launched when server return error
