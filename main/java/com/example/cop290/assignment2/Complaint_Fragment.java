@@ -22,6 +22,8 @@ import java.util.ArrayList;
  */
 public class Complaint_Fragment extends Fragment {
 
+    ArrayList<fraud> list = new ArrayList<fraud>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -81,8 +83,11 @@ public class Complaint_Fragment extends Fragment {
             button3.setVisibility(View.GONE);
         }
 
-        ArrayList<fraud> list = new ArrayList<fraud>();
-        // TODO : add elements to the thread list
+        list = new ArrayList<fraud>();
+        // TODO ing : add elements to the thread list
+
+        //LoadData l = new LoadData();
+
         for(int i=0; i<10; ++i ){
             list.add(new fraud("Title "+i, "Lodger "+i, "bla"));
         }

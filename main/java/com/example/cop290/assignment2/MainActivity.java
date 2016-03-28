@@ -15,6 +15,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,11 +41,8 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        SharedPreferences sp = getSharedPreferences("MahPrefs",Context.MODE_PRIVATE);
-//TODO:DELETE THIS SHIT
+        SharedPreferences sp = getSharedPreferences("MahPrefs", Context.MODE_PRIVATE);
         //TODO:SPLASH SCREEN ADD KARDE
-        TextView tv = (TextView)findViewById(R.id.textView2);
-        tv.setText(sp.getString("kerbID","")+":"+sp.getString("password","")+":"+sp.getString("token",""));
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
         swipeRefreshLayout.setColorSchemeResources(R.color.google_blue,
@@ -144,6 +142,9 @@ public class MainActivity extends AppCompatActivity
         //TODO : Navigate to the individual complaint page
         RelativeLayout rl = (RelativeLayout)view;
         TextView t = (TextView) rl.findViewById(R.id.complaint_id);
+Log.i("SHREYAN", view.toString());
+        Bundle bundle = new Bundle();
+        //bundle.putString("complaint_id",)
 
         FragmentManager mFragmentManager = getSupportFragmentManager();
         FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
