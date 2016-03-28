@@ -574,7 +574,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
             complaint_id:req.body.complaint_id,
             title:req.body.title,
             description:req.body.description,
-            last_updated:new Date(),
+            last_updated:(new Date()).toDateString(),
             comments:[]
           }
 
@@ -589,7 +589,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
             {
               var notif = {
                 complaint_id:req.body.complaint_id,
-                timestamp: new Date(),
+                timestamp: (new Date()).toDateString(),
                 content: req.decoded.name + " posted a new thread under complaint id "+req.body.complaint_id
               }
 
@@ -625,7 +625,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
           var comment_obj = {
             posted_by:req.decoded.unique_id,
             description:req.body.description,
-            timestamp:new Date(),
+            timestamp:(new Date()).toDateString(),
           }
 
           for (var i = 0; i < result[0]["threads"].length; i++ )
@@ -643,7 +643,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
             {
               var notif = {
                 complaint_id:req.body.complaint_id,
-                timestamp: new Date(),
+                timestamp: (new Date()).toDateString(),
                 content: req.decoded.name + " posted a new comment on the thread "+req.body.thread_id+" under complaint id "+req.body.complaint_id
               }
 
@@ -692,7 +692,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
             {
               var notif = {
                 complaint_id:req.body.complaint_id,
-                timestamp: new Date(),
+                timestamp: (new Date()).toDateString(),
                 content: req.decoded.name + " marked the complaint "+req.body.complaint_id+" as "+status
               }
 
@@ -736,7 +736,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
             {
               var notif = {
                 complaint_id:req.body.complaint_id,
-                timestamp: new Date(),
+                timestamp: (new Date()).toDateString(),
                 content: req.decoded.name + " relodged the complaint with "+result[0]["current_level"]
               }
 
@@ -795,7 +795,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
               {
                 var notif = {
                   complaint_id:req.body.complaint_id,
-                  timestamp: new Date(),
+                  timestamp: (new Date()).toDateString(),
                   content: req.decoded.name + " "+req.body.type+"d the complaint "+req.body.complaint_id
                 }
 
@@ -836,7 +836,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
       {
         // var complaint_id = "c"+crypto.createHash('sha1').update(new Date()+"").digest('hex');
         var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
-        var timestamp = {lodging:new Date(),update:new Date()};
+        var timestamp = {lodging:(new Date()).toDateString(),update:(new Date()).toDateString()};
 
         users.update({"tags":{$in: [req.decoded.tags[0]]}},{ $addToSet: { complaint_list: complaint_id } },{ multi: true },function(err,result)
         {
@@ -878,7 +878,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
                   {
                   var notif = {
                       complaint_id:complaint_id,
-                      timestamp: new Date(),
+                      timestamp: (new Date()).toDateString(),
                       content: req.decoded.name + " lodged a new complaint."
                     }
 
@@ -897,9 +897,9 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
       }
       else
       {
-        // var complaint_id = "c"+crypto.createHash('sha1').update(new Date()).digest('hex');
+        // var complaint_id = "c"+crypto.createHash('sha1').update((new Date()).toDateString()).digest('hex');
         var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
-        var timestamp = {lodging:new Date(),update:new Date()};
+        var timestamp = {lodging:(new Date()).toDateString(),update:(new Date()).toDateString()};
 
         users.update({"unique_id":{$in: [current_level,lodged_by]}},{ $addToSet: { complaint_list: complaint_id } },function(err,result2)
         {
@@ -931,7 +931,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
             {
             var notif = {
                     complaint_id:complaint_id,
-                    timestamp: new Date(),
+                    timestamp: (new Date()).toDateString(),
                     content: req.decoded.name + " lodged a new complaint."
                   }
 
@@ -955,9 +955,9 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 
       if (req.body.is_community === true)
       {
-        // var complaint_id = "c"+crypto.createHash('sha1').update(new Date()).digest('hex');
+        // var complaint_id = "c"+crypto.createHash('sha1').update((new Date()).toDateString()).digest('hex');
         var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
-        var timestamp = {lodging:new Date(),update:new Date()};
+        var timestamp = {lodging:(new Date()).toDateString(),update:(new Date()).toDateString()};
 
         users.update({"tags":{$in: [req.decoded.tags[1]]}},{ $addToSet: { complaint_list: complaint_id } },{ multi: true },function(err,result)
         {
@@ -999,7 +999,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
                 {
                 var notif = {
                     complaint_id:complaint_id,
-                    timestamp: new Date(),
+                    timestamp: (new Date()).toDateString(),
                     content: req.decoded.name + " lodged a new complaint."
                   }
 
@@ -1018,9 +1018,9 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
       }
       else
       {
-        // var complaint_id = "c"+crypto.createHash('sha1').update(new Date()).digest('hex');
+        // var complaint_id = "c"+crypto.createHash('sha1').update((new Date()).toDateString()).digest('hex');
         var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
-        var timestamp = {lodging:new Date(),update:new Date()};
+        var timestamp = {lodging:(new Date()).toDateString(),update:(new Date()).toDateString()};
 
         users.update({"unique_id":{$in: [current_level,lodged_by]}},{ $addToSet: { complaint_list: complaint_id } },function(err,result2)
         {
@@ -1052,7 +1052,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
             {
             var notif = {
                     complaint_id:complaint_id,
-                    timestamp: new Date(),
+                    timestamp: (new Date()).toDateString(),
                     content: req.decoded.name + " lodged a new complaint."
                   }
 
@@ -1076,9 +1076,9 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 
       if (req.body.is_community === true)
       {
-        // var complaint_id = "c"+crypto.createHash('sha1').update(new Date()).digest('hex');
+        // var complaint_id = "c"+crypto.createHash('sha1').update((new Date()).toDateString()).digest('hex');
         var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
-        var timestamp = {lodging:new Date(),update:new Date()};
+        var timestamp = {lodging:(new Date()).toDateString(),update:(new Date()).toDateString()};
 
         users.update({"course_list":{$in: [req.body.course_id]}},{ $addToSet: { complaint_list: complaint_id } },{ multi: true },function(err,result)
         {
@@ -1120,7 +1120,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
                 {
                 var notif = {
                     complaint_id:complaint_id,
-                    timestamp: new Date(),
+                    timestamp: (new Date()).toDateString(),
                     content: req.decoded.name + " lodged a new complaint."
                   }
 
@@ -1139,9 +1139,9 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
       }
       else
       {
-        // var complaint_id = "c"+crypto.createHash('sha1').update(new Date()).digest('hex');
+        // var complaint_id = "c"+crypto.createHash('sha1').update((new Date()).toDateString()).digest('hex');
         var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
-        var timestamp = {lodging:new Date(),update:new Date()};
+        var timestamp = {lodging:(new Date()).toDateString(),update:(new Date()).toDateString()};
 
         users.update({"unique_id":{$in: [current_level,lodged_by]}},{ $addToSet: { complaint_list: complaint_id } },function(err,result2)
         {
@@ -1173,7 +1173,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
             {
             var notif = {
                     complaint_id:complaint_id,
-                    timestamp: new Date(),
+                    timestamp: (new Date()).toDateString(),
                     content: req.decoded.name + " lodged a new complaint."
                   }
 
@@ -1197,9 +1197,9 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 
       if (req.body.is_community === true)
       {
-        // var complaint_id = "c"+crypto.createHash('sha1').update(new Date()).digest('hex');
+        // var complaint_id = "c"+crypto.createHash('sha1').update((new Date()).toDateString()).digest('hex');
         var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
-        var timestamp = {lodging:new Date(),update:new Date()};
+        var timestamp = {lodging:(new Date()).toDateString(),update:(new Date()).toDateString()};
 
         users.update({},{ $addToSet: { complaint_list: complaint_id } },{ multi: true },function(err,result)
         {
@@ -1241,7 +1241,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
                 {
                 var notif = {
                     complaint_id:complaint_id,
-                    timestamp: new Date(),
+                    timestamp: (new Date()).toDateString(),
                     content: req.decoded.name + " lodged a new complaint."
                   }
 
@@ -1260,9 +1260,9 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
       }
       else
       {
-        // var complaint_id = "c"+crypto.createHash('sha1').update(new Date()).digest('hex');
+        // var complaint_id = "c"+crypto.createHash('sha1').update((new Date()).toDateString()).digest('hex');
         var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
-        var timestamp = {lodging:new Date(),update:new Date()};
+        var timestamp = {lodging:(new Date()).toDateString(),update:(new Date()).toDateString()};
 
         users.update({"unique_id":{$in: [current_level,lodged_by]}},{ $addToSet: { complaint_list: complaint_id } },function(err,result2)
         {
@@ -1294,7 +1294,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
             {
             var notif = {
               complaint_id:complaint_id,
-              timestamp: new Date(),
+              timestamp: (new Date()).toDateString(),
               content: req.decoded.name + " lodged a new complaint."
             }
 
@@ -1351,7 +1351,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
             {
             var notif = {
               complaint_id:req.body.complaint_id,
-              timestamp: new Date(),
+              timestamp: (new Date()).toDateString(),
               content: req.decoded.name + " relodged the complaint with "+result[0]["current_level"]
             }
 

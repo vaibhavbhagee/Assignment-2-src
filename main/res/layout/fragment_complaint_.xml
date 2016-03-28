@@ -134,7 +134,7 @@ thread list-->
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:layout_marginTop="5dp"
-        android:layout_below="@+id/button1"
+        android:layout_below="@+id/button3"
         android:layout_above="@+id/thread_title"
         android:layout_width="match_parent"
         android:layout_height="170dp" />
@@ -173,34 +173,37 @@ thread list-->
         android:layout_alignParentBottom="true" />
 
     <Button
+        android:onClick="relodge_same_authority"
         android:layout_marginLeft="20dp"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:text="New Button1"
+        android:text="Relodge with \nsame authority"
         android:textAllCaps="false"
         android:textSize="12dp"
         android:layout_below="@+id/description"
         android:id="@+id/button1" />
 
     <Button
+        android:onClick="relodge_higher_authority"
         android:layout_centerInParent="true"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:text="New Button2"
+        android:text="Relodge with \nhigher authority"
         android:textAllCaps="false"
         android:textSize="12dp"
         android:layout_below="@+id/description"
         android:id="@+id/button2" />
 
     <Button
+        android:onClick="mark_resolved"
         android:layout_alignParentRight="true"
         android:layout_marginRight="20dp"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:text="New Button3"
+        android:text="Mark as\nresolved"
         android:textAllCaps="false"
         android:textSize="12dp"
         android:layout_below="@+id/description"

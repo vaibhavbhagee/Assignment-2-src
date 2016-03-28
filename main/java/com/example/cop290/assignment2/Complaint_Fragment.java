@@ -92,7 +92,27 @@ public class Complaint_Fragment extends Fragment {
         if(current_status.equals("resolved")) layout.setBackgroundColor(getResources().getColor(R.color.resolved));
         else if(current_status.equals("under_resolution")) layout.setBackgroundColor(getResources().getColor(R.color.under_resolution));
         else layout.setBackgroundColor(getResources().getColor(R.color.unresolved));
-        
+
+        if(complaint_type.equals("individial")){
+            upvote.setVisibility(View.GONE);
+            downvote.setVisibility(View.GONE);
+        }
+
+        // TODO : IF THEN ELSE KE CHECKS LIKHNA HAI!!!
+        if(current_status.equals("unresolved") && (true) /* authority hai? */  ){
+            if(true /* highest authority hai */){
+                button1.setVisibility(View.GONE);
+                button2.setVisibility(View.GONE);
+            }else{
+                button1.setVisibility(View.GONE);
+            }
+        }else if(complaint_type.equals("under_resolution") && (true) /* user hai? */){
+
+        }else{
+            button1.setVisibility(View.GONE);
+            button2.setVisibility(View.GONE);
+            button3.setVisibility(View.GONE);
+        }
 
         list = new ArrayList<fraud>();
         // TODO ing : add elements to the thread list
