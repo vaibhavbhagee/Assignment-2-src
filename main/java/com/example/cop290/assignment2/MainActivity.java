@@ -184,7 +184,7 @@ Log.i("SHREYAN", view.toString());
         l.setContext(thisContext);
 
         // TODO : figure out what to set for token and courseID
-        l.add_complaint_request( isCommunity, selected_item, t, d, new String("courseID"));
+        l.add_complaint_request(isCommunity, selected_item, t, d, new String("courseID"));
 
         //add_complaint_request(String token,String isCommunity,String Type,String Title,String Description, final String courseID)
     }
@@ -223,7 +223,7 @@ Log.i("SHREYAN", view.toString());
         l.setContext(thisContext);
 
         // TODO : Figure out what to set for token
-        l.new_thread_request( id, t, d);
+        l.new_thread_request(id, t, d);
 
         //public void new_thread_request(final String token,final String complaintID,final String Title, final String Description)
     }
@@ -257,29 +257,62 @@ Log.i("SHREYAN", view.toString());
     }
 
     public void relodge_same_authority(View view) {
-       // new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Vote Error: " + error.toString()).setNeutralButton("Close", null).show();
 
+        RelativeLayout parent = (RelativeLayout)view.getParent();
+        TextView complaint_id = (TextView) parent.findViewById(R.id.complaint_id);
+        String id = complaint_id.getText().toString();
+
+        String title = "Title kya rakhun?";
+        String message = "Are you sure you want to relodge the complaint with same authority?";
+        alert(id, title, message, 1);
     }
 
     public void relodge_higher_authority(View view) {
+
+        RelativeLayout parent = (RelativeLayout)view.getParent();
+        TextView complaint_id = (TextView) parent.findViewById(R.id.complaint_id);
+        String id = complaint_id.getText().toString();
+
+        String title = "Title kya rakhun?";
+        String message = "Are you sure you want to relodge the complaint with higher authority?";
+        alert(id, title, message, 2);
     }
 
     public void mark_resolved(View view) {
 
+        RelativeLayout parent = (RelativeLayout)view.getParent();
+        TextView complaint_id = (TextView) parent.findViewById(R.id.complaint_id);
+        String id = complaint_id.getText().toString();
+
+        String title = "Title kya rakhun?";
+        String message = "Are you sure you want to mark the complaint as resolved?";
+        alert(id, title, message, 3);
+    }
+
+    private void alert(final String complaint_id, String title, String message, final int type){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(thisContext);
-        alertDialogBuilder.setTitle("/*Aayan Kumar*/");
+        alertDialogBuilder.setTitle(title);
         alertDialogBuilder
-                .setMessage("Are you sure you want to mark the complaint as resolved?")
+                .setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("No",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
-                        // if this button is clicked, close
-                        // current activity
                         dialog.cancel();
                     }
                 })
                 .setNegativeButton("Yes",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
+
+                        final LoadData l = new LoadData();
+                        l.setContext(thisContext);
+
+                        if(type == 1){          //same authority
+                            l.relodge_same_request(complaint_id);
+                        }else if(type == 2){    //higher authority
+                            l.relodge_higher_request(complaint_id);
+                        }else if(type == 3){    //mark resolved
+                            l.mark_resolved_request(complaint_id);
+                        }
                         // if this button is clicked, just close
                         // the dialog box and do nothing
                         dialog.cancel();
