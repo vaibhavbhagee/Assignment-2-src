@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                  login(kerbID,password);
 
-                //Unbypassed
+                // Unbypassed           -> // Kya hae yaar??
                 // By pass login
                 /*Intent intent = new Intent(thisContext, MainActivity.class);
                 startActivity(intent);*/
@@ -94,11 +94,6 @@ public class LoginActivity extends AppCompatActivity {
 
         //TODO: Unsuccesful login, Store token in Shared Preferences
 
-
-       /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();*/
-     /*   Intent intent = new Intent(thisContext, MainActivity.class);
-        startActivity(intent);*/
     }
 
 
@@ -183,7 +178,7 @@ public class LoginActivity extends AppCompatActivity {
                                     l.complaintDetailsArray[i] = comparr.getJSONObject(i);
                                 }
                             }
-                            //list.add(new fraud("Title ka naam kya hona chaiyeh?? Shreyan madarboard hai.\n New line karke kya milega tujhe? " + i, "Lodger " + i, "bla"));
+                            //list.add(new fraud("Title ka naam kya hona chaiyeh?? Shreyan kya hai.\n New line karke kya milega tujhe? " + i, "Lodger " + i, "bla"));
                         }catch(Exception e)
                         {
                             e.printStackTrace();

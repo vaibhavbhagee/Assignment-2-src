@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -24,6 +25,7 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -145,9 +147,11 @@ public class MainActivity extends AppCompatActivity
         //TODO : Navigate to the individual complaint page
         RelativeLayout rl = (RelativeLayout)view;
         TextView t = (TextView) rl.findViewById(R.id.complaint_id);
-Log.i("SHREYAN", ((TextView)((RelativeLayout) view).getChildAt(1)).getText().toString() );
+
+        Log.i("SHREYAN", ((TextView) ((RelativeLayout) view).getChildAt(1)).getText().toString());
+
         Bundle bundle = new Bundle();
-        bundle.putString("complaint_json",((TextView)((RelativeLayout) view).getChildAt(3)).getText().toString());
+        bundle.putString("complaint_json", ((TextView) ((RelativeLayout) view).getChildAt(3)).getText().toString());
 
         FragmentManager mFragmentManager = getSupportFragmentManager();
         FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
@@ -166,11 +170,12 @@ Log.i("SHREYAN", ((TextView)((RelativeLayout) view).getChildAt(1)).getText().toS
         //TODO : Logout Properly!!!!!!! Done dana done done
         Intent intent = new Intent(thisContext, LoginActivity.class);
         startActivity(intent);
+        //TODO : Seriously, koi dhang se kar le yeh??
     }
 
     public void submit_new_complaint(View view) {
         // TODO : Submit new complaint
-        RelativeLayout parent = (RelativeLayout)view.getParent();
+        RelativeLayout parent = (RelativeLayout) view.getParent();
         EditText title = (EditText) parent.findViewById(R.id.title);
         EditText description = (EditText) parent.findViewById(R.id.description);
         RadioButton r = (RadioButton) parent.findViewById((R.id.individual));
@@ -181,16 +186,27 @@ Log.i("SHREYAN", ((TextView)((RelativeLayout) view).getChildAt(1)).getText().toS
         String d = description.getText().toString();
         String isCommunity;
 
-        if(r.isChecked()) isCommunity = "false";
+        if (t.equals("")) {
+            Toast.makeText(MainActivity.this, "Title is Empty", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (d.equals("")) {
+            Toast.makeText(MainActivity.this, "Description is Empty", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if (r.isChecked()) isCommunity = "false";
         else isCommunity = "true";
 
         final LoadData l = new LoadData();
         l.setContext(thisContext);
+        l.add_complaint_request(isCommunity, selected_item, t, d, new String("courseID"));
+        timer(2,0,l);
+        l.flag[2] = false;
 
         // TODO : figure out what to set for token and courseID
-        l.add_complaint_request(isCommunity, selected_item, t, d, new String("courseID"));
+        // TODO : Arre yaar, abhi tak nahi hua hai yeh!
 
-        //add_complaint_request(String token,String isCommunity,String Type,String Title,String Description, final String courseID)
     }
 
     public void post_thread_comment(View view) {
@@ -204,11 +220,19 @@ Log.i("SHREYAN", ((TextView)((RelativeLayout) view).getChildAt(1)).getText().toS
         String t_id = thread_id.getText().toString();
         String d = description.getText().toString();
 
+        if(d.equals("")){
+            Toast.makeText(MainActivity.this, "Comment is Empty", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         final LoadData l = new LoadData();
         l.setContext(thisContext);
+        l.new_comment_request(c_id, t_id, new String("posted by"), d, new String("time stamp"));
+        timer(4,0,l);
+        l.flag[4] = false;
 
         // TODO : figure out token and posted by and time stamp
-        l.new_comment_request(c_id, t_id, new String("posted by"), d, new String("time stamp"));
+
         //public void new_comment_request(final String token,final String complaintID,final String threadID, final String postedBy, final String description, final String timestamp)
     }
 
@@ -223,11 +247,20 @@ Log.i("SHREYAN", ((TextView)((RelativeLayout) view).getChildAt(1)).getText().toS
         String t = title.getText().toString();
         String d = description.getText().toString();
 
+        if(t.equals("")){
+            Toast.makeText(MainActivity.this, "Title is Empty", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(d.equals("")){
+            Toast.makeText(MainActivity.this, "Description is Empty", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         final LoadData l = new LoadData();
         l.setContext(thisContext);
-
-        // TODO : Figure out what to set for token
         l.new_thread_request(id, t, d);
+        timer(3, 0, l);
+        l.flag[3] = false;
 
         //public void new_thread_request(final String token,final String complaintID,final String Title, final String Description)
     }
@@ -248,27 +281,41 @@ Log.i("SHREYAN", ((TextView)((RelativeLayout) view).getChildAt(1)).getText().toS
     }
 
     public void upvote(View view) {
+
         RelativeLayout parent = (RelativeLayout)view.getParent();
         TextView complaint_id = (TextView) parent.findViewById(R.id.complaint_id);
-
         String id = complaint_id.getText().toString();
+
+        // TODO : Check if upvote is possible
+        if(true /*Upvote not possible*/ ){
+            Toast.makeText(MainActivity.this, "Sorry, you have already voted", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         final LoadData l = new LoadData();
         l.setContext(thisContext);
-
         l.vote_request(id, "upvote");
+        timer(8, 0, l);
+        l.flag[8] = false;
     }
 
     public void downvote(View view) {
+
         RelativeLayout parent = (RelativeLayout)view.getParent();
         TextView complaint_id = (TextView) parent.findViewById(R.id.complaint_id);
-
         String id = complaint_id.getText().toString();
+
+        // TODO : Check if downvote is possible
+        if(true /*Downvote not possible*/ ){
+            Toast.makeText(MainActivity.this, "Sorry, you have already voted", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         final LoadData l = new LoadData();
         l.setContext(thisContext);
-
         l.vote_request(id, "downvote");
+        timer(8, 0, l);
+        l.flag[8] = false;
     }
 
     public void relodge_same_authority(View view) {
@@ -323,10 +370,16 @@ Log.i("SHREYAN", ((TextView)((RelativeLayout) view).getChildAt(1)).getText().toS
 
                         if(type == 1){          //same authority
                             l.relodge_same_request(complaint_id);
+                            timer(7,0,l);
+                            l.flag[7] = false;
                         }else if(type == 2){    //higher authority
                             l.relodge_higher_request(complaint_id);
+                            timer(6,0,l);
+                            l.flag[6] = false;
                         }else if(type == 3){    //mark resolved
                             l.mark_resolved_request(complaint_id);
+                            timer(5,0,l);
+                            l.flag[5] = false;
                         }
                         // if this button is clicked, just close
                         // the dialog box and do nothing
@@ -339,6 +392,59 @@ Log.i("SHREYAN", ((TextView)((RelativeLayout) view).getChildAt(1)).getText().toS
 
         // show it
         alertDialog.show();
+    }
+
+    public boolean timer(final int k, final int x, final LoadData l){
+
+        new CountDownTimer(50, 1000) {
+            public void onTick(long millisUntilFinished) {
+
+            }
+            public void onFinish() {
+                if(x==100) {
+                    Toast.makeText(MainActivity.this, "Connection Timed Out", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                switch(k){
+                    case 2 : {
+                        if(l.flag[2]){
+                            Toast.makeText(MainActivity.this,"New thread posted", Toast.LENGTH_LONG).show();
+                        }else timer(k, x+1, l);
+                    }
+                    case 4 : {
+                        if(l.flag[2]){
+                            Toast.makeText(MainActivity.this,"New thread posted", Toast.LENGTH_LONG).show();
+                        }else timer(k, x+1, l);
+                    }
+                    case 3 : {
+                        if(l.flag[2]){
+                            Toast.makeText(MainActivity.this,"New thread posted", Toast.LENGTH_LONG).show();
+                        }else timer(k, x+1, l);
+                    }
+                    case 8 : {
+                        if(l.flag[2]){
+                            Toast.makeText(MainActivity.this,"New thread posted", Toast.LENGTH_LONG).show();
+                        }else timer(k, x+1, l);
+                    }
+                    case 5 : {
+                        if(l.flag[2]){
+                            Toast.makeText(MainActivity.this,"New thread posted", Toast.LENGTH_LONG).show();
+                        }else timer(k, x+1, l);
+                    }
+                    case 6 : {
+                        if(l.flag[2]){
+                            Toast.makeText(MainActivity.this,"New thread posted", Toast.LENGTH_LONG).show();
+                        }else timer(k, x+1, l);
+                    }
+                    case 7 : {
+                        if(l.flag[2]){
+                            Toast.makeText(MainActivity.this,"New thread posted", Toast.LENGTH_LONG).show();
+                        }else timer(k, x+1, l);
+                    }
+                }
+            }
+        }.start();
+        return true;
     }
 }
 
