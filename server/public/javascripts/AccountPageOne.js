@@ -14,7 +14,7 @@ function AccountPageOne()
 
 	this.edit = function()
 	{
-		document.getElementById( "WelcomeName_Div"+Object.Index+"" ).innerHTML = "Welcome: Dr. "+Object.AssociatedData.First_name+" "+Object.AssociatedData.Second_name;
+		document.getElementById( "WelcomeName_Div"+Object.Index+"" ).innerHTML = "Welcome: "+Object.AssociatedData.First_name+" "+Object.AssociatedData.Second_name;
 	}
 
 	// Initialization
@@ -68,97 +68,53 @@ function AccountPageOne()
 		Object.LogoutButton = "<input type='button' id='LogoutButton' value='Logout' />";
 		$( "#Welcome_Div"+Object.Index+"" ).append(Object.LogoutButton);
 		$( "#LogoutButton" ).css( {"position":"absolute","top":"5%","right":"5px", "width":"10%" , "height":"90%", "font-size":"1.2em", "font-weight": "semibold","color":"#FFFFFF","background-color":"transparent","border":"0px solid rgb(88,151,19)","border-radius":"10px","padding":"0px", "padding-left":"0px", "padding-right":"0px", "box-shadow":"0px 0px 0px #888888", "text-align":"center"});
-
-		// Object.ChangePasswdButton = "<input type='button' id='ChangePasswdButton' value='Change Password' />";
-		// $( "#Welcome_Div"+Object.Index+"" ).append(Object.ChangePasswdButton);
-		// $( "#ChangePasswdButton" ).css( {"position":"absolute","top":"5%","right":"13%", "width":"12%" , "height":"90%", "font-size":"1.2em", "font-weight": "semibold","color":"#FFFFFF","background-color":"transparent","border":"0px solid rgb(88,151,19)","border-radius":"10px","padding":"0px", "padding-left":"0px", "padding-right":"0px", "box-shadow":"0px 0px 0px #888888", "text-align":"center"});
 		
-		Object.ViewProfileButton = "<input type='button' id='ViewProfileButton' value='View Profile' />";
-		$( "#Function_Div"+Object.Index+"" ).append(Object.ViewProfileButton);
-		$( "#ViewProfileButton" ).css( {"position":"absolute","top":"10%","left":"20%", "width":"60%" , "height":"20%", "font-size":"1.2em", "font-weight": "semibold","color":"#FFFFFF","background-color":"#276FF5","border":"0px solid rgb(88,151,19)","border-radius":"10px","padding":"0px", "padding-left":"0px", "padding-right":"0px", "box-shadow":"2px 2px 5px #888888", "text-align":"center"});
+		Object.AddUserButton = "<input type='button' id='AddUserButton' value='Add User' />";
+		$( "#Function_Div"+Object.Index+"" ).append(Object.AddUserButton);
+		$( "#AddUserButton" ).css( {"position":"absolute","top":"10%","left":"20%", "width":"60%" , "height":"20%", "font-size":"1.2em", "font-weight": "semibold","color":"#FFFFFF","background-color":"#276FF5","border":"0px solid rgb(88,151,19)","border-radius":"10px","padding":"0px", "padding-left":"0px", "padding-right":"0px", "box-shadow":"2px 2px 5px #888888", "text-align":"center"});
 
-		Object.StartCaseButton = "<input type='button' id='StartCaseButton' value='Start Case' />";
-		$( "#Function_Div"+Object.Index+"" ).append(Object.StartCaseButton);
-		$( "#StartCaseButton" ).css( {"position":"absolute","top":"40%","left":"20%", "width":"60%" , "height":"20%", "font-size":"1.2em", "font-weight": "semibold","color":"#FFFFFF","background-color":"#276FF5","border":"0px solid rgb(88,151,19)","border-radius":"10px","padding":"0px", "padding-left":"0px", "padding-right":"0px", "box-shadow":"2px 2px 5px #888888", "text-align":"center"});
+		Object.ListUsersButton = "<input type='button' id='ListUsersButton' value='List All Users' />";
+		$( "#Function_Div"+Object.Index+"" ).append(Object.ListUsersButton);
+		$( "#ListUsersButton" ).css( {"position":"absolute","top":"40%","left":"20%", "width":"60%" , "height":"20%", "font-size":"1.2em", "font-weight": "semibold","color":"#FFFFFF","background-color":"#276FF5","border":"0px solid rgb(88,151,19)","border-radius":"10px","padding":"0px", "padding-left":"0px", "padding-right":"0px", "box-shadow":"2px 2px 5px #888888", "text-align":"center"});
 
-		Object.PreviousCasesButton = "<input type='button' id='PreviousCasesButton' value='Previous Cases' />";
-		$( "#Function_Div"+Object.Index+"" ).append(Object.PreviousCasesButton);
-		$( "#PreviousCasesButton" ).css( {"position":"absolute","top":"70%","left":"20%", "width":"60%" , "height":"20%", "font-size":"1.2em", "font-weight": "semibold","color":"#FFFFFF","background-color":"#276FF5","border":"0px solid rgb(88,151,19)","border-radius":"10px","padding":"0px", "padding-left":"0px", "padding-right":"0px", "box-shadow":"2px 2px 5px #888888", "text-align":"center"});
-
-		// Object.ProfileObj.Initialize("ProfileObl1", 5 , 10 , "WorkArea_Div"+Object.Index , 80 , 80 , 1, Object.AssociatedData, Object);
+		Object.ListComplaintsButton = "<input type='button' id='ListComplaintsButton' value='List All Complaints' />";
+		$( "#Function_Div"+Object.Index+"" ).append(Object.ListComplaintsButton);
+		$( "#ListComplaintsButton" ).css( {"position":"absolute","top":"70%","left":"20%", "width":"60%" , "height":"20%", "font-size":"1.2em", "font-weight": "semibold","color":"#FFFFFF","background-color":"#276FF5","border":"0px solid rgb(88,151,19)","border-radius":"10px","padding":"0px", "padding-left":"0px", "padding-right":"0px", "box-shadow":"2px 2px 5px #888888", "text-align":"center"});
 		
 	// Begin Event Handlers
 	
-		$( "#PreviousCasesButton" ).on('mouseover',function(){ $( this ).css( {"background-color": "#0B197D","border":"1px solid rgb(145,141,2)", "color": "#FFFFFF","box-shadow":"0px 0px 10px #333333"}); });
-		$( "#PreviousCasesButton" ).on('mouseout',function(){ $( this ).css( {"background-color": "#276FF5","border":"0px solid rgb(145,141,2)", "color": "#FFFFFF","box-shadow":"0px 0px 10px #999999"}); });
+		$( "#AddUserButton" ).on('mouseover',function(){ $( this ).css( {"background-color": "#0B197D","border":"1px solid rgb(145,141,2)", "color": "#FFFFFF","box-shadow":"0px 0px 10px #333333"}); });
+		$( "#AddUserButton" ).on('mouseout',function(){ $( this ).css( {"background-color": "#276FF5","border":"0px solid rgb(145,141,2)", "color": "#FFFFFF","box-shadow":"0px 0px 10px #999999"}); });
 
-		$( "#ViewProfileButton" ).on('mouseover',function(){ $( this ).css( {"background-color": "#0B197D","border":"1px solid rgb(145,141,2)", "color": "#FFFFFF","box-shadow":"0px 0px 10px #333333"}); });
-		$( "#ViewProfileButton" ).on('mouseout',function(){ $( this ).css( {"background-color": "#276FF5","border":"0px solid rgb(145,141,2)", "color": "#FFFFFF","box-shadow":"0px 0px 10px #999999"}); });
+		$( "#ListUsersButton" ).on('mouseover',function(){ $( this ).css( {"background-color": "#0B197D","border":"1px solid rgb(145,141,2)", "color": "#FFFFFF","box-shadow":"0px 0px 10px #333333"}); });
+		$( "#ListUsersButton" ).on('mouseout',function(){ $( this ).css( {"background-color": "#276FF5","border":"0px solid rgb(145,141,2)", "color": "#FFFFFF","box-shadow":"0px 0px 10px #999999"}); });
 
-		$( "#StartCaseButton" ).on('mouseover',function(){ $( this ).css( {"background-color": "#0B197D","border":"1px solid rgb(145,141,2)", "color": "#FFFFFF","box-shadow":"0px 0px 10px #333333"}); });
-		$( "#StartCaseButton" ).on('mouseout',function(){ $( this ).css( {"background-color": "#276FF5","border":"0px solid rgb(145,141,2)", "color": "#FFFFFF","box-shadow":"0px 0px 10px #999999"}); });
+		$( "#ListComplaintsButton" ).on('mouseover',function(){ $( this ).css( {"background-color": "#0B197D","border":"1px solid rgb(145,141,2)", "color": "#FFFFFF","box-shadow":"0px 0px 10px #333333"}); });
+		$( "#ListComplaintsButton" ).on('mouseout',function(){ $( this ).css( {"background-color": "#276FF5","border":"0px solid rgb(145,141,2)", "color": "#FFFFFF","box-shadow":"0px 0px 10px #999999"}); });
 
 		$( "#LogoutButton" ).on('mouseover',function(){ $( this ).css( {"background-color": "#276FF5","border":"1px solid rgb(10,10,200)", "color": "#0B197D","box-shadow":"0px 0px 10px #333333"}); });
 		$( "#LogoutButton" ).on('mouseout',function(){ $( this ).css( {"background-color": "transparent","border":"0px solid rgb(145,141,2)", "color": "#FFFFFF","box-shadow":"0px 0px 0px #999999"}); });
 
-		// $( "#ChangePasswdButton" ).on('mouseover',function(){ $( this ).css( {"background-color": "#276FF5","border":"1px solid rgb(10,10,200)", "color": "#0B197D","box-shadow":"0px 0px 10px #333333"}); });
-		// $( "#ChangePasswdButton" ).on('mouseout',function(){ $( this ).css( {"background-color": "transparent","border":"0px solid rgb(145,141,2)", "color": "#FFFFFF","box-shadow":"0px 0px 0px #999999"}); });
+		$( "#AddUserButton" ).on('click',function()  //edit
+		{ 
+			//Populate the add user object
+		});
 
-		// $( "#ChangePasswdButton").on('click', function()
-		// {
-		// 	document.getElementById("WorkArea_Div"+Object.Index).innerHTML = "";
-		// 	Object.ChangePass.Initialize("ChangePass", 10 , 10 , "WorkArea_Div"+Object.Index , 80 , 60 , 1.0, Object.AssociatedData, Object);
-		// });
+		$( "#ListUsersButton" ).on('click',function()  //edit
+		{ 
+			//List all the users
+		});
 
-		// $( "#StartCaseButton" ).on('click',function()  //edit
-		// { 
-		// 	document.getElementById("WorkArea_Div"+Object.Index).innerHTML = "";
-		// 	// Object.DiagnosisObj.Initialize("MainDO", 10 , 10 , "WorkArea_Div"+Object.Index , 80 , 130 , 1.0, Object.AssociatedData,{},true, Object);
-		// 	// tut = new Tutorial();
-		// 	// document.getElementById("tutdiv").innerHTML = "";
-		// 	// flag = true;
-		// 	Object.tutObj = new Tutorial();
-		// 	tutorialStack = [];
-		// 	Object.tutObj.Initialize( "TutorialObj2",25,30,"WorkArea_Div"+Object.Index,50,40,1.0,true);
-		// 	// flag = true;
-		// });
+		$( "#ListComplaintsButton" ).on('click',function()  //edit
+		{ 
+			//List all the complaints
+		});
 
-		// $( "#PreviousCasesButton" ).on('click',function()  //edit
-		// { 
-		// 	document.getElementById("WorkArea_Div"+Object.Index).innerHTML = "";
-		// 	socket.emit('findCases',Object.AssociatedData);
-		// 	socket.on('findCasesOutput',function(data)
-		// 	{
-		// 		$("#MainCases_Div"+Object.PrevCases.Index).remove();
-		// 		console.log("inside pre cases op "+data);
-		// 		Object.PrevCases.Initialize("MainPC", 10 , 10 , "WorkArea_Div"+Object.Index , 80 , 130 , 1.0, data[0], data[1]);
-		// 		// [{"DPName" : "DocYo1", "PatientName" : "Patient1"}, {"DPName" : "DocYo2", "PatientName" : "Patient2"}]
-		// 	});
-	
-		// });
-
-		// $( "#ViewProfileButton" ).on('click',function()  //edit
-		// { 
-		// 	document.getElementById("WorkArea_Div"+Object.Index).innerHTML = "";
-		// 	Object.ProfileObj.Initialize("ProfileObl1", 5 , 10 , "WorkArea_Div"+Object.Index , 80 , 80 , 1, Object.AssociatedData, Object);
-		// 	console.log(Object.AssociatedData);
-
-		// });
-
-		// $( "#LogoutButton" ).on('click',function()  //edit
-		// { 
-		// 	document.getElementById("AccountPage"+Object.Index).remove();
-		// 	// flag = false;
-		// 	// Object.ProfileObj.Initialize("ProfileObl1", 5 , 10 , "WorkArea_Div"+Object.Index , 80 , 80 , 1, Object.AssociatedData, Object);
-		// 	// console.log(Object.AssociatedData);
-		// 	HPage.Initialize( "HPageMain", 55 , 15 , "HomeDiv" , 30 , 70 , 1.0 );
-
-		// });
-
-		// Object.edit = function()
-		// {
-		// 	$( "#WelcomeName_Div"+Object.Index+"" ).val("Welcome: Dr. "+Object.AssociatedData.First_name+" "+Object.AssociatedData.Second_name);
-		// }
+		$( "#LogoutButton" ).on('click',function()  //edit
+		{ 
+			document.getElementById("AccountPage"+Object.Index).remove();
+			login.Initialize( "LoginObj1", 25 , 30 , "HomeDiv" , 50 , 40 , 1.0);
+		});
 
 	}
 
