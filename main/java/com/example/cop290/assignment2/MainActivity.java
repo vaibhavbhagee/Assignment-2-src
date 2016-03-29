@@ -178,8 +178,10 @@ public class MainActivity extends AppCompatActivity
         EditText description = (EditText) parent.findViewById(R.id.description);
         RadioButton r = (RadioButton) parent.findViewById((R.id.individual));
         Spinner spin = (Spinner) parent.findViewById(R.id.spinner);
+        Spinner spin2 = (Spinner) parent.findViewById(R.id.spinner2);
 
         String selected_item = spin.getSelectedItem().toString();
+        String course = spin2.getSelectedItem().toString();
         String t = title.getText().toString();
         String d = description.getText().toString();
         String isCommunity;
@@ -198,7 +200,7 @@ public class MainActivity extends AppCompatActivity
 
         final LoadData l = new LoadData();
         l.setContext(thisContext);
-        l.add_complaint_request(isCommunity, selected_item, t, d, new String("courseID"));
+        l.add_complaint_request(isCommunity, selected_item, t, d, course);
 
         timer2(0, l);
         l.flag[2] = false;
