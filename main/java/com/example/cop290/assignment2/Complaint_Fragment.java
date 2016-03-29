@@ -47,6 +47,7 @@ public class Complaint_Fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_complaint_, container, false);
 
         String complaintjsonstr = getArguments().getString("complaint_json");
+
         try {
             JSONObject complaintjson = new JSONObject(complaintjsonstr);
             Log.i("COMPLAINTJSON", complaintjson.toString());

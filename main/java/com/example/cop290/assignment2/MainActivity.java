@@ -153,10 +153,8 @@ public class MainActivity extends AppCompatActivity
         RelativeLayout rl = (RelativeLayout)view;
         TextView t = (TextView) rl.findViewById(R.id.complaint_id);
 
-        Log.i("SHREYAN", ((TextView) ((RelativeLayout) view).getChildAt(3)).getText().toString());
-
         Bundle bundle = new Bundle();
-        bundle.putString("complaint_json", ((TextView) ((RelativeLayout) view).getChildAt(3)).getText().toString());
+        bundle.putString("complaint_json", t.getText().toString());
 
         FragmentManager mFragmentManager = getSupportFragmentManager();
         FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
@@ -599,14 +597,43 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void on_refresh() {
+
+    private void on_refresh(){
+        LoadData l = new LoadData();
+        l.get_complaints_request();
+        timer1(0,l);
+        l.flag[1] = false;
+
+    }
+    public boolean timer1(final int x, final LoadData l){
+
+        new CountDownTimer(50, 1000) {
+            public void onTick(long millisUntilFinished) {
+
+            }
+            public void onFinish() {
+                if(x==100){
+                    Toast.makeText(MainActivity.this,"Connection Timed Out", Toast.LENGTH_LONG).show();
+                }
+                else if(l.flag[1]){
+
+                } else {
+                    timer1(x + 1, l);
+                }
+            }
+        }.start();
+        return true;
+    }
+
+
+/*    private void on_refresh() {
         //TODO : On refresh kya karna hai???
 
 
         LoadData l = new LoadData();
         l.setContext(thisContext);
 
-        /*JSONObject loginR = l.loginResponseJSON;
+        *//*JSONObject loginR = l.loginResponseJSON;
         try{
             String[] c_list = new String[loginR.getJSONArray("complaint_list").length()];
             for(int i = 0 ; i < loginR.getJSONArray("complaint_list").length(); i ++ )
@@ -618,7 +645,7 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(MainActivity.this,"Data Populated", Toast.LENGTH_LONG).show();
 
         }catch(Exception e){e.printStackTrace();}
-*/
+*//*
         try {
             l.get_complaints_request(l.loginResponseJSON.getString("unique_id"));
             timer(1, l, 1);
@@ -628,9 +655,6 @@ public class MainActivity extends AppCompatActivity
         //Intent intent = new Intent(thisContext, LoginActivity.class);
         //startActivity(intent);
     }
-
-
-
     public boolean timer(final int x, final LoadData l, final int whichflag){
 
         new CountDownTimer(50, 1000) {
@@ -671,10 +695,6 @@ public class MainActivity extends AppCompatActivity
         }.start();
         return true;
     }
-
-
-    //REFRESH SHIT
-
     public boolean timercomplaint(final int x, final LoadData l, final int whichflag, final String[] c_list){
 
         new CountDownTimer(50, 1000) {
@@ -725,8 +745,6 @@ public class MainActivity extends AppCompatActivity
         }.start();
         return true;
     }
-
-
     public boolean timernotifications(final int x, final LoadData l, final int whichflag) {
 
         new CountDownTimer(50, 1000) {
@@ -769,5 +787,7 @@ public class MainActivity extends AppCompatActivity
             }
         }.start();
         return true;
-    }
+    }*/
+
+
 }
