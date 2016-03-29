@@ -118,21 +118,22 @@ public class Complaint_Fragment extends Fragment {
 
         LoadData l = new LoadData();
         JSONObject lr = l.loginResponseJSON;
+        button1.setVisibility(View.GONE);
+        button2.setVisibility(View.GONE);
+        button3.setVisibility(View.GONE);
         try {
             if (current_status.equals("unresolved") && lr.getString("unique_id").equals(complaint.getString("current_level")) /* authority hai? */)
             {
                 if ( complaint.getInt("current_level_index") ==0 /* highest authority hai */) {
-                    button1.setVisibility(View.GONE);
-                    button2.setVisibility(View.GONE);
+                    button3.setVisibility(View.VISIBLE);
                 } else {
-                    button1.setVisibility(View.GONE);
+                    button2.setVisibility(View.VISIBLE);
+                    button3.setVisibility(View.VISIBLE);
                 }
             }else if (complaint_type.equals("under_resolution") &&lr.getString("unique_id").equals(complaint.getString("lodged_by")) /* lodged_by hai? */) {
-
-            } else {
-                button1.setVisibility(View.GONE);
-                button2.setVisibility(View.GONE);
-                button3.setVisibility(View.GONE);
+                button1.setVisibility(View.VISIBLE);
+                button2.setVisibility(View.VISIBLE);
+                button3.setVisibility(View.VISIBLE);
             }
         }catch(Exception e){e.printStackTrace();}
         list = new ArrayList<fraud>();

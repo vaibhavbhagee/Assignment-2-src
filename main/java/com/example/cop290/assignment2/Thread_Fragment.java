@@ -82,6 +82,7 @@ public class Thread_Fragment extends Fragment {
         try {
             for (int i = 0; i < comments.length(); ++i) {
                 list.add(new fraud(comments.getJSONObject(i).getString("description"), comments.getJSONObject(i).getString("posted_by"), comments.getJSONObject(i).getString("timestamp")));
+                System.out.println("checking: "+comments.getJSONObject(i).getString("description"));
             }
         }catch(Exception e){e.printStackTrace();}
         UserAdapter adapter = new UserAdapter(getActivity(), list);

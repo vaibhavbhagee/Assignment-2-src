@@ -432,8 +432,9 @@ public class MainActivity extends AppCompatActivity
                     on_refresh();
                     Thread_Fragment fragment = (Thread_Fragment) getSupportFragmentManager().findFragmentByTag("Thread_Fragment");
                     fragment.populate_data();
-                    TextView thread_title = (TextView) l.thread_fragment.findViewById(R.id.thread_title);
-                    System.out.println("Shreyan "+thread_title.getText().toString());
+                    System.out.println("first one");
+                    //TextView thread_title = (TextView) l.thread_fragment.findViewById(R.id.thread_title);
+                    //System.out.println("Shreyan "+thread_title.getText().toString());
                 } else {
                     timer4(x + 1, l);
                 }
@@ -640,14 +641,16 @@ public class MainActivity extends AppCompatActivity
                     //Toast.makeText(LoginActivity.this, "Connection Timed Out", Toast.LENGTH_LONG).show();
                 } else if (l.flag[whichflag]) {
                     if (whichflag == 10) {
-                        Log.i("gaand", "sajdas");
+
+                        Thread_Fragment fragment = (Thread_Fragment) getSupportFragmentManager().findFragmentByTag("Thread_Fragment");
+                        if(fragment != null)fragment.populate_data();
+
                         try {
                             JSONObject cdr = l.notificationsJSON;
 
                             if (cdr.getBoolean("success")) {
 
                                 JSONArray comparr = (JSONArray) cdr.get("notifications");
-                                Log.i("sandj", "sadjsakdas");
                                 l.notificationsArray = new JSONObject[comparr.length()];
                                 for (int i = 0; i < comparr.length(); i++) {
                                     l.notificationsArray[i] = comparr.getJSONObject(i);
