@@ -39,7 +39,7 @@ public class LoadData extends Activity {
 
 
     public static boolean loginResponded= false;
-    public static boolean[] flag = new boolean[11];
+    public static boolean[] flag = new boolean[12];
 
     public static JSONObject[] complaintDetailsArray;
     public static JSONObject[] notificationsArray;
@@ -47,6 +47,7 @@ public class LoadData extends Activity {
     public static String token;
     public static JSONObject notificationsJSON;
     public static JSONObject loginResponseJSON;
+    public static JSONObject pseudoLoginResponseJSON;
     public static JSONObject getComplaintsResponse;
     public static JSONObject complaintDetailsResponse;
     public static JSONObject addComplaintResponse;
@@ -124,6 +125,57 @@ public class LoadData extends Activity {
         requestQueue.add(stringRequest);
     }
 
+
+//flag[11]
+    public void pseudo_login_request(final String un, final String pw) {
+
+        Map<String, String> jsonParams = new HashMap<String, String>();
+        jsonParams.put("username", un);
+
+
+        final String loginRequest = ServerURL + "/get_user_details";
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, loginRequest, new JSONObject(jsonParams),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    //On valid response
+                    public void onResponse(JSONObject response) {
+
+                        try {
+                            pseudoLoginResponseJSON = response;
+                            Log.i("bhaggus",loginResponseJSON.toString());
+
+
+                                flag[11] = true;
+                                Log.i("ajsdas", Integer.toString(Context.MODE_PRIVATE));
+
+
+
+                        }catch(Exception e){System.out.println(e.toString());}
+                    }
+                },
+                //Launched when server return error
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Login_Request Error: " + error.toString()).setNeutralButton("Close", null).show();
+
+                    }
+                }) {
+
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> head = new HashMap<String, String>();
+                head.put("x-access-token", token);
+                return head;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(thisContext);
+        requestQueue.add(stringRequest);
+    }
+
+
+
+
     /*flag[1]*/
    public void get_complaints_request(final String uid) {
 
@@ -139,7 +191,7 @@ public class LoadData extends Activity {
                         Log.i("crapp",response.toString());
                         try{
                             loginResponseJSON.put("complaint_list",response);
-                            Log.i("acidtest",loginResponseJSON.getJSONObject("complaint_list").toString());
+                            Log.i("REFRESHED",loginResponseJSON.getJSONObject("complaint_list").toString());
                         }catch(Exception e){e.printStackTrace();}
                         System.out.println(getComplaintsResponse);
                              flag[1] = true;
@@ -224,7 +276,7 @@ public class LoadData extends Activity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Complaint_Details Error: " + error.toString()).setNeutralButton("Close", null).show();
+                       // new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Complaint_Details Error: " + error.toString()).setNeutralButton("Close", null).show();
 
                     }
                 }) {
