@@ -11,10 +11,11 @@ function UserObject()
 	// this.DoctorJSON = {};
 	this.UserJSON = {};
 	this.ParentObj = null;
+	this.add = true;
 
 	var Object = this;
 
-	this.Initialize = function(Index, Left , Top , Parent , Width , Height , Opacity, UserJSON, IsEditable, parent)
+	this.Initialize = function(Index, Left , Top , Parent , Width , Height , Opacity, UserJSON, IsEditable, parent, add)
 	{
 		this.Index = Index;
 		this.Left = Left;
@@ -26,6 +27,7 @@ function UserObject()
 		this.IsEditable = IsEditable;
 		this.UserJSON = UserJSON;
 		this.ParentObj = parent;
+		this.add = add;
 
 		this.Render();
 	}
@@ -197,7 +199,7 @@ function UserObject()
 
 		//
 
-		Object.CloseButton = "<input type='button' id='CloseButton"+Object.Index+"' value='Close'/>";
+		Object.CloseButton = "<input type='button' id='CloseButton"+Object.Index+"' value='Delete'/>";
 		
 		//
 
@@ -228,7 +230,7 @@ function UserObject()
 
 		$( "#SaveButton" +Object.Index+"").on('click',function()
 		{
-			var currentText = $("#SaveButton").val();
+			var currentText = $("#SaveButton" +Object.Index+"").val();
 			if (currentText == "Save")
 			{
 				$("#Unique_ID_Input"+Object.Index+"").attr("readonly", true);
@@ -239,56 +241,85 @@ function UserObject()
 				$("#TagsInput"+Object.Index+"").attr("readonly", true);
 				$("#Course_List_Input"+Object.Index+""+Object.Index+"").attr("readonly", true);
 				$("#Complaint_List_Input"+Object.Index+"").attr("readonly", true);
-				// $("#PatientNameInput").attr("readonly", true);
+				
 				$("#SaveButton"+Object.Index+"").attr("value", 'Edit');
-				// var patientName = $("#PatientNameInput").val();
-				// if (patientName != "")
-				// {
-				// 	console.log("p name not empty");
-				// 	if (jQuery.isEmptyObject( Object.DetailsJSON ))
-				// 	{
 
-				// 		var pass_this = {
-				// 		PatientID: Object.DoctorJSON.U_name+(Object.DoctorJSON.No_of_Patients+1),
-				// 		PatientName : patientName,
-				// 		FCInput : $("#FCInput").val(),
-				// 		PFInput : $("#PFInput").val(),
-				// 		HTInput : $("#HTInput").val(),
-				// 		RHDInput : $("#RHDInput").val(),
-				// 		RCMInput : $("#RCMInput").val(),
-				// 		DCMInput : $("#DCMInput").val(),
-				// 		HCMInput : $("#HCMInput").val(),
-				// 		IHDInput : $("#IHDInput").val()
-				// 		}
+				// Make the requisite API call to add a new user and do the subsequent action on response
 
-				// 		Object.DoctorJSON.No_of_Patients = Object.DoctorJSON.No_of_Patients + 1;
-				// 		// Object.ParentObj.AssociatedData.No_of_Patients = Object.ParentObj.AssociatedData.No_of_Patients + 1;
-				// 		console.log(Object.DoctorJSON + " " + pass_this);
-				// 		socket.emit('addPatient', [Object.DoctorJSON, pass_this]);
-				// 	}
-				// 	else
-				// 	{
-				// 		var pass_this2 = {
-				// 		PatientID: Object.DetailsJSON.PatientID,
-				// 		PatientName : patientName,
-				// 		FCInput : $("#FCInput").val(),
-				// 		PFInput : $("#PFInput").val(),
-				// 		HTInput : $("#HTInput").val(),
-				// 		RHDInput : $("#RHDInput").val(),
-				// 		RCMInput : $("#RCMInput").val(),
-				// 		DCMInput : $("#DCMInput").val(),
-				// 		HCMInput : $("#HCMInput").val(),
-				// 		IHDInput : $("#IHDInput").val()
-				// 		}
+				if (Object.add === true)
+				{
+					//Hide the close button
+					$( "#CloseButton"+Object.Index+"" ).css({"visibility":"hidden"});
+					$( "#DeleteButton"+Object.Index+"" ).css({"visibility":"hidden"});
 
-				// 		socket.emit('updatePatient', [Object.DoctorJSON, pass_this2]);
-				// 	}
-				// }
-				// else
-				// {
-				// 	console.log("no patient name");
-				// }
-				//console.log(pass_this);
+					if ($("#Unique_ID_Input"+Object.Index+"").val() != "" && $("#UserNameInput"+Object.Index+"").val() != "" && $("#PasswordInput"+Object.Index+"").val() != "" &&
+							$("#DepartmentInput"+Object.Index+"").val() != "" && $("#Contact_Info_Input"+Object.Index+"").val() != "")
+					{
+						$.post(server_url+"/add_user",
+					    {
+					        unique_id: $("#Unique_ID_Input"+Object.Index+"").val(),
+					        name: $("#UserNameInput"+Object.Index+"").val(),
+					        password: $("#PasswordInput"+Object.Index+"").val(),
+					        department: $("#DepartmentInput"+Object.Index+"").val(),
+					        contact_info: $("#Contact_Info_Input"+Object.Index+"").val(),
+					        tags: $("#TagsInput"+Object.Index+"").val().split(","),
+					        course_list: $("#Course_List_Input"+Object.Index+"").val().split(","),
+					        complaint_list: $("#Complaint_List_Input"+Object.Index+"").val().split(","),
+					        token: token
+					    },
+					    function(data, status){
+					        console.log("Data: " + data + "\nStatus: " + status);
+
+					        if (data.success === true)
+					        {
+						        alert("User added successfully");
+						        $("#ListUsersButton").click();
+						    }
+						    else
+						    	alert("Could not add user to database");
+					    });
+					}
+					else
+					{
+						alert("Fields cannot be left blank!!");
+					}
+				}
+				else
+				{
+					if ($("#Unique_ID_Input"+Object.Index+"").val() != "" && $("#UserNameInput"+Object.Index+"").val() != "" && $("#PasswordInput"+Object.Index+"").val() != "" &&
+							$("#DepartmentInput"+Object.Index+"").val() != "" && $("#Contact_Info_Input"+Object.Index+"").val() != "")
+					{
+						$.post(server_url+"/update_user_details",
+					    {
+					        unique_id: $("#Unique_ID_Input"+Object.Index+"").val(),
+					        name: $("#UserNameInput"+Object.Index+"").val(),
+					        password: $("#PasswordInput"+Object.Index+"").val(),
+					        department: $("#DepartmentInput"+Object.Index+"").val(),
+					        contact_info: $("#Contact_Info_Input"+Object.Index+"").val(),
+					        tags: $("#TagsInput"+Object.Index+"").val().split(","),
+					        course_list: $("#Course_List_Input"+Object.Index+"").val().split(","),
+					        complaint_list: $("#Complaint_List_Input"+Object.Index+"").val().split(","),
+					        token: token
+					    },
+					    function(data, status){
+					        console.log("Data: " + data + "\nStatus: " + status);
+
+					        if (data.success === true)
+					        {
+					        	alert("User updated successfully");
+						        $("#ListUsersButton").click();
+						    }
+						    else
+						    	alert("Could not update user details");
+					    });
+					}
+					else
+					{
+						alert("Fields cannot be left blank!!");
+					}
+				}
+
+
 			}
 			else
 			{
@@ -300,7 +331,7 @@ function UserObject()
 				$("#TagsInput"+Object.Index+"").attr("readonly", false);
 				$("#Course_List_Input"+Object.Index+""+Object.Index+"").attr("readonly", false);
 				$("#Complaint_List_Input"+Object.Index+"").attr("readonly", false);
-				// $("#FCInput").focus();
+				
 				$("#SaveButton"+Object.Index+"").attr("value", 'Save')
 			}
 
@@ -308,19 +339,42 @@ function UserObject()
 
 		$( "#CloseButton"+Object.Index+"" ).on('click',function()
 		{
-			// $( "#User_Div"+Object.Index+"" ).remove();
-			// $( "#PreviousCasesButton").click();
+			$.post(server_url+"/delete_user",
+		    {
+		        unique_id: $("#Unique_ID_Input"+Object.Index+"").val(),
+		        token: token
+		    },
+		    function(data, status){
+		        console.log("Data: " + data + "\nStatus: " + status);
+
+		        if (data.success === true)
+		        {
+			        alert("User deleted successfully");
+			        $("#ListUsersButton").click();
+			    }
+			    else
+			    	alert("Could not delete user from database");
+		    });
 		});
 
 		$( "#DeleteButton" +Object.Index+"").on('click',function()
 		{
-			// // $( "#Diagnosis_Div"+Object.Index+"" ).remove();
-			// // $( "#PreviousCasesButton").click();
-			//  document.getElementById("WorkArea_Div"+Object.ParentObj.Index).innerHTML = "";
-			//  var treatObj = new Treatment();
-			//  treatObj.Initialize( "TreatObj2", 25 , 30 , "WorkArea_Div"+Object.ParentObj.Index , 50 , 40 , 1.0,true);
+			$.post(server_url+"/delete_user",
+		    {
+		        unique_id: $("#Unique_ID_Input"+Object.Index+"").val(),
+		        token: token
+		    },
+		    function(data, status){
+		        console.log("Data: " + data + "\nStatus: " + status);
 
-			//Add delete functionality here
+		        if (data.success === true)
+		        {
+			        alert("User deleted successfully");
+			        $("#ListUsersButton").click();
+			    }
+			    else
+			    	alert("Could not delete user from database");
+		    });
 		});
 	}
 }

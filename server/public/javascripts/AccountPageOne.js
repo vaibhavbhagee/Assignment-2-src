@@ -100,7 +100,7 @@ function AccountPageOne()
 		{ 
 			//Populate the add user object
 			$("#WorkArea_Div"+Object.Index).empty();
-			Object.uo.Initialize("ViewDO", 10 , 10 , "WorkArea_Div"+Object.Index , 80 , 80 , 1.0, {}, true, Object);
+			Object.uo.Initialize("ViewDO", 10 , 10 , "WorkArea_Div"+Object.Index , 80 , 80 , 1.0, {}, true, Object, true);
 		});
 
 		$( "#ListUsersButton" ).on('click',function()  //edit
@@ -146,7 +146,7 @@ function AccountPageOne()
 
 	this.render_wa = function(i,data)
 	{
-		Object.uo.Initialize("ViewDO"+i, 10 , 10+90*i , "WorkArea_Div"+Object.Index , 80 , 80 , 1.0, data[i] , false, Object);
+		Object.uo.Initialize("ViewDO"+i, 10 , 10+90*i , "WorkArea_Div"+Object.Index , 80 , 80 , 1.0, data[i] , false, Object, false);
 	}
 
 
