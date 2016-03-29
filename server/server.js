@@ -246,7 +246,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
   */
 
   apiRoutes.get('/populate_special', function(req, res) {
-    users.find().toArray(function(err,result)
+    special_users.find().toArray(function(err,result)
     {
       if (err)
         res.send({success:false,message:"incorrect request"});
@@ -436,6 +436,20 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 //Temporary API to get users
   apiRoutes.get('/users', function(req, res) {
     users.find().toArray(function(err,result)
+    {
+      if (err)
+        res.send({success:false,message:"incorrect request"});
+
+      else if (result.length == 0)
+        res.send("Empty collection");
+      else
+        res.send(result);
+    });
+  });
+
+//Temporary API to get special users
+  apiRoutes.get('/users', function(req, res) {
+    special_users.find().toArray(function(err,result)
     {
       if (err)
         res.send({success:false,message:"incorrect request"});
