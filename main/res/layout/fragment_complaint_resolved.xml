@@ -10,4 +10,14 @@
         android:layout_height="wrap_content">
     </ListView>
 
+    <TextView
+        android:id="@+id/no_complaints"
+        android:visibility="invisible"
+        android:layout_marginTop="35dp"
+        android:textSize="32dp"
+        android:textAlignment="center"
+        android:text="No Complaints here"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </FrameLayout>

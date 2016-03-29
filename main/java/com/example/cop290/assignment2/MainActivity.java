@@ -282,7 +282,7 @@ public class MainActivity extends AppCompatActivity
         String id = complaint_id.getText().toString();
 
         // TODO : Check if upvote is possible
-        if(true /*Upvote not possible*/ ){
+        if(false /*Upvote not possible*/ ){
             Toast.makeText(MainActivity.this, "Sorry, you have already voted", Toast.LENGTH_LONG).show();
             return;
         }
@@ -301,7 +301,7 @@ public class MainActivity extends AppCompatActivity
         String id = complaint_id.getText().toString();
 
         // TODO : Check if downvote is possible
-        if(true /*Downvote not possible*/ ){
+        if(false /*Downvote not possible*/ ){
             Toast.makeText(MainActivity.this, "Sorry, you have already voted", Toast.LENGTH_LONG).show();
             return;
         }
@@ -389,60 +389,6 @@ public class MainActivity extends AppCompatActivity
         alertDialog.show();
     }
 
-    /*public boolean timer(final int k, final int x, final LoadData l){
-
-        new CountDownTimer(200, 1000) {
-            public void onTick(long millisUntilFinished) {
-
-            }
-            public void onFinish() {
-                if(x==20) {
-                    Toast.makeText(MainActivity.this, "Connection Timed Out", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                switch(k){
-                    case 2 : {
-                        if(l.flag[2]){
-                            Toast.makeText(MainActivity.this,"New thread posted", Toast.LENGTH_LONG).show();
-                        }else timer(k, x+1, l);
-                    }
-                    case 4 : {
-                        if(l.flag[2]){
-                            Toast.makeText(MainActivity.this,"New thread posted", Toast.LENGTH_LONG).show();
-                        }else timer(k, x+1, l);
-                    }
-                    case 3 : {
-                        if(l.flag[2]){
-                            Toast.makeText(MainActivity.this,"New thread posted", Toast.LENGTH_LONG).show();
-                        }else timer(k, x+1, l);
-                    }
-                    case 8 : {
-                        if(l.flag[2]){
-                            Toast.makeText(MainActivity.this,"New thread posted", Toast.LENGTH_LONG).show();
-                        }else timer(k, x+1, l);
-                    }
-                    case 5 : {
-                        if(l.flag[2]){
-                            Toast.makeText(MainActivity.this,"New thread posted", Toast.LENGTH_LONG).show();
-                        }else timer(k, x+1, l);
-                    }
-                    case 6 : {
-                        if(l.flag[2]){
-                            Toast.makeText(MainActivity.this,"New thread posted", Toast.LENGTH_LONG).show();
-                        }else timer(k, x+1, l);
-                    }
-                    case 7 : {
-                        if(l.flag[2]){
-                            Toast.makeText(MainActivity.this,"New thread posted", Toast.LENGTH_LONG).show();
-                        }else timer(k, x+1, l);
-                    }
-                }
-            }
-        }.start();
-        return true;
-    }
-*/
-
     public boolean timer2(final int x, final LoadData l){
 
         new CountDownTimer(50, 1000) {
@@ -455,6 +401,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 else if(l.flag[2]){
                     Toast.makeText(MainActivity.this,"New complaint posted", Toast.LENGTH_LONG).show();
+                    on_refresh();
                 } else {
                     timer2(x + 1, l);
                 }
@@ -474,6 +421,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 else if(l.flag[4]){
                     Toast.makeText(MainActivity.this,"New comment posted", Toast.LENGTH_LONG).show();
+                    on_refresh();
                 } else {
                     timer4(x + 1, l);
                 }
@@ -493,6 +441,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 else if(l.flag[3]){
                     Toast.makeText(MainActivity.this,"New thread posted", Toast.LENGTH_LONG).show();
+                    on_refresh();
                 } else {
                     timer3(x + 1, l);
                 }
@@ -512,6 +461,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 else if(l.flag[8]){
                     Toast.makeText(MainActivity.this,"Vote Recorded", Toast.LENGTH_LONG).show();
+                    on_refresh();
                 } else {
                     timer8(x + 1, l);
                 }
@@ -531,6 +481,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 else if(l.flag[5]){
                     Toast.makeText(MainActivity.this,"Complaint Marked as Resolved", Toast.LENGTH_LONG).show();
+                    on_refresh();
                 } else {
                     timer5(x + 1, l);
                 }
@@ -550,6 +501,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 else if(l.flag[6]){
                     Toast.makeText(MainActivity.this,"Complaint Posted with higher Authority", Toast.LENGTH_LONG).show();
+                    on_refresh();
                 } else {
                     timer6(x + 1, l);
                 }
@@ -569,6 +521,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 else if(l.flag[7]){
                     Toast.makeText(MainActivity.this,"Complaint Posted with same Authority", Toast.LENGTH_LONG).show();
+                    on_refresh();
                 } else {
                     timer7(x + 1, l);
                 }
@@ -591,8 +544,9 @@ public class MainActivity extends AppCompatActivity
                 c_list[i] = loginR.getJSONArray("complaint_list").getString(i);
 
             l.get_complaint_details_request(c_list);
-            timercomplaint(1, l, 9,c_list);
+            timercomplaint(1, l, 9, c_list);
             l.flag[9] = false;
+            Toast.makeText(MainActivity.this,"Data Populated", Toast.LENGTH_LONG).show();
 
         }catch(Exception e){e.printStackTrace();}
 

@@ -54,6 +54,10 @@ public class Complaint_under_resolution extends Fragment {
 
         }catch(Exception e){Log.i("terimaaki","");e.printStackTrace();}
 
+        if(list.size()==0){
+            ((TextView) view.findViewById(R.id.no_complaints)).setVisibility(View.VISIBLE);
+        }
+
         UserAdapter adapter = new UserAdapter(getActivity(), list);
         ListView listView = (ListView) view.findViewById(R.id.listView);
         listView.setAdapter(adapter);

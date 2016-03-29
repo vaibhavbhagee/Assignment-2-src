@@ -60,21 +60,40 @@ thread list-->
         android:layout_height="wrap_content"
         android:src="@android:drawable/ic_menu_send"
         android:layout_marginLeft="30dp"
-        android:layout_marginRight="@dimen/fab_margin"
+        android:layout_marginRight="5dp"
         android:layout_marginBottom="@dimen/fab_margin" />
+
+    <TextView
+        android:text="500"
+        android:textSize="18dp"
+        android:layout_toRightOf="@+id/upvote"
+        android:layout_marginTop="75dp"
+        android:id="@+id/num_upvote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/downvote"
         android:onClick="downvote"
         android:layout_marginTop="65dp"
-        android:layout_toRightOf="@+id/upvote"
+        android:layout_toRightOf="@+id/num_upvote"
         app:backgroundTint="@color/google_green"
         app:fabSize="mini"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@android:drawable/ic_menu_send"
-        android:layout_marginRight="@dimen/fab_margin"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="5dp"
         android:layout_marginBottom="@dimen/fab_margin" />
+
+    <TextView
+        android:text="500"
+        android:textSize="18dp"
+        android:layout_toRightOf="@+id/downvote"
+        android:layout_marginTop="75dp"
+        android:id="@+id/num_downvote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 
     <TextView
