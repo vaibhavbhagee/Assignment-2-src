@@ -26,7 +26,9 @@ import java.util.ArrayList;
  */
 public class Complaint_Fragment extends Fragment {
 
-    ArrayList<fraud> list = new ArrayList<fraud>();
+    //ArrayList<fraud> list = new ArrayList<fraud>();
+    private UserAdapter u;
+    private ArrayList<fraud> list;
 
     private String complaintID;
     private boolean community;
@@ -45,6 +47,19 @@ public class Complaint_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_complaint_, container, false);
+        populate_data(view);
+
+        return view;
+    }
+
+    public void new_thread(JSONObject kk){
+        try{
+            list.add(new fraud(kk.getString("title"),kk.getString("description"), kk.toString()));
+            u.notifyDataSetChanged();
+        }catch(Exception e){e.printStackTrace();}
+
+    }
+    private void populate_data(View view) {
 
         String complaintjsonstr = getArguments().getString("complaint_json");
 
@@ -61,20 +76,13 @@ public class Complaint_Fragment extends Fragment {
             _description = complaintjson.getString("description");
             curauth = complaintjson.getString("current_level");
             curstat = complaintjson.getString("current_status");
-                threads = (JSONArray)complaintjson.get("threads");
-                complaint = complaintjson;
+            threads = (JSONArray)complaintjson.get("threads");
+            complaint = complaintjson;
             upvote1 = complaintjson.getJSONObject("votes").getInt("upvotes");
             downvote1 = complaintjson.getJSONObject("votes").getInt("downvotes");
 
 
         }catch(Exception e){e.printStackTrace();}
-
-        populate_data(view);
-
-        return view;
-    }
-
-    private void populate_data(View view) {
 
         TextView complaint_id = (TextView) view.findViewById(R.id.complaint_id);
         TextView complaint_type = (TextView) view.findViewById(R.id.type);
@@ -145,12 +153,6 @@ public class Complaint_Fragment extends Fragment {
         list = new ArrayList<fraud>();
         // TODO : add elements to the thread list -------------DONE
 
-        //LoadData l = new LoadData();
-
-        //for(int i=0; i<10; ++i ){
-        //    list.add(new fraud("Title "+i, "Lodger "+i, "bla"));
-        //}
-
         //PASS ARAMETERS INTO THREAD FRAGMENT
         Log.i("WTF","asd");
         try{
@@ -165,9 +167,9 @@ public class Complaint_Fragment extends Fragment {
             ((TextView) view.findViewById(R.id.no_threads)).setVisibility(View.VISIBLE);
         }
 
-        UserAdapter adapter = new UserAdapter(getActivity(), list);
+        u = new UserAdapter(getActivity(), list);
         ListView listView = (ListView) view.findViewById(R.id.listView);
-        listView.setAdapter(adapter);
+        listView.setAdapter(u);
     }
     public class UserAdapter extends ArrayAdapter<fraud> {
         public UserAdapter(Context context, ArrayList<fraud> items) {

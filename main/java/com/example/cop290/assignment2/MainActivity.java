@@ -495,6 +495,15 @@ public class MainActivity extends AppCompatActivity
                 }
                 else if(l.flag[3]){
                     Toast.makeText(MainActivity.this,"New thread posted", Toast.LENGTH_LONG).show();
+                    try{
+                        JSONObject k = l.newThreadResponse;
+                        JSONArray p = k.getJSONObject("complaint").getJSONArray("threads");
+                        JSONObject q = p.getJSONObject(p.length()-1);
+
+                        Complaint_Fragment fragment = (Complaint_Fragment) getSupportFragmentManager().findFragmentByTag("Complaint_Fragment");
+                        fragment.new_thread(q);
+
+                    }catch (Exception e){e.printStackTrace();}
                     on_refresh();
                 } else {
                     timer3(x + 1, l);
