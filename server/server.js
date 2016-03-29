@@ -941,7 +941,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
     {  
       hierarchy = hierarchy_json[req.body.type][(req.decoded.tags[0]).toLowerCase()];
 
-      if (req.body.is_community === true)
+      if (req.body.is_community === "true")
       {
         // var complaint_id = "c"+crypto.createHash('sha1').update(new Date()+"").digest('hex');
         var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
@@ -1064,7 +1064,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
     {  
       hierarchy = hierarchy_json[req.body.type][req.decoded.tags[1]];
 
-      if (req.body.is_community === true)
+      if (req.body.is_community === "true")
       {
         // var complaint_id = "c"+crypto.createHash('sha1').update((new Date()).toDateString()).digest('hex');
         var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
@@ -1187,7 +1187,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
     {
       hierarchy = hierarchy_json[req.body.type][req.body.course_id];
 
-      if (req.body.is_community === true)
+      if (req.body.is_community === "true")
       {
         // var complaint_id = "c"+crypto.createHash('sha1').update((new Date()).toDateString()).digest('hex');
         var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
@@ -1310,7 +1310,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
     {
       hierarchy = hierarchy_json[req.body.type];
 
-      if (req.body.is_community === true)
+      if (req.body.is_community === "true")
       {
         // var complaint_id = "c"+crypto.createHash('sha1').update((new Date()).toDateString()).digest('hex');
         var current_level = hierarchy[Object.keys(hierarchy)[Object.keys(hierarchy).length-1]];
