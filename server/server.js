@@ -710,6 +710,40 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
   });
 
   /**
+   * API to delete a complaint from the collection
+   */
+
+  apiRoutes.post('/delete_complaint', function(req, res) {
+
+      (complaints.remove({"complaint_id":req.body.complaint_id},function(err,result) // Fetch the required complaint
+      {
+        if (err)
+          res.send({success:false,message:"incorrect request"});
+
+        else if (result.length == 0)
+          res.send({success:false,message:"Complaint not found"});
+        else
+        {
+          (notifications.remove({"complaint_id":req.body.complaint_id},function(err,result1)
+          {
+            if (err)
+              res.send({success:false,message:"incorrect request"});
+            else
+            {
+              users.update({},{$pull:{"complaint_list":req.body.complaint_id}},{multi:true},function(err,result2)
+              {
+                if (err)
+                  res.send({success:false,message:"incorrect request"});
+                else
+                  res.send({success:true,message:"Complaint Deleted Successfully"});
+              });    
+            }
+          }));          
+        }
+      }));
+  });
+
+  /**
   *  API to relodge a complaint with the same authority
   */
 
