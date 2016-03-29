@@ -14,7 +14,7 @@ function AccountPageOne()
 
 	this.edit = function()
 	{
-		document.getElementById( "WelcomeName_Div"+Object.Index+"" ).innerHTML = "Welcome: "+Object.AssociatedData.First_name+" "+Object.AssociatedData.Second_name;
+		document.getElementById( "WelcomeName_Div"+Object.Index+"" ).innerHTML = "Welcome: "+Object.AssociatedData.name+" ";
 	}
 
 	// Initialization
@@ -61,7 +61,7 @@ function AccountPageOne()
 		$( "#AccountPage"+Object.Index+"" ).append(Object.WorkAreaDiv);
 
 		Object.WelcomeNameDiv =
-					"<div id='WelcomeName_Div"+Object.Index+"' style='position: absolute; top: 0px; left: 0px; height: 40px; width: 45%; opacity: "+Object.Opacity+"; border: 0px solid #0B197D;background-color:transparent; border-radius: 0px 0px 0px 0px; overflow: hidden; text-align: left; line-height: 40px; color: #FFFFFF; padding-left:10px;'>Welcome: "+Object.AssociatedData.First_name+" "+Object.AssociatedData.Second_name+"</div>"; 
+					"<div id='WelcomeName_Div"+Object.Index+"' style='position: absolute; top: 0px; left: 0px; height: 40px; width: 45%; opacity: "+Object.Opacity+"; border: 0px solid #0B197D;background-color:transparent; border-radius: 0px 0px 0px 0px; overflow: hidden; text-align: left; line-height: 40px; color: #FFFFFF; padding-left:10px;'>Welcome: "+Object.AssociatedData.name+" "+"</div>"; 
 
 		$( "#Welcome_Div"+Object.Index+"" ).append(Object.WelcomeNameDiv);
 

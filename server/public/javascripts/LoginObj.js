@@ -75,13 +75,18 @@ function LoginObj()
 			if (uname != "" && passw != "")
 			{
 				//Pass the input to the server here
-				$.post(server_url+"/login",
+				$.post(server_url+"/special_login",
 			    {
 			        username: uname,
 			        password: passw
 			    },
 			    function(data, status){
-			        alert("Data: " + data + "\nStatus: " + status);
+			        console.log("Data: " + data + "\nStatus: " + status);
+
+			        token = data.token;
+
+			        $("#HomeDiv").empty();
+			        acctPage.Initialize("acctpage1", 0 , 0 , "HomeDiv" , 100 , 100 , 1, data);
 			    });
 			}
 
