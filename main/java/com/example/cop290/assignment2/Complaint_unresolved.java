@@ -41,8 +41,10 @@ public class Complaint_unresolved extends Fragment {
         LoadData l = new LoadData();
         JSONObject loginR = l.loginResponseJSON;
         try {
+            Log.i("refreshed",loginR.getJSONObject("complaint_list").toString());
 
             list = new ArrayList<fraud>();
+
 
             for (int i = 0; i < l.complaintDetailsArray.length; i++) {
                 Log.i("sandj" + i, "sadjsakdas" + i);
