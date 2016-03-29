@@ -178,8 +178,10 @@ public class MainActivity extends AppCompatActivity
         EditText description = (EditText) parent.findViewById(R.id.description);
         RadioButton r = (RadioButton) parent.findViewById((R.id.individual));
         Spinner spin = (Spinner) parent.findViewById(R.id.spinner);
+        Spinner spin2 = (Spinner) parent.findViewById(R.id.spinner2);
 
         String selected_item = spin.getSelectedItem().toString();
+        String course = spin2.getSelectedItem().toString();
         String t = title.getText().toString();
         String d = description.getText().toString();
         String isCommunity;
@@ -198,7 +200,7 @@ public class MainActivity extends AppCompatActivity
 
         final LoadData l = new LoadData();
         l.setContext(thisContext);
-        l.add_complaint_request(isCommunity, selected_item, t, d, new String("courseID"));
+        l.add_complaint_request(isCommunity, selected_item, t, d, course);
 
         timer2(0, l);
         l.flag[2] = false;
@@ -470,7 +472,12 @@ public class MainActivity extends AppCompatActivity
                     Toast.makeText(MainActivity.this,"Connection Timed Out", Toast.LENGTH_LONG).show();
                 }
                 else if(l.flag[8]){
-                    Toast.makeText(MainActivity.this,"Vote Recorded", Toast.LENGTH_LONG).show();
+                    try {
+                        if (l.voteResponse.getString("success").equals("true"))
+                            Toast.makeText(MainActivity.this, "Vote Recorded", Toast.LENGTH_LONG).show();
+                        else
+                            Toast.makeText(MainActivity.this, "Already Voted. One account, one vote.", Toast.LENGTH_LONG).show();
+                    }catch(Exception e){e.printStackTrace();}
                     on_refresh();
                 } else {
                     timer8(x + 1, l);

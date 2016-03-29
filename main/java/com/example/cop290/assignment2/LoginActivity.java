@@ -130,6 +130,7 @@ public class LoginActivity extends AppCompatActivity {
                         SharedPreferences.Editor editor = sharedpreferences.edit();
                         editor.putString("token", l.token);
                         editor.commit();
+                        Toast.makeText(LoginActivity.this,"Logged in successfully", Toast.LENGTH_LONG).show();
 
                         JSONObject loginR = l.loginResponseJSON;
                         try{
