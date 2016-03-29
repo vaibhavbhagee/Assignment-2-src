@@ -19,7 +19,8 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class New_Complaint_Fragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class New_Complaint_Fragment extends Fragment //implements AdapterView.OnItemSelectedListener
+{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,7 +35,7 @@ public class New_Complaint_Fragment extends Fragment implements AdapterView.OnIt
         Spinner spinner = (Spinner) view.findViewById(R.id.spinner);
 
         // Spinner click listener
-        spinner.setOnItemSelectedListener(this);
+        //spinner.setOnItemSelectedListener(this);
 
         // Spinner Drop down elements
         // TODO: Populate the spinner list
@@ -55,19 +56,19 @@ public class New_Complaint_Fragment extends Fragment implements AdapterView.OnIt
         // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
     }
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // On selecting a spinner item
-        String item = parent.getItemAtPosition(position).toString();
+//    @Override
+//    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//        // On selecting a spinner item
+//        String item = parent.getItemAtPosition(position).toString();
+//
+//        // Showing selected spinner item
+//        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+//
+//    }
 
-        // Showing selected spinner item
-        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
-
-    }
-
-    public void onNothingSelected(AdapterView<?> arg0) {
-        // TODO Auto-generated method stub
-
-    }
+//    public void onNothingSelected(AdapterView<?> arg0) {
+//        // TODO Auto-generated method stub
+//
+//    }
 
 }

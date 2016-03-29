@@ -37,6 +37,8 @@ public class Complaint_Fragment extends Fragment {
     private String curauth;
     private JSONObject complaint;
     private String curstat = "unresolved" ;
+    private int upvote1 = 0;
+    private int downvote1 = 0;
     private JSONArray threads;
 
     @Override
@@ -58,9 +60,11 @@ public class Complaint_Fragment extends Fragment {
             _description = complaintjson.getString("description");
             curauth = complaintjson.getString("current_level");
             curstat = complaintjson.getString("current_status");
-
                 threads = (JSONArray)complaintjson.get("threads");
                 complaint = complaintjson;
+            upvote1 = complaintjson.getJSONObject("votes").getInt("upvotes");
+            downvote1 = complaintjson.getJSONObject("votes").getInt("downvotes");
+
 
         }catch(Exception e){e.printStackTrace();}
 
@@ -78,6 +82,8 @@ public class Complaint_Fragment extends Fragment {
         TextView updated_on = (TextView) view.findViewById(R.id.updated_on);
         TextView description = (TextView) view.findViewById(R.id.description);
         TextView current_authority = (TextView) view.findViewById(R.id.current_authority);
+        TextView num_upvote = (TextView) view.findViewById(R.id.num_upvote);
+        TextView num_downvote = (TextView) view.findViewById(R.id.num_downvote);
         Button button1 = (Button) view.findViewById(R.id.button1);
         Button button2 = (Button) view.findViewById(R.id.button2);
         Button button3 = (Button) view.findViewById(R.id.button3);
@@ -88,6 +94,8 @@ public class Complaint_Fragment extends Fragment {
         // TODO : Set these values
         complaint_id.setText(complaintID);
         complaint_type.setText(community==true?"Community":"Individual");
+        num_upvote.setText(upvote1+"");
+        num_downvote.setText(downvote1+"");
         title.setText(tItle);
         lodged_on.setText(lodgedon);
         updated_on.setText(updatedon);
@@ -99,9 +107,11 @@ public class Complaint_Fragment extends Fragment {
         else if(current_status.equals("under_resolution")) layout.setBackgroundColor(getResources().getColor(R.color.under_resolution));
         else layout.setBackgroundColor(getResources().getColor(R.color.unresolved));
 
-        if(complaint_type.equals("individial")){
+        if(complaint_type.equals("Individual")){
             upvote.setVisibility(View.GONE);
             downvote.setVisibility(View.GONE);
+            num_upvote.setVisibility(View.GONE);
+            num_downvote.setVisibility(View.GONE);
         }
 
         // TODO : IF THEN ELSE KE CHECKS LIKHNA HAI!!!

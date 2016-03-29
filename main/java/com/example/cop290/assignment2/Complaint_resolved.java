@@ -61,6 +61,11 @@ public class Complaint_resolved extends Fragment {
         /*for(int i=0; i<10; ++i ){
             list.add(new fraud("Title ka naam kya hona chaiyeh?? Shreyan madarboard hai.\n New line karke kya milega tujhe? "+i, "Lodger "+i, "bla"));
         }*/
+
+        if(list.size()==0){
+            ((TextView) view.findViewById(R.id.no_complaints)).setVisibility(View.VISIBLE);
+        }
+
         UserAdapter adapter = new UserAdapter(getActivity(), list);
         ListView listView = (ListView) view.findViewById(R.id.listView);
         listView.setAdapter(adapter);
