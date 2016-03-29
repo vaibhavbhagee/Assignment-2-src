@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
         LoadData loadDataObject = new LoadData();
         loadDataObject.setContext(thisContext);
         loadDataObject.login_request(kerberosIDString, passwordString);
-        timer(1, loadDataObject, 0);
+        timer(1, loadDataObject);
         loadDataObject.flag[0] = false;
         loadDataObject.loginResponded = false;
         //TODO: Always loggs in
@@ -113,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-    public boolean timer(final int x, final LoadData l, final int whichflag){
+    public boolean timer(final int x, final LoadData l){
 
         new CountDownTimer(50, 1000) {
             public void onTick(long millisUntilFinished) {
@@ -123,34 +123,32 @@ public class LoginActivity extends AppCompatActivity {
                 if(x==100){
                     Toast.makeText(LoginActivity.this,"Connection Timed Out", Toast.LENGTH_LONG).show();
                 }
-                else if(l.flag[whichflag]){
-                    if(whichflag == 0)
-                    {
-                        SharedPreferences sharedpreferences = getSharedPreferences(SharedPref, Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedpreferences.edit();
-                        editor.putString("token", l.token);
-                        editor.commit();
-                        Toast.makeText(LoginActivity.this,"Logged in successfully", Toast.LENGTH_LONG).show();
+                else if(l.flag[0]){
+                    SharedPreferences sharedpreferences = getSharedPreferences(SharedPref, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.putString("token", l.token);
+                    editor.commit();
+                    Toast.makeText(LoginActivity.this,"Logged in successfully", Toast.LENGTH_LONG).show();
 
-                        JSONObject loginR = l.loginResponseJSON;
-                        try{
-                            String[] c_list = new String[loginR.getJSONArray("complaint_list").length()];
-                            for(int i = 0 ; i < loginR.getJSONArray("complaint_list").length(); i ++ )
-                                c_list[i] = loginR.getJSONArray("complaint_list").getString(i);
+                    l.pseudo_login_request();
+                    timer2(0, l);
+                    l.flag[11] = false;
 
-                            l.get_complaint_details_request(c_list);
-                            timercomplaint(1, l, 9,c_list);
-                            l.flag[9] = false;
 
-                        }catch(Exception e){e.printStackTrace();}
+//                        JSONObject loginR = l.loginResponseJSON;
+//                        try{
+//                            String[] c_list = new String[loginR.getJSONArray("complaint_list").length()];
+//                            for(int i = 0 ; i < loginR.getJSONArray("complaint_list").length(); i ++ )
+//                                c_list[i] = loginR.getJSONArray("complaint_list").getString(i);
+//
+//                            l.get_complaint_details_request(c_list);
+//                            timercomplaint(1, l, 9,c_list);
+//                            l.flag[9] = false;
+//
+//                        }catch(Exception e){e.printStackTrace();}
 
-                        //timer(1, loadDataObject, 0);
-                        //loadDataObject.flag[0] = false;
-
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-
-                    }
+//                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                    startActivity(intent);
 
                 } else if(l.loginResponded == true)
                 {
@@ -158,13 +156,34 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    timer(x+1,l, whichflag);
+                    timer(x+1,l);
                 }
             }
         }.start();
         return true;
     }
 
+    public boolean timer2(final int x, final LoadData l){
+
+        new CountDownTimer(50, 1000) {
+            public void onTick(long millisUntilFinished) {
+
+            }
+            public void onFinish() {
+                if(x==100){
+                    Toast.makeText(LoginActivity.this,"Connection Timed Out22", Toast.LENGTH_LONG).show();
+                }
+                else if(l.flag[11]){
+                    System.out.print("ho gaya!!");
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    timer2(x + 1, l);
+                }
+            }
+        }.start();
+        return true;
+    }
 
 
     public boolean timercomplaint(final int x, final LoadData l, final int whichflag, final String[] c_list){

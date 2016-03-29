@@ -600,12 +600,11 @@ public class MainActivity extends AppCompatActivity
 
     private void on_refresh(){
         LoadData l = new LoadData();
-        l.get_complaints_request();
-        timer1(0,l);
+        l.pseudo_login_request();
+        timer11(0,l);
         l.flag[1] = false;
-
     }
-    public boolean timer1(final int x, final LoadData l){
+    public boolean timer11(final int x, final LoadData l){
 
         new CountDownTimer(50, 1000) {
             public void onTick(long millisUntilFinished) {
@@ -615,10 +614,10 @@ public class MainActivity extends AppCompatActivity
                 if(x==100){
                     Toast.makeText(MainActivity.this,"Connection Timed Out", Toast.LENGTH_LONG).show();
                 }
-                else if(l.flag[1]){
-
+                else if(l.flag[11]){
+                    System.out.print("ho gaya!!");
                 } else {
-                    timer1(x + 1, l);
+                    timer11(x + 1, l);
                 }
             }
         }.start();

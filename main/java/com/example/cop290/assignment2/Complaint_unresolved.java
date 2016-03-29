@@ -39,9 +39,8 @@ public class Complaint_unresolved extends Fragment {
         list = new ArrayList<fraud>();
 
         LoadData l = new LoadData();
-        JSONObject loginR = l.loginResponseJSON;
         try {
-            Log.i("refreshed",loginR.getJSONObject("complaint_list").toString());
+            //Log.i("refreshed",loginR.getJSONObject("complaint_list").toString());
 
             list = new ArrayList<fraud>();
 
