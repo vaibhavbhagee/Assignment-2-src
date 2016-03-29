@@ -35,6 +35,7 @@ public class Complaint_Fragment extends Fragment {
     private String updatedon;
     private String _description;
     private String curauth;
+    private JSONObject complaint;
     private String curstat = "unresolved" ;
     private JSONArray threads;
 
@@ -59,7 +60,7 @@ public class Complaint_Fragment extends Fragment {
             curstat = complaintjson.getString("current_status");
 
                 threads = (JSONArray)complaintjson.get("threads");
-
+                complaint = complaintjson;
 
         }catch(Exception e){e.printStackTrace();}
 
@@ -104,23 +105,28 @@ public class Complaint_Fragment extends Fragment {
         }
 
         // TODO : IF THEN ELSE KE CHECKS LIKHNA HAI!!!
-        if(current_status.equals("unresolved") && (true) /* authority hai? */  ){
-            if(true /* highest authority hai */){
+
+        LoadData l = new LoadData();
+        JSONObject lr = l.loginResponseJSON;
+        try {
+            if (current_status.equals("unresolved") && lr.getString("unique_id").equals(complaint.getString("current_level")) /* authority hai? */)
+            {
+                if ( complaint.getInt("current_level_index") ==0 /* highest authority hai */) {
+                    button1.setVisibility(View.GONE);
+                    button2.setVisibility(View.GONE);
+                } else {
+                    button1.setVisibility(View.GONE);
+                }
+            }else if (complaint_type.equals("under_resolution") &&lr.getString("unique_id").equals(complaint.getString("lodged_by")) /* lodged_by hai? */) {
+
+            } else {
                 button1.setVisibility(View.GONE);
                 button2.setVisibility(View.GONE);
-            }else{
-                button1.setVisibility(View.GONE);
+                button3.setVisibility(View.GONE);
             }
-        }else if(complaint_type.equals("under_resolution") && (true) /* user hai? */){
-
-        }else{
-            button1.setVisibility(View.GONE);
-            button2.setVisibility(View.GONE);
-            button3.setVisibility(View.GONE);
-        }
-
+        }catch(Exception e){e.printStackTrace();}
         list = new ArrayList<fraud>();
-        // TODO ing : add elements to the thread list
+        // TODO : add elements to the thread list -------------DONE
 
         //LoadData l = new LoadData();
 
