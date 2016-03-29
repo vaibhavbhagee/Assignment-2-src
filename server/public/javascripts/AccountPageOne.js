@@ -9,6 +9,7 @@ function AccountPageOne()
 	this.Opacity = "";
 	this.AssociatedData = {};
 	this.uo = new UserObject();
+	this.co = new ComplaintObject();
 
 
 	var Object = this;
@@ -110,30 +111,33 @@ function AccountPageOne()
 			    function(data, status){
 			        console.log("Data: " + data + "\nStatus: " + status);
 
-			        // if (data.success === true)
-			        // {
-				       //  token = data.token;
-
 				        $("#WorkArea_Div"+Object.Index).empty();
 				        
 				        for(var i = 0; i < data.length; i++)
 				        {
-				        	// function(i)
-				        	// {
-				        	// 	Object.uo.Initialize("ViewDO"+i, 10 , 10+90*i , "WorkArea_Div"+Object.Index , 80 , 80 , 1.0, data[i] , false, Object);
-				        	// }
 
 				        	Object.render_wa(i,data);
 				        }
-				    // }
-				    // else
-				    // 	alert("Error in Fetching user lists");
+				    
 			    });
 		});
 
 		$( "#ListComplaintsButton" ).on('click',function()  //edit
 		{ 
 			//List all the complaints
+			$.get(server_url+"/all_complaints?token="+token,
+			    function(data, status){
+			        console.log("Data: " + data + "\nStatus: " + status);
+
+				        $("#WorkArea_Div"+Object.Index).empty();
+				        
+				        for(var i = 0; i < data.length; i++)
+				        {
+
+				        	Object.render_wac(i,data);
+				        }
+				    
+			    });
 		});
 
 		$( "#LogoutButton" ).on('click',function()  //edit
@@ -147,6 +151,11 @@ function AccountPageOne()
 	this.render_wa = function(i,data)
 	{
 		Object.uo.Initialize("ViewDO"+i, 10 , 10+90*i , "WorkArea_Div"+Object.Index , 80 , 80 , 1.0, data[i] , false, Object, false);
+	}
+
+	this.render_wac = function(i,data)
+	{
+		Object.co.Initialize("ViewCO"+i, 10 , 10+90*i , "WorkArea_Div"+Object.Index , 80 , 80 , 1.0, data[i] , false, Object);
 	}
 
 
