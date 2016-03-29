@@ -12,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,8 +51,13 @@ public class New_Complaint_Fragment extends Fragment implements AdapterView.OnIt
         categories.add("Security Complaint");
 
         List<String> courses = new ArrayList<String>();
-        courses.add("Mess Complaint");
-        courses.add("And all and all and all");
+
+        LoadData l = new LoadData();
+        try {
+            JSONArray ja = l.loginResponseJSON.getJSONArray("course_list");
+            for(int i = 0; i < ja.length() ; i ++)
+                courses.add(ja.getString(i).toUpperCase());
+        }catch(Exception e){e.printStackTrace();}
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categories);
