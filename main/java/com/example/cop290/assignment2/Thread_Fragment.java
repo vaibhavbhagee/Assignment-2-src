@@ -73,7 +73,7 @@ public class Thread_Fragment extends Fragment {
         ArrayList<fraud> list = new ArrayList<fraud>();
         // TODO : add elements to the thread list
         try {
-            for (int i = 0; i < 10; ++i) {
+            for (int i = 0; i < comments.length(); ++i) {
                 list.add(new fraud(comments.getJSONObject(i).getString("description"), comments.getJSONObject(i).getString("posted_by"), comments.getJSONObject(i).getString("timestamp")));
             }
         }catch(Exception e){e.printStackTrace();}

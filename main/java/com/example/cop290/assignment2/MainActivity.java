@@ -27,6 +27,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -134,14 +137,6 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    private void on_refresh() {
-        //TODO : On refresh kya karna hai???
-        Intent intent = new Intent(thisContext, LoginActivity.class);
-        startActivity(intent);
-    }
-
-
-
 
     public void navigate_to_complaint(View view) {
         //TODO : Navigate to the individual complaint page
@@ -169,7 +164,8 @@ public class MainActivity extends AppCompatActivity
         editor.commit();
         Intent intent = new Intent(thisContext, LoginActivity.class);
         startActivity(intent);
-        //TODO : Seriously, koi dhang se kar le yeh??
+        //TODO  : Seriously, koi dhang se kar le yeh??
+        //TODO ?:Aur kya karna hai bc
     }
 
     public void submit_new_complaint(View view) {
@@ -200,7 +196,7 @@ public class MainActivity extends AppCompatActivity
         final LoadData l = new LoadData();
         l.setContext(thisContext);
         l.add_complaint_request(isCommunity, selected_item, t, d, new String("courseID"));
-        timer(2,0,l);
+        timer(2, 0, l);
         l.flag[2] = false;
 
         // TODO : figure out what to set for token and courseID
@@ -270,7 +266,7 @@ public class MainActivity extends AppCompatActivity
         TextView t = (TextView) rl.findViewById(R.id.complaint_id);
         Log.i("SHREYAN2278194", ((TextView)((RelativeLayout) view).getChildAt(3)).getText().toString() );
         Bundle bundle = new Bundle();
-        bundle.putString("thread_json",((TextView)((RelativeLayout) view).getChildAt(3)).getText().toString());
+        bundle.putString("thread_json", ((TextView) ((RelativeLayout) view).getChildAt(3)).getText().toString());
 
         FragmentManager mFragmentManager = getSupportFragmentManager();
         FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
@@ -445,6 +441,144 @@ public class MainActivity extends AppCompatActivity
         }.start();
         return true;
     }
+
+
+
+    private void on_refresh() {
+        //TODO : On refresh kya karna hai???
+
+
+        LoadData l = new LoadData();
+        l.setContext(thisContext);
+
+        JSONObject loginR = l.loginResponseJSON;
+        try{
+            String[] c_list = new String[loginR.getJSONArray("complaint_list").length()];
+            for(int i = 0 ; i < loginR.getJSONArray("complaint_list").length(); i ++ )
+                c_list[i] = loginR.getJSONArray("complaint_list").getString(i);
+
+            l.get_complaint_details_request(c_list);
+            timercomplaint(1, l, 9,c_list);
+            l.flag[9] = false;
+
+        }catch(Exception e){e.printStackTrace();}
+
+
+
+        //Intent intent = new Intent(thisContext, LoginActivity.class);
+        //startActivity(intent);
+    }
+
+
+    //REFRESH SHIT
+
+    public boolean timercomplaint(final int x, final LoadData l, final int whichflag, final String[] c_list){
+
+        new CountDownTimer(50, 1000) {
+            public void onTick(long millisUntilFinished) {
+
+            }
+            public void onFinish() {
+                if(x==100){
+                    //Toast.makeText(LoginActivity.this, "Connection Timed Out", Toast.LENGTH_LONG).show();
+                }
+                else if(l.flag[whichflag]){
+                    if(whichflag == 9)
+                    {
+                        Log.i("gaand", "sajdas");
+                        try {
+                            JSONObject cdr = l.complaintDetailsResponse;
+                            Log.i("gaandu","sajdaus");
+
+                            if (cdr.getBoolean("success")) {
+                                Log.i("gaandusuc","sajdaussuc");
+
+                                JSONArray comparr = (JSONArray) cdr.get("complaints");
+                                Log.i("sandj","sadjsakdas");
+                                l.complaintDetailsArray = new JSONObject[comparr.length()];
+                                for ( int i = 0 ; i < comparr.length(); i ++ )
+                                {
+                                    l.complaintDetailsArray[i] = comparr.getJSONObject(i);
+                                }
+
+                                //Calling notifications timer
+                                l.get_notifications_request(c_list);
+                                timernotifications(1, l, 10);
+                                l.flag[10] = false;
+
+                            }
+                            //list.add(new fraud("Title ka naam kya hona chaiyeh?? Shreyan kya hai.\n New line karke kya milega tujhe? " + i, "Lodger " + i, "bla"));
+                        }catch(Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                } else {
+                    timercomplaint(x + 1, l, whichflag, c_list);
+                }
+            }
+        }.start();
+        return true;
+    }
+
+
+    public boolean timernotifications(final int x, final LoadData l, final int whichflag){
+
+        new CountDownTimer(50, 1000) {
+            public void onTick(long millisUntilFinished) {
+
+            }
+            public void onFinish() {
+                if(x==100){
+                    //Toast.makeText(LoginActivity.this, "Connection Timed Out", Toast.LENGTH_LONG).show();
+                }
+                else if(l.flag[whichflag]){
+                    if(whichflag == 10)
+                    {
+                        Log.i("gaand", "sajdas");
+                        try {
+                            JSONObject cdr = l.notificationsJSON;
+
+                            if (cdr.getBoolean("success")) {
+
+                                JSONArray comparr = (JSONArray) cdr.get("notifications");
+                                Log.i("sandj", "sadjsakdas");
+                                l.notificationsArray = new JSONObject[comparr.length()];
+                                for ( int i = 0 ; i < comparr.length(); i ++ )
+                                {
+                                    l.notificationsArray[i] = comparr.getJSONObject(i);
+                                }
+
+
+
+                            }
+                            //list.add(new fraud("Title ka naam kya hona chaiyeh?? Shreyan kya hai.\n New line karke kya milega tujhe? " + i, "Lodger " + i, "bla"));
+                        }catch(Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                } else {
+                    timernotifications(x + 1, l, whichflag);
+                }
+            }
+        }.start();
+        return true;
+    }
+
+
+
+
+
+
+
+
+
+
 }
 
 
