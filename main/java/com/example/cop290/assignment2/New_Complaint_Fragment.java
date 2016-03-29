@@ -38,14 +38,14 @@ public class New_Complaint_Fragment extends Fragment //implements AdapterView.On
         //spinner.setOnItemSelectedListener(this);
 
         // Spinner Drop down elements
-        // TODO: Populate the spinner list
         List<String> categories = new ArrayList<String>();
-        categories.add("Automobile");
-        categories.add("Business Services");
-        categories.add("Computers");
-        categories.add("Education");
-        categories.add("Personal");
-        categories.add("Travel");
+        categories.add("Mess Complaint");
+        categories.add("Maintenance Complaint");
+        categories.add("Student Welfare Complaint");
+        categories.add("Infrastructure Complaint");
+        categories.add("Course Complaint");
+        categories.add("NCC/NSO/NSS Complaint");
+        categories.add("Security Complaint");
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categories);
@@ -66,9 +66,6 @@ public class New_Complaint_Fragment extends Fragment //implements AdapterView.On
 //
 //    }
 
-//    public void onNothingSelected(AdapterView<?> arg0) {
-//        // TODO Auto-generated method stub
 //
-//    }
 
 }
