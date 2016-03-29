@@ -26,7 +26,6 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -143,7 +142,7 @@ public class MainActivity extends AppCompatActivity
         RelativeLayout rl = (RelativeLayout)view;
         TextView t = (TextView) rl.findViewById(R.id.complaint_id);
 
-        Log.i("SHREYAN", ((TextView)((RelativeLayout) view).getChildAt(3)).getText().toString() );
+        Log.i("SHREYAN", ((TextView) ((RelativeLayout) view).getChildAt(3)).getText().toString());
 
         Bundle bundle = new Bundle();
         bundle.putString("complaint_json", ((TextView) ((RelativeLayout) view).getChildAt(3)).getText().toString());
@@ -196,7 +195,8 @@ public class MainActivity extends AppCompatActivity
         final LoadData l = new LoadData();
         l.setContext(thisContext);
         l.add_complaint_request(isCommunity, selected_item, t, d, new String("courseID"));
-        timer(2, 0, l);
+
+        timer2(0, l);
         l.flag[2] = false;
 
         // TODO : figure out what to set for token and courseID
@@ -223,7 +223,7 @@ public class MainActivity extends AppCompatActivity
         final LoadData l = new LoadData();
         l.setContext(thisContext);
         l.new_comment_request(c_id, t_id, new String("posted by"), d, new String("time stamp"));
-        timer(4,0,l);
+        timer4(0, l);
         l.flag[4] = false;
 
         // TODO : figure out token and posted by and time stamp
@@ -254,7 +254,7 @@ public class MainActivity extends AppCompatActivity
         final LoadData l = new LoadData();
         l.setContext(thisContext);
         l.new_thread_request(id, t, d);
-        timer(3, 0, l);
+        timer3(0, l);
         l.flag[3] = false;
 
         //public void new_thread_request(final String token,final String complaintID,final String Title, final String Description)
@@ -290,7 +290,7 @@ public class MainActivity extends AppCompatActivity
         final LoadData l = new LoadData();
         l.setContext(thisContext);
         l.vote_request(id, "upvote");
-        timer(8, 0, l);
+        timer8(0, l);
         l.flag[8] = false;
     }
 
@@ -309,7 +309,7 @@ public class MainActivity extends AppCompatActivity
         final LoadData l = new LoadData();
         l.setContext(thisContext);
         l.vote_request(id, "downvote");
-        timer(8, 0, l);
+        timer8(0, l);
         l.flag[8] = false;
     }
 
@@ -365,15 +365,15 @@ public class MainActivity extends AppCompatActivity
 
                         if(type == 1){          //same authority
                             l.relodge_same_request(complaint_id);
-                            timer(7,0,l);
+                            timer7(0,l);
                             l.flag[7] = false;
                         }else if(type == 2){    //higher authority
                             l.relodge_higher_request(complaint_id);
-                            timer(6,0,l);
+                            timer6(0,l);
                             l.flag[6] = false;
                         }else if(type == 3){    //mark resolved
                             l.mark_resolved_request(complaint_id);
-                            timer(5,0,l);
+                            timer5(0,l);
                             l.flag[5] = false;
                         }
                         // if this button is clicked, just close
@@ -389,14 +389,14 @@ public class MainActivity extends AppCompatActivity
         alertDialog.show();
     }
 
-    public boolean timer(final int k, final int x, final LoadData l){
+    /*public boolean timer(final int k, final int x, final LoadData l){
 
-        new CountDownTimer(50, 1000) {
+        new CountDownTimer(200, 1000) {
             public void onTick(long millisUntilFinished) {
 
             }
             public void onFinish() {
-                if(x==100) {
+                if(x==20) {
                     Toast.makeText(MainActivity.this, "Connection Timed Out", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -441,8 +441,141 @@ public class MainActivity extends AppCompatActivity
         }.start();
         return true;
     }
+*/
 
+    public boolean timer2(final int x, final LoadData l){
 
+        new CountDownTimer(50, 1000) {
+            public void onTick(long millisUntilFinished) {
+
+            }
+            public void onFinish() {
+                if(x==100){
+                    Toast.makeText(MainActivity.this,"Connection Timed Out", Toast.LENGTH_LONG).show();
+                }
+                else if(l.flag[2]){
+                    Toast.makeText(MainActivity.this,"New complaint posted", Toast.LENGTH_LONG).show();
+                } else {
+                    timer2(x + 1, l);
+                }
+            }
+        }.start();
+        return true;
+    }
+    public boolean timer4(final int x, final LoadData l){
+
+        new CountDownTimer(50, 1000) {
+            public void onTick(long millisUntilFinished) {
+
+            }
+            public void onFinish() {
+                if(x==100){
+                    Toast.makeText(MainActivity.this,"Connection Timed Out", Toast.LENGTH_LONG).show();
+                }
+                else if(l.flag[4]){
+                    Toast.makeText(MainActivity.this,"New comment posted", Toast.LENGTH_LONG).show();
+                } else {
+                    timer4(x + 1, l);
+                }
+            }
+        }.start();
+        return true;
+    }
+    public boolean timer3(final int x, final LoadData l){
+
+        new CountDownTimer(50, 1000) {
+            public void onTick(long millisUntilFinished) {
+
+            }
+            public void onFinish() {
+                if(x==100){
+                    Toast.makeText(MainActivity.this,"Connection Timed Out", Toast.LENGTH_LONG).show();
+                }
+                else if(l.flag[3]){
+                    Toast.makeText(MainActivity.this,"New thread posted", Toast.LENGTH_LONG).show();
+                } else {
+                    timer3(x + 1, l);
+                }
+            }
+        }.start();
+        return true;
+    }
+    public boolean timer8(final int x, final LoadData l){
+
+        new CountDownTimer(50, 1000) {
+            public void onTick(long millisUntilFinished) {
+
+            }
+            public void onFinish() {
+                if(x==100){
+                    Toast.makeText(MainActivity.this,"Connection Timed Out", Toast.LENGTH_LONG).show();
+                }
+                else if(l.flag[8]){
+                    Toast.makeText(MainActivity.this,"Vote Recorded", Toast.LENGTH_LONG).show();
+                } else {
+                    timer8(x + 1, l);
+                }
+            }
+        }.start();
+        return true;
+    }
+    public boolean timer5(final int x, final LoadData l){
+
+        new CountDownTimer(50, 1000) {
+            public void onTick(long millisUntilFinished) {
+
+            }
+            public void onFinish() {
+                if(x==100){
+                    Toast.makeText(MainActivity.this,"Connection Timed Out", Toast.LENGTH_LONG).show();
+                }
+                else if(l.flag[5]){
+                    Toast.makeText(MainActivity.this,"Complaint Marked as Resolved", Toast.LENGTH_LONG).show();
+                } else {
+                    timer5(x + 1, l);
+                }
+            }
+        }.start();
+        return true;
+    }
+    public boolean timer6(final int x, final LoadData l){
+
+        new CountDownTimer(50, 1000) {
+            public void onTick(long millisUntilFinished) {
+
+            }
+            public void onFinish() {
+                if(x==100){
+                    Toast.makeText(MainActivity.this,"Connection Timed Out", Toast.LENGTH_LONG).show();
+                }
+                else if(l.flag[6]){
+                    Toast.makeText(MainActivity.this,"Complaint Posted with higher Authority", Toast.LENGTH_LONG).show();
+                } else {
+                    timer6(x + 1, l);
+                }
+            }
+        }.start();
+        return true;
+    }
+    public boolean timer7(final int x, final LoadData l){
+
+        new CountDownTimer(50, 1000) {
+            public void onTick(long millisUntilFinished) {
+
+            }
+            public void onFinish() {
+                if(x==100){
+                    Toast.makeText(MainActivity.this,"Connection Timed Out", Toast.LENGTH_LONG).show();
+                }
+                else if(l.flag[7]){
+                    Toast.makeText(MainActivity.this,"Complaint Posted with same Authority", Toast.LENGTH_LONG).show();
+                } else {
+                    timer7(x + 1, l);
+                }
+            }
+        }.start();
+        return true;
+    }
 
     private void on_refresh() {
         //TODO : On refresh kya karna hai???
@@ -524,19 +657,18 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    public boolean timernotifications(final int x, final LoadData l, final int whichflag){
+    public boolean timernotifications(final int x, final LoadData l, final int whichflag) {
 
         new CountDownTimer(50, 1000) {
             public void onTick(long millisUntilFinished) {
 
             }
+
             public void onFinish() {
-                if(x==100){
+                if (x == 100) {
                     //Toast.makeText(LoginActivity.this, "Connection Timed Out", Toast.LENGTH_LONG).show();
-                }
-                else if(l.flag[whichflag]){
-                    if(whichflag == 10)
-                    {
+                } else if (l.flag[whichflag]) {
+                    if (whichflag == 10) {
                         Log.i("gaand", "sajdas");
                         try {
                             JSONObject cdr = l.notificationsJSON;
@@ -546,17 +678,14 @@ public class MainActivity extends AppCompatActivity
                                 JSONArray comparr = (JSONArray) cdr.get("notifications");
                                 Log.i("sandj", "sadjsakdas");
                                 l.notificationsArray = new JSONObject[comparr.length()];
-                                for ( int i = 0 ; i < comparr.length(); i ++ )
-                                {
+                                for (int i = 0; i < comparr.length(); i++) {
                                     l.notificationsArray[i] = comparr.getJSONObject(i);
                                 }
 
 
-
                             }
                             //list.add(new fraud("Title ka naam kya hona chaiyeh?? Shreyan kya hai.\n New line karke kya milega tujhe? " + i, "Lodger " + i, "bla"));
-                        }catch(Exception e)
-                        {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 
@@ -569,17 +698,4 @@ public class MainActivity extends AppCompatActivity
         }.start();
         return true;
     }
-
-
-
-
-
-
-
-
-
-
-
 }
-
-
