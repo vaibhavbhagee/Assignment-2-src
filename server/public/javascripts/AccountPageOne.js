@@ -99,8 +99,8 @@ function AccountPageOne()
 		$( "#AddUserButton" ).on('click',function()  //edit
 		{ 
 			//Populate the add user object
-			$("#WorkAreaDiv"+Object.Index).empty();
-			this.uo.Initialize("ViewDO", 10 , 10 , "HomeDiv" , 80 , 80 , 1.0, {}, true, Object);
+			$("#WorkArea_Div"+Object.Index).empty();
+			Object.uo.Initialize("ViewDO", 10 , 10 , "WorkArea_Div"+Object.Index , 80 , 80 , 1.0, {}, true, Object);
 		});
 
 		$( "#ListUsersButton" ).on('click',function()  //edit
