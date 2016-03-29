@@ -107,7 +107,7 @@ public class Complaint_Fragment extends Fragment {
         else if(current_status.equals("under_resolution")) layout.setBackgroundColor(getResources().getColor(R.color.under_resolution));
         else layout.setBackgroundColor(getResources().getColor(R.color.unresolved));
 
-        if(complaint_type.equals("Individual")){
+        if(!community){
             upvote.setVisibility(View.GONE);
             downvote.setVisibility(View.GONE);
             num_upvote.setVisibility(View.GONE);

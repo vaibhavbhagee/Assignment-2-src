@@ -198,9 +198,38 @@ public class MainActivity extends AppCompatActivity
         if (r.isChecked()) isCommunity = "false";
         else isCommunity = "true";
 
+        String s;
+        switch(selected_item)
+        {
+            case "Mess Complaint":
+                s = "mess_complaint";
+                        break;
+            case "Maintenance Complaint":
+                s = "maintenance_complaint";
+                break;
+            case "Student Welfare Complaint":
+                s = "student_welfare_complaint";
+                break;
+            case "Infrastructure Complaint":
+                s = "infrastructure_complaint";
+                break;
+            case "Course Complaint":
+                s = "course_complaint";
+                break;
+            case "NCC/NSO/NSS Complaint":
+                s = "nnn_complaint";
+                break;
+            case "Security Complaint":
+                s = "security_complaint";
+                break;
+            default:
+                s = null;
+
+        }
+
         final LoadData l = new LoadData();
         l.setContext(thisContext);
-        l.add_complaint_request(isCommunity, selected_item, t, d, course);
+        l.add_complaint_request(isCommunity, s, t, d, course.toLowerCase());
 
         timer2(0, l);
         l.flag[2] = false;
