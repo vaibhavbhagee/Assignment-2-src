@@ -107,60 +107,73 @@ var hierarchy_json = {
 
 var input_users = [
 //MESS COMPLAINT
-{"unique_id":"cs5140297","name":"Vaibhav Bhagee","password":"d7218156761eff363a67505eca3fd90fde37ce08","department":"cse","contact_info":"9999988888","tags":["vindhyachal","nss"],"course_list":["cop290","col226"],"complaint_list":[]}
+{"unique_id":"cs5140297","name":"Vaibhav Bhagee","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"cse","contact_info":"9999988888","tags":["vindhyachal","nss"],"course_list":["cop290","col226"],"complaint_list":[]}
 ,
-{"unique_id":"director_id","name":"Director","password":"b85b179882f31c43324ef124feaa3dd4ddae2915","department":"cse","contact_info":"9999988889","tags":[],"course_list":[],"complaint_list":[]}
+{"unique_id":"director_id","name":"Director","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"cse","contact_info":"9999988889","tags":[],"course_list":[],"complaint_list":[]}
 ,
-{"unique_id":"dosa_id","name":"Dosa","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"ee","contact_info":"9999988890","tags":[],"course_list":[],"complaint_list":[]}
+{"unique_id":"dosa_id","name":"Dosa","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"ee","contact_info":"9999988890","tags":[],"course_list":[],"complaint_list":[]}
 ,
-{"unique_id":"asso_dean_hm_id","name":"Asso Dean HM","password":"ce0dae246586bc69f8a98a6592184ceceda49185","department":"ee","contact_info":"9999988891","tags":[],"course_list":[],"complaint_list":[]}
+{"unique_id":"asso_dean_hm_id","name":"Asso Dean HM","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"ee","contact_info":"9999988891","tags":[],"course_list":[],"complaint_list":[]}
 ,
-{"unique_id":"warden_kumaon_id","name":"Dosa","password":"d51d283f6542727e2904e68c828b091f8460c5dd","department":"ee","contact_info":"9999988892","tags":[],"course_list":[],"complaint_list":[]}
+{"unique_id":"warden_kumaon_id","name":"Dosa","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"ee","contact_info":"9999988892","tags":[],"course_list":[],"complaint_list":[]}
 ,
-{"unique_id":"house_secy_kumaon_id","name":"House Secy Kumaon","password":"48abcff594f9be1ff4b1d5a983f84d072798a8b6","department":"ee","contact_info":"9999988893","tags":["kumaon","nss"],"course_list":["ell231"],"complaint_list":[]}
+{"unique_id":"house_secy_kumaon_id","name":"House Secy Kumaon","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"ee","contact_info":"9999988893","tags":["kumaon","nss"],"course_list":["ell231"],"complaint_list":[]}
  ,   //Kumaon
-{"unique_id":"mess_secy_kumaon_id","name":"Mess Secy Kumaon","password":"2563f6aed4c92a732169c7e1195d46b589565c6d","department":"ee","contact_info":"9999988894","tags":["kumaon","nso"],"course_list":["cop290"],"complaint_list":[]}
-  ,  //Vindy
-{"unique_id":"mess_secy_vindhyachal_id","name":"Mess Secy Vindhyachal","password":"867b72ec6dd6c43e60422d54c7cedd7411e1c2bf","department":"cse","contact_info":"9999988895","tags":["vindhyachal","nso"],"course_list":["cop290"],"complaint_list":[]}
+{"unique_id":"mess_secy_kumaon_id","name":"Mess Secy Kumaon","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"ee","contact_info":"9999988894","tags":["kumaon","nso"],"course_list":["cop290"],"complaint_list":[]}
+,    //Vindy
+{"unique_id":"mess_secy_vindhyachal_id","name":"Mess Secy Vindhyachal","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"cse","contact_info":"9999988895","tags":["vindhyachal","nso"],"course_list":["cop290"],"complaint_list":[]}
 //MAINTENANCE COMPLAINT
 ,    //Kumaon
-{"unique_id":"maintenance_secy_kumaon_id","name":"Maintenance Secy Kumaon","password":"1c870916e3e44e3f496ffbcc8bc88f2973a74667","department":"cse","contact_info":"9999988896","tags":["kumaon","ncc"],"course_list":["cop290","col202"],"complaint_list":[]}
+{"unique_id":"maintenance_secy_kumaon_id","name":"Maintenance Secy Kumaon","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"cse","contact_info":"9999988896","tags":["kumaon","ncc"],"course_list":["cop290","col202"],"complaint_list":[]}
 ,    //Vindy
-{"unique_id":"maintenance_secy_vindhyachal_id","name":"Maintenance Secy Vindhyachal","password":"e53633a42b35eff05d273f06a40fa8a72b0d1425","department":"cse","contact_info":"9999988897","tags":["vindhyachal","nss"],"course_list":["cop290","ell231"],"complaint_list":[]}
+{"unique_id":"maintenance_secy_vindhyachal_id","name":"Maintenance Secy Vindhyachal","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"cse","contact_info":"9999988897","tags":["vindhyachal","nss"],"course_list":["cop290","ell231"],"complaint_list":[]}
 ,//WELFARE COMPLAINT
-{"unique_id":"president_sac_id","name":"President SAC","password":"5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8","department":"cse","contact_info":"9999988898","tags":[],"course_list":[],"complaint_list":[]}
+{"unique_id":"president_sac_id","name":"President SAC","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"cse","contact_info":"9999988898","tags":[],"course_list":[],"complaint_list":[]}
 ,
-{"unique_id":"sac_gensec_id","name":"SAC GenSec","password":"5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8","department":"ee","contact_info":"9999988899","tags":["kumaon","nso"],"course_list":["cop290"],"complaint_list":[]}
+{"unique_id":"sac_gensec_id","name":"SAC GenSec","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"ee","contact_info":"9999988899","tags":["kumaon","nso"],"course_list":["cop290"],"complaint_list":[]}
 ,
-{"unique_id":"bsw_gensec_id","name":"BSW GenSec","password":"5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8","department":"ee","contact_info":"9999988900","tags":["vindhyachal","ncc"],"course_list":["ell231"],"complaint_list":[]}
+{"unique_id":"bsw_gensec_id","name":"BSW GenSec","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"ee","contact_info":"9999988900","tags":["vindhyachal","ncc"],"course_list":["ell231"],"complaint_list":[]}
 ,//INFRASTRUCTURE COMPLAINT
-{"unique_id":"bhm_gensec_id","name":"BHM GenSec","password":"5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8","department":"ee","contact_info":"9999988901","tags":["vindhyachal","nss"],"course_list":["col202"],"complaint_list":[]}
+{"unique_id":"bhm_gensec_id","name":"BHM GenSec","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"ee","contact_info":"9999988901","tags":["vindhyachal","nss"],"course_list":["col202"],"complaint_list":[]}
 ,//COURSE COMPLAINT
-{"unique_id":"doa_id","name":"Doa","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"ee","contact_info":"9999988902","tags":[],"course_list":[],"complaint_list":[]}
+{"unique_id":"doa_id","name":"Doa","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"ee","contact_info":"9999988902","tags":[],"course_list":[],"complaint_list":[]}
 ,//CSE
-{"unique_id":"hod_cse_id","name":"HOD CSE","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"cse","contact_info":"9999988903","tags":[],"course_list":[],"complaint_list":[]}
+{"unique_id":"hod_cse_id","name":"HOD CSE","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"cse","contact_info":"9999988903","tags":[],"course_list":[],"complaint_list":[]}
 ,
-{"unique_id":"course_coordinator_cop290_id","name":"Course Coordinator COP 290","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"cse","contact_info":"9999988904","tags":[],"course_list":["cop290"],"complaint_list":[]}
+{"unique_id":"course_coordinator_cop290_id","name":"Course Coordinator COP 290","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"cse","contact_info":"9999988904","tags":[],"course_list":["cop290"],"complaint_list":[]}
 ,
-{"unique_id":"course_coordinator_col202_id","name":"Course Coordinator COL 202","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"cse","contact_info":"9999988905","tags":[],"course_list":["col202"],"complaint_list":[]}
+{"unique_id":"course_coordinator_col202_id","name":"Course Coordinator COL 202","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"cse","contact_info":"9999988905","tags":[],"course_list":["col202"],"complaint_list":[]}
 ,//EE
-{"unique_id":"hod_ee_id","name":"HOD EE","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"ee","contact_info":"9999988906","tags":[],"course_list":[],"complaint_list":[]}
+{"unique_id":"hod_ee_id","name":"HOD EE","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"ee","contact_info":"9999988906","tags":[],"course_list":[],"complaint_list":[]}
 ,
-{"unique_id":"course_coordinator_ell231_id","name":"Course Coordinator ELL 231","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"ee","contact_info":"9999988907","tags":[],"course_list":["ell231"],"complaint_list":[]}
+{"unique_id":"course_coordinator_ell231_id","name":"Course Coordinator ELL 231","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"ee","contact_info":"9999988907","tags":[],"course_list":["ell231"],"complaint_list":[]}
 ,//NSO
-{"unique_id":"president_nso_id","name":"President NSO","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"ee","contact_info":"9999988908","tags":[],"course_list":[],"complaint_list":[]}
+{"unique_id":"president_nso_id","name":"President NSO","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"ee","contact_info":"9999988908","tags":[],"course_list":[],"complaint_list":[]}
 ,
-{"unique_id":"gensec_nso_id","name":"GenSec NSO","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"ee","contact_info":"9999988909","tags":["kumaon","nso"],"course_list":["cop290"],"complaint_list":[]}
+{"unique_id":"gensec_nso_id","name":"GenSec NSO","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"ee","contact_info":"9999988909","tags":["kumaon","nso"],"course_list":["cop290"],"complaint_list":[]}
 ,//NSS
-{"unique_id":"president_nss_id","name":"President NSS","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"ee","contact_info":"9999988910","tags":[],"course_list":[],"complaint_list":[]}
+{"unique_id":"president_nss_id","name":"President NSS","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"ee","contact_info":"9999988910","tags":[],"course_list":[],"complaint_list":[]}
 ,
-{"unique_id":"gensec_nss_id","name":"GenSec NSS","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"ee","contact_info":"9999988909","tags":["kumaon","nss"],"course_list":["cop290"],"complaint_list":[]}
+{"unique_id":"gensec_nss_id","name":"GenSec NSS","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"ee","contact_info":"9999988909","tags":["kumaon","nss"],"course_list":["cop290"],"complaint_list":[]}
 ,//NCC
-{"unique_id":"president_ncc_id","name":"President NCC","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"ee","contact_info":"9999988911","tags":[],"course_list":[],"complaint_list":[]}
+{"unique_id":"president_ncc_id","name":"President NCC","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"ee","contact_info":"9999988911","tags":[],"course_list":[],"complaint_list":[]}
 ,
-{"unique_id":"gensec_ncc_id","name":"GenSec NCC","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"ee","contact_info":"9999988912","tags":["vindhyachal","ncc"],"course_list":["col202"],"complaint_list":[]}
+{"unique_id":"gensec_ncc_id","name":"GenSec NCC","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"ee","contact_info":"9999988912","tags":["vindhyachal","ncc"],"course_list":["col202"],"complaint_list":[]}
 ,//SECURITY
-{"unique_id":"security_officer_id","name":"Security Officer","password":"4a39f96e78f1dff9877dafff9e35e4e8bce520df","department":"cse","contact_info":"9999988913","tags":[],"course_list":[],"complaint_list":[]}
+{"unique_id":"security_officer_id","name":"Security Officer","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"cse","contact_info":"9999988913","tags":[],"course_list":[],"complaint_list":[]}
+,
+//ADMIN
+{"unique_id":"admin1","name":"Admin Bhagee 1","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"cse","contact_info":"9999988887","tags":["vindhyachal","ncc"],"course_list":[],"complaint_list":[]}
+,
+{"unique_id":"admin2","name":"Admin Bhagee 2","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"cse","contact_info":"9999988886","tags":["vindhyachal","nso"],"course_list":[],"complaint_list":[]}
+]
+
+var special_users_input = [
+//ADMIN
+{"unique_id":"admin1","name":"Admin Bhagee 1","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"cse","contact_info":"9999988887","tags":["vindhyachal","ncc"],"course_list":[],"complaint_list":[]}
+,
+{"unique_id":"admin2","name":"Admin Bhagee 2","password":"a9993e364706816aba3e25717850c26c9cd0d89d","department":"cse","contact_info":"9999988886","tags":["vindhyachal","nso"],"course_list":[],"complaint_list":[]}
+
 ]
 
 var port = process.env.PORT || 8081;
@@ -220,8 +233,31 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         {
           if (err)
             res.send({success:false,message:"incorrect request"});
-
+          else
             res.send({success:true,message:"Successfully Populated"});
+        });
+      else
+        res.send({success:false,message:"Database contains data which can be overwritten"});
+    });
+  });
+
+  /**
+  *  API to initialize the special users
+  */
+
+  apiRoutes.get('/populate_special', function(req, res) {
+    special_users.find().toArray(function(err,result)
+    {
+      if (err)
+        res.send({success:false,message:"incorrect request"});
+
+      else if (result.length == 0)
+        special_users.insert(special_users_input,function(error,result1)
+        {
+          if (err)
+            res.send({success:false,message:"incorrect request"});
+          else
+            res.send({success:true,message:"Successfully Populated Special Users"});
         });
       else
         res.send({success:false,message:"Database contains data which can be overwritten"});
@@ -239,6 +275,20 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
         res.send({success:false,message:"incorrect request"});
       else
         res.send({success:true,message:"User Collection Emptied successfully"});
+    });
+  });
+
+  /**
+  *  API to empty special user collection
+  */
+
+  apiRoutes.get('/empty_special_users', function(req, res) {
+    special_users.remove({},function(err,result)
+    {
+      if (err)
+        res.send({success:false,message:"incorrect request"});
+      else
+        res.send({success:true,message:"Special User Collection Emptied successfully"});
     });
   });
 
@@ -386,6 +436,20 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 //Temporary API to get users
   apiRoutes.get('/users', function(req, res) {
     users.find().toArray(function(err,result)
+    {
+      if (err)
+        res.send({success:false,message:"incorrect request"});
+
+      else if (result.length == 0)
+        res.send("Empty collection");
+      else
+        res.send(result);
+    });
+  });
+
+//Temporary API to get special users
+  apiRoutes.get('/special_users', function(req, res) {
+    special_users.find().toArray(function(err,result)
     {
       if (err)
         res.send({success:false,message:"incorrect request"});
