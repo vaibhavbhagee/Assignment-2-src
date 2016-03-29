@@ -8,6 +8,7 @@ function AccountPageOne()
 	this.Height = "";
 	this.Opacity = "";
 	this.AssociatedData = {};
+	this.uo = new UserObject();
 
 
 	var Object = this;
@@ -98,6 +99,8 @@ function AccountPageOne()
 		$( "#AddUserButton" ).on('click',function()  //edit
 		{ 
 			//Populate the add user object
+			$("#WorkArea_Div"+Object.Index).empty();
+			Object.uo.Initialize("ViewDO", 10 , 10 , "WorkArea_Div"+Object.Index , 80 , 80 , 1.0, {}, true, Object);
 		});
 
 		$( "#ListUsersButton" ).on('click',function()  //edit

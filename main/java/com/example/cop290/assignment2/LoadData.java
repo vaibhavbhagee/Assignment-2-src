@@ -405,7 +405,7 @@ public class LoadData extends Activity {
 
     /*flag[6]*/
     public void relodge_higher_request( final String complaintID) {
-        final String sRequest = ServerURL + "/relodge_higher";
+        final String sRequest = ServerURL + "/relodge_next_authority";
         Map<String, String> params = new HashMap<String, String>();
         params.put("complaint_id",complaintID);
 
@@ -446,7 +446,7 @@ public class LoadData extends Activity {
 
     /*flag[7]*/
     public void relodge_same_request( final String complaintID) {
-        final String sRequest = ServerURL + "/relodge_same";
+        final String sRequest = ServerURL + "/relodge_same_authority";
         Map<String, String> params = new HashMap<String, String>();
         params.put("complaint_id",complaintID);
 

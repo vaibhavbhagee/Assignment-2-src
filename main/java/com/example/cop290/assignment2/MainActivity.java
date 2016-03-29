@@ -599,7 +599,7 @@ public class MainActivity extends AppCompatActivity
         LoadData l = new LoadData();
         l.setContext(thisContext);
 
-        JSONObject loginR = l.loginResponseJSON;
+        /*JSONObject loginR = l.loginResponseJSON;
         try{
             String[] c_list = new String[loginR.getJSONArray("complaint_list").length()];
             for(int i = 0 ; i < loginR.getJSONArray("complaint_list").length(); i ++ )
@@ -611,11 +611,58 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(MainActivity.this,"Data Populated", Toast.LENGTH_LONG).show();
 
         }catch(Exception e){e.printStackTrace();}
-
-
+*/
+        try {
+            l.get_complaints_request(l.loginResponseJSON.getString("unique_id"));
+            timer(1, l, 1);
+            l.flag[1] = false;
+        }catch(Exception e){e.printStackTrace();}
 
         //Intent intent = new Intent(thisContext, LoginActivity.class);
         //startActivity(intent);
+    }
+
+
+
+    public boolean timer(final int x, final LoadData l, final int whichflag){
+
+        new CountDownTimer(50, 1000) {
+            public void onTick(long millisUntilFinished) {
+
+            }
+            public void onFinish() {
+                if(x==100){
+                    Toast.makeText(MainActivity.this,"Connection Timed Out", Toast.LENGTH_LONG).show();
+                }
+                else if(l.flag[whichflag]){
+                    if(whichflag == 1)
+                    {
+
+                        l.setContext(thisContext);
+
+                        JSONObject loginR = l.loginResponseJSON;
+                        try{
+                            String[] c_list = new String[loginR.getJSONArray("complaint_list").length()];
+                            for(int i = 0 ; i < loginR.getJSONArray("complaint_list").length(); i ++ )
+                                c_list[i] = loginR.getJSONArray("complaint_list").getString(i);
+
+                            l.get_complaint_details_request(c_list);
+                            timercomplaint(1, l, 9, c_list);
+                            l.flag[9] = false;
+                            Toast.makeText(MainActivity.this,"Data Populated", Toast.LENGTH_LONG).show();
+
+                        }catch(Exception e){e.printStackTrace();}
+
+                    }
+
+                }
+                else
+                {
+                    timer(x+1,l, whichflag);
+                }
+            }
+        }.start();
+        return true;
     }
 
 
