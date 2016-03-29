@@ -74,7 +74,7 @@ public class LoadData extends Activity {
     }
 
 //flag[0]
-   public void login_request(final String un, final String pw) {
+    public void login_request(final String un, final String pw) {
 
         Map<String, String> jsonParams = new HashMap<String, String>();
         jsonParams.put("username", un);
@@ -108,7 +108,7 @@ public class LoadData extends Activity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Login_Request Error: " + error.toString()).setNeutralButton("Close", null).show();
+                        //new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Login_Request Error: " + error.toString()).setNeutralButton("Close", null).show();
 
                     }
                 }) {
@@ -127,10 +127,16 @@ public class LoadData extends Activity {
 
 
 //flag[11]
-    public void pseudo_login_request(final String un, final String pw) {
+    public void pseudo_login_request() {
+
+        String un = "";
+        try{
+            un = loginResponseJSON.getString("unique_id");
+            System.out.println("User is " +un);
+        }catch (Exception e){ e.printStackTrace(); }
 
         Map<String, String> jsonParams = new HashMap<String, String>();
-        jsonParams.put("username", un);
+        jsonParams.put("unique_id", un);
 
 
         final String loginRequest = ServerURL + "/get_user_details";
@@ -142,14 +148,16 @@ public class LoadData extends Activity {
 
                         try {
                             pseudoLoginResponseJSON = response;
-                            Log.i("bhaggus",loginResponseJSON.toString());
-
-
-                                flag[11] = true;
-                                Log.i("ajsdas", Integer.toString(Context.MODE_PRIVATE));
-
-
-
+                            System.out.println(response);
+                            complaintDetailsArray = new JSONObject[response.getJSONArray("complaint_details").length()];
+                            for(int i=0; i<response.getJSONArray("complaint_details").length(); ++i){
+                                complaintDetailsArray[i] = response.getJSONArray("complaint_details").getJSONObject(i);
+                            }
+                            notificationsArray = new JSONObject[response.getJSONArray("notifications").length()];
+                            for(int i=0; i<response.getJSONArray("notifications").length(); ++i){
+                                notificationsArray[i] = response.getJSONArray("notifications").getJSONObject(i);
+                            }
+                            flag[11] = true;
                         }catch(Exception e){System.out.println(e.toString());}
                     }
                 },
@@ -157,7 +165,7 @@ public class LoadData extends Activity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Login_Request Error: " + error.toString()).setNeutralButton("Close", null).show();
+                        //new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Login_Request Error: " + error.toString()).setNeutralButton("Close", null).show();
 
                     }
                 }) {
@@ -198,7 +206,7 @@ public class LoadData extends Activity {
                         //Log.i("crapp",response.toString());
                         try{
                             loginResponseJSON.put("complaint_list",response);
-                            Log.i("REFRESHED",loginResponseJSON.getJSONObject("complaint_list").toString());
+                            Log.i("REFRESHED", loginResponseJSON.getJSONObject("complaint_list").toString());
 
                         }catch(Exception e){e.printStackTrace();}
                         System.out.println(getComplaintsResponse);
@@ -209,7 +217,7 @@ public class LoadData extends Activity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Get_complaints Error: " + error.toString()).setNeutralButton("Close", null).show();
+                        //new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Get_complaints Error: " + error.toString()).setNeutralButton("Close", null).show();
 
                     }
                 }) {
@@ -330,7 +338,7 @@ public class LoadData extends Activity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Add_complaint Error: " + error.toString()).setNeutralButton("Close", null).show();
+                        //new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Add_complaint Error: " + error.toString()).setNeutralButton("Close", null).show();
 
                     }
                 }) {
@@ -371,7 +379,7 @@ public class LoadData extends Activity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("New_Thread Error: " + error.toString()).setNeutralButton("Close", null).show();
+                        //new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("New_Thread Error: " + error.toString()).setNeutralButton("Close", null).show();
 
                     }
                 }) {
@@ -415,7 +423,7 @@ public class LoadData extends Activity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("New_comment Error: " + error.toString()).setNeutralButton("Close", null).show();
+                        //new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("New_comment Error: " + error.toString()).setNeutralButton("Close", null).show();
 
                     }
                 }) {
@@ -455,7 +463,7 @@ public class LoadData extends Activity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Mark_Resolved Error: " + error.toString()).setNeutralButton("Close", null).show();
+                        //new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Mark_Resolved Error: " + error.toString()).setNeutralButton("Close", null).show();
 
                     }
                 }) {
@@ -496,7 +504,7 @@ public class LoadData extends Activity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Relodge_higehr Error: " + error.toString()).setNeutralButton("Close", null).show();
+                        //new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Relodge_higehr Error: " + error.toString()).setNeutralButton("Close", null).show();
 
                     }
                 }) {
@@ -536,7 +544,7 @@ public class LoadData extends Activity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Reldoge_same Error: " + error.toString()).setNeutralButton("Close", null).show();
+                        //new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Reldoge_same Error: " + error.toString()).setNeutralButton("Close", null).show();
 
                     }
                 }) {
@@ -577,7 +585,7 @@ public class LoadData extends Activity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Vote Error: " + error.toString()).setNeutralButton("Close", null).show();
+                        //new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Vote Error: " + error.toString()).setNeutralButton("Close", null).show();
 
                     }
                 }) {
