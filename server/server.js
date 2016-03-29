@@ -448,7 +448,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
   });
 
 //Temporary API to get special users
-  apiRoutes.get('/users', function(req, res) {
+  apiRoutes.get('/special_users', function(req, res) {
     special_users.find().toArray(function(err,result)
     {
       if (err)
