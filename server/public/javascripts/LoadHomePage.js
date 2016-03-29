@@ -5,6 +5,8 @@ var HPage = new HomePage();
 
 var server_url = "http://cm-system-iitd.herokuapp.com/api";
 
+var toaken = "";
+
 function LoadHomePage()
 {
 	login.Initialize( "LoginObj1", 25 , 30 , "HomeDiv" , 50 , 40 , 1.0);

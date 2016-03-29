@@ -8,13 +8,14 @@ function AccountPageOne()
 	this.Height = "";
 	this.Opacity = "";
 	this.AssociatedData = {};
+	this.uo = new UserObject();
 
 
 	var Object = this;
 
 	this.edit = function()
 	{
-		document.getElementById( "WelcomeName_Div"+Object.Index+"" ).innerHTML = "Welcome: "+Object.AssociatedData.First_name+" "+Object.AssociatedData.Second_name;
+		document.getElementById( "WelcomeName_Div"+Object.Index+"" ).innerHTML = "Welcome: "+Object.AssociatedData.name+" ";
 	}
 
 	// Initialization
@@ -61,7 +62,7 @@ function AccountPageOne()
 		$( "#AccountPage"+Object.Index+"" ).append(Object.WorkAreaDiv);
 
 		Object.WelcomeNameDiv =
-					"<div id='WelcomeName_Div"+Object.Index+"' style='position: absolute; top: 0px; left: 0px; height: 40px; width: 45%; opacity: "+Object.Opacity+"; border: 0px solid #0B197D;background-color:transparent; border-radius: 0px 0px 0px 0px; overflow: hidden; text-align: left; line-height: 40px; color: #FFFFFF; padding-left:10px;'>Welcome: "+Object.AssociatedData.First_name+" "+Object.AssociatedData.Second_name+"</div>"; 
+					"<div id='WelcomeName_Div"+Object.Index+"' style='position: absolute; top: 0px; left: 0px; height: 40px; width: 45%; opacity: "+Object.Opacity+"; border: 0px solid #0B197D;background-color:transparent; border-radius: 0px 0px 0px 0px; overflow: hidden; text-align: left; line-height: 40px; color: #FFFFFF; padding-left:10px;'>Welcome: "+Object.AssociatedData.name+" "+"</div>"; 
 
 		$( "#Welcome_Div"+Object.Index+"" ).append(Object.WelcomeNameDiv);
 
@@ -98,6 +99,8 @@ function AccountPageOne()
 		$( "#AddUserButton" ).on('click',function()  //edit
 		{ 
 			//Populate the add user object
+			$("#WorkArea_Div"+Object.Index).empty();
+			Object.uo.Initialize("ViewDO", 10 , 10 , "WorkArea_Div"+Object.Index , 80 , 80 , 1.0, {}, true, Object);
 		});
 
 		$( "#ListUsersButton" ).on('click',function()  //edit
