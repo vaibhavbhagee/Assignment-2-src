@@ -35,6 +35,7 @@ public class LoadData extends Activity {
     public static final String SharedPref = "MahPrefs";
 
 
+    public static boolean loginResponded= false;
     public static boolean[] flag = new boolean[11];
 
     public static JSONObject[] complaintDetailsArray;
@@ -83,6 +84,7 @@ public class LoadData extends Activity {
                     //On valid response
                     public void onResponse(JSONObject response) {
 
+                    loginResponded = true;
                     try {
                         loginResponseJSON = response;
                         Log.i("bhaggus",loginResponseJSON.toString());
