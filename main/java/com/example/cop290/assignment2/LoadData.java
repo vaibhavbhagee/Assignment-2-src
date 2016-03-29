@@ -128,6 +128,7 @@ public class LoadData extends Activity {
    public void get_complaints_request(final String uid) {
 
         final String sRequest = ServerURL + "/complaintlist?unique_id="+uid;
+       Log.i("crap",uid);
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, sRequest, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -135,7 +136,11 @@ public class LoadData extends Activity {
                     public void onResponse(JSONObject response) {
 
                         getComplaintsResponse = response;
-
+                        Log.i("crapp",response.toString());
+                        try{
+                            loginResponseJSON.put("complaint_list",response);
+                            Log.i("acidtest",loginResponseJSON.getJSONObject("complaint_list").toString());
+                        }catch(Exception e){e.printStackTrace();}
                         System.out.println(getComplaintsResponse);
                              flag[1] = true;
                     }
@@ -149,6 +154,11 @@ public class LoadData extends Activity {
                     }
                 }) {
 
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> head = new HashMap<String, String>();
+                head.put("x-access-token", token);
+                return head;
+            }
 
         };
 
@@ -177,7 +187,7 @@ public class LoadData extends Activity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Complaint_Details Error: " + error.toString()).setNeutralButton("Close", null).show();
+                        //new AlertDialog.Builder(thisContext).setTitle("Error").setMessage("Complaint_Details Error: " + error.toString()).setNeutralButton("Close", null).show();
 
                     }
                 }) {
