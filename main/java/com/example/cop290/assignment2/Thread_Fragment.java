@@ -85,6 +85,11 @@ public class Thread_Fragment extends Fragment {
                 System.out.println("checking: "+comments.getJSONObject(i).getString("description"));
             }
         }catch(Exception e){e.printStackTrace();}
+
+        if(list.size()==0){
+            ((TextView) view.findViewById(R.id.no_comments)).setVisibility(View.VISIBLE);
+        }
+
         UserAdapter adapter = new UserAdapter(getActivity(), list);
         ListView listView = (ListView) view.findViewById(R.id.listView);
         listView.setAdapter(adapter);

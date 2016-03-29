@@ -180,11 +180,17 @@ public class MainActivity extends AppCompatActivity
         Spinner spin = (Spinner) parent.findViewById(R.id.spinner);
         Spinner spin2 = (Spinner) parent.findViewById(R.id.spinner2);
 
+        Object xyz = spin2.getSelectedItem();
+
         String selected_item = spin.getSelectedItem().toString();
-        String course = spin2.getSelectedItem().toString();
+        String course = (xyz!=null) ? xyz.toString() : "null";
         String t = title.getText().toString();
         String d = description.getText().toString();
         String isCommunity;
+
+        if (r.isChecked()) isCommunity = "false";
+        else isCommunity = "true";
+        //System.out.println("Checking community... "+isCommunity);
 
         if (t.equals("")) {
             Toast.makeText(MainActivity.this, "Title is Empty", Toast.LENGTH_LONG).show();
@@ -194,9 +200,6 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(MainActivity.this, "Description is Empty", Toast.LENGTH_LONG).show();
             return;
         }
-
-        if (r.isChecked()) isCommunity = "false";
-        else isCommunity = "true";
 
         String s;
         switch(selected_item)
@@ -439,6 +442,9 @@ public class MainActivity extends AppCompatActivity
                 else if(l.flag[2]){
                     Toast.makeText(MainActivity.this,"New complaint posted", Toast.LENGTH_LONG).show();
                     on_refresh();
+                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    MainActivity.this.finish();
                 } else {
                     timer2(x + 1, l);
                 }
@@ -529,6 +535,9 @@ public class MainActivity extends AppCompatActivity
                 else if(l.flag[5]){
                     Toast.makeText(MainActivity.this,"Complaint Marked as Resolved", Toast.LENGTH_LONG).show();
                     on_refresh();
+                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    MainActivity.this.finish();
                 } else {
                     timer5(x + 1, l);
                 }
@@ -549,6 +558,9 @@ public class MainActivity extends AppCompatActivity
                 else if(l.flag[6]){
                     Toast.makeText(MainActivity.this,"Complaint Posted with higher Authority", Toast.LENGTH_LONG).show();
                     on_refresh();
+                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    MainActivity.this.finish();
                 } else {
                     timer6(x + 1, l);
                 }
@@ -569,6 +581,9 @@ public class MainActivity extends AppCompatActivity
                 else if(l.flag[7]){
                     Toast.makeText(MainActivity.this,"Complaint Posted with same Authority", Toast.LENGTH_LONG).show();
                     on_refresh();
+                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    MainActivity.this.finish();
                 } else {
                     timer7(x + 1, l);
                 }

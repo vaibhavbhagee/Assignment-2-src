@@ -277,8 +277,6 @@ public class LoadData extends Activity {
         requestQueue.add(stringRequest);
     }
 
-
-
         /*flag[3]*/
     public void new_thread_request( final String complaintID,final String Title, final String Description) {
         final String sRequest = ServerURL + "/new_thread";
