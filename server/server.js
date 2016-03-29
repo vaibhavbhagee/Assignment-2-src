@@ -591,7 +591,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
                 complaint_id:req.body.complaint_id,
                 timestamp: (new Date()).toDateString(),
                 tstamp:new Date(),
-                content: req.decoded.name + " posted a new thread under complaint id "+req.body.complaint_id
+                content: req.decoded.name + " posted a new thread under complaint "+req.body.complaint_id
               }
 
               // Generate the required notification
@@ -646,7 +646,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
                 complaint_id:req.body.complaint_id,
                 timestamp: (new Date()).toDateString(),
                 tstamp:new Date(),
-                content: req.decoded.name + " posted a new comment on the thread "+req.body.thread_id+" under complaint id "+req.body.complaint_id
+                content: req.decoded.name + " posted a new comment on the thread "+req.body.thread_id+" under complaint "+req.body.complaint_id
               }
 
               notifications.insert(notif,function(err,result2)

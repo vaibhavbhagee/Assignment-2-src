@@ -232,7 +232,7 @@ function UserObject()
 			if (currentText == "Save")
 			{
 				$("#Unique_ID_Input").attr("readonly", true);
-				$("#UsernameInput").attr("readonly", true);
+				$("#UserNameInput").attr("readonly", true);
 				$("#PasswordInput").attr("readonly", true);
 				$("#DepartmentInput").attr("readonly", true);
 				$("#Contact_Info_Input").attr("readonly", true);
@@ -293,7 +293,7 @@ function UserObject()
 			else
 			{
 				$("#Unique_ID_Input").attr("readonly", false);
-				$("#UsernameInput").attr("readonly", false);
+				$("#UserNameInput").attr("readonly", false);
 				$("#PasswordInput").attr("readonly", false);
 				$("#DepartmentInput").attr("readonly", false);
 				$("#Contact_Info_Input").attr("readonly", false);

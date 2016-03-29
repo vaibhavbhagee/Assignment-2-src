@@ -98,6 +98,7 @@ public class LoginActivity extends AppCompatActivity {
         loadDataObject.login_request(kerberosIDString, passwordString);
         timer(1, loadDataObject, 0);
         loadDataObject.flag[0] = false;
+        loadDataObject.loginResponded = false;
         //TODO: Always loggs in
 
         /*Intent intent = new Intent(LoginActivity.this,MainActivity.class);
@@ -150,7 +151,12 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
 
-                } else {
+                } else if(l.loginResponded == true)
+                {
+                    Toast.makeText(LoginActivity.this,"Incorrect Credentials", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
                     timer(x+1,l, whichflag);
                 }
             }
