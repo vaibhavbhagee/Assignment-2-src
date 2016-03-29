@@ -91,12 +91,12 @@ public class LoadData extends Activity {
                     loginResponded = true;
                     try {
                         loginResponseJSON = response;
-                        Log.i("bhaggus",loginResponseJSON.toString());
+                        //Log.i("bhaggus",loginResponseJSON.toString());
 
                         if(response.getBoolean("success"))
                         {
                             flag[0] = true;
-                            Log.i("ajsdas", Integer.toString(Context.MODE_PRIVATE));
+                            //Log.i("ajsdas", Integer.toString(Context.MODE_PRIVATE));
                             token = response.getString("token");
                         }
 
@@ -177,10 +177,17 @@ public class LoadData extends Activity {
 
 
     /*flag[1]*/
-   public void get_complaints_request(final String uid) {
+   public void get_complaints_request() {
 
-        final String sRequest = ServerURL + "/complaintlist?unique_id="+uid;
-       Log.i("crap",uid);
+       String u_id = "";
+       try{
+           u_id = loginResponseJSON.getString("unique_id");
+       }catch (Exception e){
+           e.printStackTrace();
+       }
+
+        final String sRequest = ServerURL + "/complaintlist?unique_id="+u_id;
+       //Log.i("crap",uid);
         JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, sRequest, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -188,13 +195,14 @@ public class LoadData extends Activity {
                     public void onResponse(JSONObject response) {
 
                         getComplaintsResponse = response;
-                        Log.i("crapp",response.toString());
+                        //Log.i("crapp",response.toString());
                         try{
                             loginResponseJSON.put("complaint_list",response);
                             Log.i("REFRESHED",loginResponseJSON.getJSONObject("complaint_list").toString());
+
                         }catch(Exception e){e.printStackTrace();}
                         System.out.println(getComplaintsResponse);
-                             flag[1] = true;
+                        flag[1] = true;
                     }
                 },
                 //Launched when server return error
