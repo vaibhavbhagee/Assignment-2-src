@@ -57,6 +57,10 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onRefresh() {
                 on_refresh();
+                swipeRefreshLayout.setRefreshing(false);
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intent);
+                MainActivity.this.finish();
             }
         });
 
@@ -112,18 +116,18 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_notification) {
             FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
             fragmentTransaction
-                    .replace(R.id.content_frame, new Notification_Fragment())
+                    .replace(R.id.content_frame, new Notification_Fragment(),"Notification_Fragment")
                     .commit();
         } else if (id == R.id.nav_complaint) {
             FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
             fragmentTransaction
-                    .replace(R.id.content_frame, new Tab_Fragment())
+                    .replace(R.id.content_frame, new Tab_Fragment(),"Tab_Fragment")
                     .commit();
 
         } else if (id == R.id.nav_new_complaint) {
             FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
             fragmentTransaction
-                    .replace(R.id.content_frame, new New_Complaint_Fragment())
+                    .replace(R.id.content_frame, new New_Complaint_Fragment(),"New_Complaint_Fragment")
                     .commit();
 
         } else if (id == R.id.nav_logout) {
@@ -151,7 +155,7 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
         Complaint_Fragment f = new Complaint_Fragment();
         f.setArguments(bundle);
-        xfragmentTransaction.replace(R.id.content_frame, f).addToBackStack(null).commit();
+        xfragmentTransaction.replace(R.id.content_frame, f, "Complaint_Fragment").addToBackStack(null).commit();
     }
 
     private void logout() {
@@ -264,7 +268,9 @@ public class MainActivity extends AppCompatActivity
         // TODO : Navigate to thread
         RelativeLayout rl = (RelativeLayout)view;
         TextView t = (TextView) rl.findViewById(R.id.complaint_id);
+
         Log.i("SHREYAN2278194", ((TextView)((RelativeLayout) view).getChildAt(3)).getText().toString() );
+
         Bundle bundle = new Bundle();
         bundle.putString("thread_json", ((TextView) ((RelativeLayout) view).getChildAt(3)).getText().toString());
 
@@ -272,7 +278,7 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
         Thread_Fragment f = new Thread_Fragment();
         f.setArguments(bundle);
-        xfragmentTransaction.replace(R.id.content_frame, f).addToBackStack(null).commit();
+        xfragmentTransaction.replace(R.id.content_frame, f, "Thread_Fragment").addToBackStack(null).commit();
     }
 
     public void upvote(View view) {
@@ -422,6 +428,10 @@ public class MainActivity extends AppCompatActivity
                 else if(l.flag[4]){
                     Toast.makeText(MainActivity.this,"New comment posted", Toast.LENGTH_LONG).show();
                     on_refresh();
+                    Thread_Fragment fragment = (Thread_Fragment) getSupportFragmentManager().findFragmentByTag("Thread_Fragment");
+                    fragment.populate_data();
+                    TextView thread_title = (TextView) l.thread_fragment.findViewById(R.id.thread_title);
+                    System.out.println("Shreyan "+thread_title.getText().toString());
                 } else {
                     timer4(x + 1, l);
                 }

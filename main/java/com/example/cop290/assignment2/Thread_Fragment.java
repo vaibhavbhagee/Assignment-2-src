@@ -24,6 +24,8 @@ import java.util.ArrayList;
  */
 public class Thread_Fragment extends Fragment {
 
+    private View this_fragment;
+
     private String complaintID;
     private String threadID;
     private String tItle;
@@ -34,6 +36,19 @@ public class Thread_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_thread_, container, false);
+
+        LoadData l = new LoadData();
+        l.thread_fragment = view;
+
+        this_fragment = view;
+
+        populate_data();
+        return view;
+    }
+
+    public void populate_data() {
+
+        View view = this_fragment;
 
         String threadjsonstr = getArguments().getString("thread_json");
         try {
@@ -49,14 +64,6 @@ public class Thread_Fragment extends Fragment {
 
 
         }catch(Exception e){e.printStackTrace();}
-
-
-
-        populate_data(view);
-        return view;
-    }
-
-    private void populate_data(View view) {
 
         TextView thread_id = (TextView) view.findViewById(R.id.thread_id);
         TextView complaint_id = (TextView) view.findViewById(R.id.complaint_id);
@@ -80,6 +87,7 @@ public class Thread_Fragment extends Fragment {
         UserAdapter adapter = new UserAdapter(getActivity(), list);
         ListView listView = (ListView) view.findViewById(R.id.listView);
         listView.setAdapter(adapter);
+        adapter.setNotifyOnChange(true);
     }
     public class UserAdapter extends ArrayAdapter<fraud> {
         public UserAdapter(Context context, ArrayList<fraud> items) {
