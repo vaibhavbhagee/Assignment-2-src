@@ -490,6 +490,54 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
   });
 
   /**
+  *  API to get Details of a particular user
+  */
+
+  apiRoutes.post('/get_user_details',function(req,res)
+  {
+    var username = req.body.unique_id;
+
+    users.find({"unique_id":username}).toArray(function(err,result)
+    {
+      if (err)
+        res.send({success:false,message:"incorrect request"});
+
+      else if (result.length == 0)
+        res.send({"success":false,"Message":"User Not Found"});
+      else
+      {
+        
+        var complaint_list = result[0].complaint_list;
+        // return the information including token as JSON
+        (complaints.find({"complaint_id":{$in: complaint_list}}).toArray(function(err,result1)
+        {
+          if (err)
+            res.send({success:false,message:"incorrect request"});
+          else
+            (notifications.find({"complaint_id":{$in: complaint_list}}).sort({tstamp: -1}).toArray(function(err,result2)
+            {
+              if (err)
+                res.send({success:false,message:"incorrect request"});
+              else
+                res.send({success:true,
+                  unique_id: result[0].unique_id,
+                  name: result[0].name,
+                  department: result[0].department,
+                  contact_info: result[0].contact_info,
+                  tags: result[0].tags,
+                  course_list: result[0].course_list,
+                  complaint_list: result[0].complaint_list,
+                  complaint_details:result1,
+                  notifications:result2});
+            }));
+        }));
+      }
+    });
+
+  });
+
+
+  /**
   *  API to add a user to the database
   */
 
