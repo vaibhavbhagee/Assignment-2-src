@@ -50,7 +50,7 @@ public class Notification_Fragment extends Fragment {
         try {
             for (int i = 0; i < j.length; ++i) {
 
-                list.add(new fraud(j[i].getString("content"), j[i].getString("timestamp"),lookfor(j[i].getString("complaint_id")).toString() ));
+                list.add(new fraud(modifyStr(j[i].getString("content"), j[i].getString("complaint_id").toString()), j[i].getString("timestamp"), lookfor(j[i].getString("complaint_id")).toString()));
             }
         }catch(Exception e){e.printStackTrace();}
         if(list.size()==0){
@@ -61,6 +61,32 @@ public class Notification_Fragment extends Fragment {
         UserAdapter adapter = new UserAdapter(getActivity(), list);
         ListView listView = (ListView) view.findViewById(R.id.listView);
         listView.setAdapter(adapter);
+    }
+
+    public String modifyStr(String s, String a)
+    {
+        LoadData l = new LoadData();
+        JSONObject[] j = l.complaintDetailsArray;
+        try {
+            for (int i = 0; i < j.length; i++) {
+                Log.i("bhageee",j[i].toString());
+
+                if (j[i].getString("complaint_id").equals(a))
+                {
+                    JSONArray thr = j[i].getJSONArray("threads");
+                    for(int k = 0 ; k < thr.length() ; k ++ )
+                    {
+                        String x = thr.getJSONObject(k).getString("thread_id");
+                        s = s.replace(x,"\"" + thr.getJSONObject(k).getString("title")+ "\"");
+                    }
+                    s = s.replace( a , "\"" + j[i].getString("title")+"\"");
+
+                }
+                //if (j[i].getString("thread_id").equals(e))
+                //    s = s.replace("\"" + a + "\"",j[i].getString("title"));
+            }
+        }catch(Exception ee){ee.printStackTrace();}
+        return s;
     }
 
     public JSONObject lookfor(String compl_id)
