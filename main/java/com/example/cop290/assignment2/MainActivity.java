@@ -48,6 +48,13 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences sp = getSharedPreferences("MahPrefs", Context.MODE_PRIVATE);
         //TODO:SPLASH SCREEN ADD KARDE
 
+        // Navigate to Home Page
+        Home_Fragment homepage = new Home_Fragment();
+        //homepage.setArguments(b);
+        FragmentManager mFragmentManager = getSupportFragmentManager();
+        FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
+        mFragmentTransaction.replace(R.id.content_frame, homepage).commit();
+
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
         swipeRefreshLayout.setColorSchemeResources(R.color.google_blue,
                 R.color.google_green,
