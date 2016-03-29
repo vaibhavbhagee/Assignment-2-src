@@ -42,18 +42,24 @@ public class New_Complaint_Fragment extends Fragment implements AdapterView.OnIt
 
         // Spinner Drop down elements
         List<String> categories = new ArrayList<String>();
-        categories.add("Mess Complaint");
-        categories.add("Maintenance Complaint");
-        categories.add("Student Welfare Complaint");
-        categories.add("Infrastructure Complaint");
-        categories.add("Course Complaint");
-        categories.add("NCC/NSO/NSS Complaint");
-        categories.add("Security Complaint");
-
+        LoadData l = new LoadData();
         List<String> courses = new ArrayList<String>();
 
-        LoadData l = new LoadData();
         try {
+        if(l.loginResponseJSON.getJSONArray("tags").length() >0 ) {
+            categories.add("Mess Complaint");
+            categories.add("Maintenance Complaint");
+            categories.add("NCC/NSO/NSS Complaint");
+        }
+        if(l.loginResponseJSON.getJSONArray("course_list").length() >0)
+        categories.add("Course Complaint");
+
+        categories.add("Student Welfare Complaint");
+        categories.add("Infrastructure Complaint");
+        categories.add("Security Complaint");
+
+
+
             JSONArray ja = l.loginResponseJSON.getJSONArray("course_list");
             for(int i = 0; i < ja.length() ; i ++)
                 courses.add(ja.getString(i).toUpperCase());

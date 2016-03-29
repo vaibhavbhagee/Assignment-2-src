@@ -54,11 +54,11 @@ thread list-->
         android:onClick="upvote"
         android:layout_marginTop="65dp"
         android:layout_toRightOf="@+id/type"
-        app:backgroundTint="@color/google_green"
+        app:backgroundTint="@color/white"
         app:fabSize="mini"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_menu_send"
+        android:src="@drawable/up"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="5dp"
         android:layout_marginBottom="@dimen/fab_margin" />
@@ -77,11 +77,11 @@ thread list-->
         android:onClick="downvote"
         android:layout_marginTop="65dp"
         android:layout_toRightOf="@+id/num_upvote"
-        app:backgroundTint="@color/google_green"
+        app:backgroundTint="@color/white"
         app:fabSize="mini"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_menu_send"
+        android:src="@drawable/down"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="5dp"
         android:layout_marginBottom="@dimen/fab_margin" />
@@ -227,6 +227,17 @@ thread list-->
         android:textSize="12dp"
         android:layout_below="@+id/description"
         android:id="@+id/button3" />
+
+    <TextView
+        android:id="@+id/no_threads"
+        android:visibility="invisible"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/button3"
+        android:textSize="32dp"
+        android:textAlignment="center"
+        android:text="No Threads here"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>
 <!--

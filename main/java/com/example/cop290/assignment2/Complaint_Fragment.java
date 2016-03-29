@@ -122,6 +122,10 @@ public class Complaint_Fragment extends Fragment {
         button2.setVisibility(View.GONE);
         button3.setVisibility(View.GONE);
         try {
+            Log.i("CurStat",current_status);
+            Log.i("lr:",lr.getString("unique_id"));
+            Log.i("complaint:",complaint.getString("lodged_by"));
+
             if (current_status.equals("unresolved") && lr.getString("unique_id").equals(complaint.getString("current_level")) /* authority hai? */)
             {
                 if ( complaint.getInt("current_level_index") ==0 /* highest authority hai */) {
@@ -130,7 +134,8 @@ public class Complaint_Fragment extends Fragment {
                     button2.setVisibility(View.VISIBLE);
                     button3.setVisibility(View.VISIBLE);
                 }
-            }else if (complaint_type.equals("under_resolution") &&lr.getString("unique_id").equals(complaint.getString("lodged_by")) /* lodged_by hai? */) {
+            }else if (current_status.equals("under_resolution") &&lr.getString("unique_id").equals(complaint.getString("lodged_by")) /* lodged_by hai? */) {
+               Log.i("terimaaki","choot");
                 button1.setVisibility(View.VISIBLE);
                 button2.setVisibility(View.VISIBLE);
                 button3.setVisibility(View.VISIBLE);
@@ -154,6 +159,10 @@ public class Complaint_Fragment extends Fragment {
             list.add(new fraud(threads.getJSONObject(i).getString("title"),threads.getJSONObject(i).getString("description"), threads.getJSONObject(i).toString()));
         }
         }catch(Exception e){e.printStackTrace();}
+
+        if(list.size()==0){
+            ((TextView) view.findViewById(R.id.no_threads)).setVisibility(View.VISIBLE);
+        }
 
         UserAdapter adapter = new UserAdapter(getActivity(), list);
         ListView listView = (ListView) view.findViewById(R.id.listView);

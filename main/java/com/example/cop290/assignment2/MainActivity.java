@@ -48,6 +48,13 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences sp = getSharedPreferences("MahPrefs", Context.MODE_PRIVATE);
         //TODO:SPLASH SCREEN ADD KARDE
 
+        // Navigate to Home Page
+        Home_Fragment homepage = new Home_Fragment();
+        //homepage.setArguments(b);
+        FragmentManager mFragmentManager = getSupportFragmentManager();
+        FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
+        mFragmentTransaction.replace(R.id.content_frame, homepage).commit();
+
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
         swipeRefreshLayout.setColorSchemeResources(R.color.google_blue,
                 R.color.google_green,
@@ -180,11 +187,17 @@ public class MainActivity extends AppCompatActivity
         Spinner spin = (Spinner) parent.findViewById(R.id.spinner);
         Spinner spin2 = (Spinner) parent.findViewById(R.id.spinner2);
 
+        Object xyz = spin2.getSelectedItem();
+
         String selected_item = spin.getSelectedItem().toString();
-        String course = spin2.getSelectedItem().toString();
+        String course = (xyz!=null) ? xyz.toString() : "null";
         String t = title.getText().toString();
         String d = description.getText().toString();
         String isCommunity;
+
+        if (r.isChecked()) isCommunity = "false";
+        else isCommunity = "true";
+        //System.out.println("Checking community... "+isCommunity);
 
         if (t.equals("")) {
             Toast.makeText(MainActivity.this, "Title is Empty", Toast.LENGTH_LONG).show();
@@ -194,9 +207,6 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(MainActivity.this, "Description is Empty", Toast.LENGTH_LONG).show();
             return;
         }
-
-        if (r.isChecked()) isCommunity = "false";
-        else isCommunity = "true";
 
         String s;
         switch(selected_item)
@@ -439,6 +449,9 @@ public class MainActivity extends AppCompatActivity
                 else if(l.flag[2]){
                     Toast.makeText(MainActivity.this,"New complaint posted", Toast.LENGTH_LONG).show();
                     on_refresh();
+                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    MainActivity.this.finish();
                 } else {
                     timer2(x + 1, l);
                 }
@@ -529,6 +542,9 @@ public class MainActivity extends AppCompatActivity
                 else if(l.flag[5]){
                     Toast.makeText(MainActivity.this,"Complaint Marked as Resolved", Toast.LENGTH_LONG).show();
                     on_refresh();
+                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    MainActivity.this.finish();
                 } else {
                     timer5(x + 1, l);
                 }
@@ -549,6 +565,9 @@ public class MainActivity extends AppCompatActivity
                 else if(l.flag[6]){
                     Toast.makeText(MainActivity.this,"Complaint Posted with higher Authority", Toast.LENGTH_LONG).show();
                     on_refresh();
+                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    MainActivity.this.finish();
                 } else {
                     timer6(x + 1, l);
                 }
@@ -569,6 +588,9 @@ public class MainActivity extends AppCompatActivity
                 else if(l.flag[7]){
                     Toast.makeText(MainActivity.this,"Complaint Posted with same Authority", Toast.LENGTH_LONG).show();
                     on_refresh();
+                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    MainActivity.this.finish();
                 } else {
                     timer7(x + 1, l);
                 }
@@ -584,7 +606,7 @@ public class MainActivity extends AppCompatActivity
         LoadData l = new LoadData();
         l.setContext(thisContext);
 
-        JSONObject loginR = l.loginResponseJSON;
+        /*JSONObject loginR = l.loginResponseJSON;
         try{
             String[] c_list = new String[loginR.getJSONArray("complaint_list").length()];
             for(int i = 0 ; i < loginR.getJSONArray("complaint_list").length(); i ++ )
@@ -596,11 +618,58 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(MainActivity.this,"Data Populated", Toast.LENGTH_LONG).show();
 
         }catch(Exception e){e.printStackTrace();}
-
-
+*/
+        try {
+            l.get_complaints_request(l.loginResponseJSON.getString("unique_id"));
+            timer(1, l, 1);
+            l.flag[1] = false;
+        }catch(Exception e){e.printStackTrace();}
 
         //Intent intent = new Intent(thisContext, LoginActivity.class);
         //startActivity(intent);
+    }
+
+
+
+    public boolean timer(final int x, final LoadData l, final int whichflag){
+
+        new CountDownTimer(50, 1000) {
+            public void onTick(long millisUntilFinished) {
+
+            }
+            public void onFinish() {
+                if(x==100){
+                    Toast.makeText(MainActivity.this,"Connection Timed Out", Toast.LENGTH_LONG).show();
+                }
+                else if(l.flag[whichflag]){
+                    if(whichflag == 1)
+                    {
+
+                        l.setContext(thisContext);
+
+                        JSONObject loginR = l.loginResponseJSON;
+                        try{
+                            String[] c_list = new String[loginR.getJSONArray("complaint_list").length()];
+                            for(int i = 0 ; i < loginR.getJSONArray("complaint_list").length(); i ++ )
+                                c_list[i] = loginR.getJSONArray("complaint_list").getString(i);
+
+                            l.get_complaint_details_request(c_list);
+                            timercomplaint(1, l, 9, c_list);
+                            l.flag[9] = false;
+                            Toast.makeText(MainActivity.this,"Data Populated", Toast.LENGTH_LONG).show();
+
+                        }catch(Exception e){e.printStackTrace();}
+
+                    }
+
+                }
+                else
+                {
+                    timer(x+1,l, whichflag);
+                }
+            }
+        }.start();
+        return true;
     }
 
 

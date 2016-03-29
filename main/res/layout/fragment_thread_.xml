@@ -79,5 +79,15 @@
         android:layout_above="@+id/comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></ListView>
+    <TextView
+        android:id="@+id/no_comments"
+        android:visibility="invisible"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/thread_description"
+        android:textSize="32dp"
+        android:textAlignment="center"
+        android:text="No Comments here"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>
