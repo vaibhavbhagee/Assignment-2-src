@@ -75,6 +75,14 @@ function LoginObj()
 			if (uname != "" && passw != "")
 			{
 				//Pass the input to the server here
+				$.post(server_url+"/login",
+			    {
+			        username: uname,
+			        password: passw
+			    },
+			    function(data, status){
+			        alert("Data: " + data + "\nStatus: " + status);
+			    });
 			}
 
 			else if (uname == "")
