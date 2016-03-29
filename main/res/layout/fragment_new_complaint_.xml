@@ -1,11 +1,12 @@
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <!--atleast 50 dp ki jagah upar chhod dena-->
     <EditText
+        android:backgroundTint="@color/google_green"
         android:layout_marginTop="90dp"
         android:hint="Title"
         android:layout_marginLeft="20dp"
@@ -53,10 +54,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner" />
+
+    <Spinner
+        android:layout_below="@+id/spinner"
+        android:layout_toRightOf="@+id/random"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner2" />
+
     <EditText
+        android:backgroundTint="@color/google_green"
         android:id="@+id/description"
         android:hint="Description"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="55dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_below="@+id/spinner"
@@ -71,6 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
+        app:backgroundTint="@color/google_green"
+        android:src="@android:drawable/ic_menu_send" />
 
 </RelativeLayout>

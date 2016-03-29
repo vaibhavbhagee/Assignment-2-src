@@ -171,6 +171,8 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json())
 
+app.use(express.static(__dirname+'/public'))
+
 app.set('superSecret',secret); //Set the secret variable
 
 var server = app.listen(port, function () {
@@ -196,7 +198,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
   // API definitions
 
   app.get('/', function(req, res) {
-    res.send('Hello! The API is at http://localhost:' + port + '/api');
+    res.sendfile(__dirname + '/public/index.html');
   });
 
   apiRoutes.get('/', function(req, res) {
