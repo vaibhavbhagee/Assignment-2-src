@@ -83,10 +83,15 @@ function LoginObj()
 			    function(data, status){
 			        console.log("Data: " + data + "\nStatus: " + status);
 
-			        token = data.token;
+			        if (data.success === true)
+			        {
+				        token = data.token;
 
-			        $("#HomeDiv").empty();
-			        acctPage.Initialize("acctpage1", 0 , 0 , "HomeDiv" , 100 , 100 , 1, data);
+				        $("#HomeDiv").empty();
+				        acctPage.Initialize("acctpage1", 0 , 0 , "HomeDiv" , 100 , 100 , 1, data);
+				    }
+				    else
+				    	alert("PLease check your credentials");
 			    });
 			}
 

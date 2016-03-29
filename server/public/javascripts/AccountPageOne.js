@@ -106,6 +106,29 @@ function AccountPageOne()
 		$( "#ListUsersButton" ).on('click',function()  //edit
 		{ 
 			//List all the users
+			$.get(server_url+"/users?token="+token,
+			    function(data, status){
+			        console.log("Data: " + data + "\nStatus: " + status);
+
+			        // if (data.success === true)
+			        // {
+				       //  token = data.token;
+
+				        $("#WorkArea_Div"+Object.Index).empty();
+				        
+				        for(var i = 0; i < data.length; i++)
+				        {
+				        	// function(i)
+				        	// {
+				        	// 	Object.uo.Initialize("ViewDO"+i, 10 , 10+90*i , "WorkArea_Div"+Object.Index , 80 , 80 , 1.0, data[i] , false, Object);
+				        	// }
+
+				        	Object.render_wa(i,data);
+				        }
+				    // }
+				    // else
+				    // 	alert("Error in Fetching user lists");
+			    });
 		});
 
 		$( "#ListComplaintsButton" ).on('click',function()  //edit
@@ -119,6 +142,11 @@ function AccountPageOne()
 			login.Initialize( "LoginObj1", 25 , 30 , "HomeDiv" , 50 , 40 , 1.0);
 		});
 
+	}
+
+	this.render_wa = function(i,data)
+	{
+		Object.uo.Initialize("ViewDO"+i, 10 , 10+90*i , "WorkArea_Div"+Object.Index , 80 , 80 , 1.0, data[i] , false, Object);
 	}
 
 
