@@ -89,5 +89,10 @@
         android:text="No Comments here"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/secret"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

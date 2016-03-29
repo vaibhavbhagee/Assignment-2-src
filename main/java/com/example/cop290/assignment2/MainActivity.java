@@ -266,7 +266,7 @@ public class MainActivity extends AppCompatActivity
         final LoadData l = new LoadData();
         l.setContext(thisContext);
         l.new_comment_request(c_id, t_id, new String("posted by"), d, new String("time stamp"));
-        timer4(0, l);
+        timer4(0, l, t_id);
         l.flag[4] = false;
 
         // TODO : figure out token and posted by and time stamp
@@ -306,12 +306,12 @@ public class MainActivity extends AppCompatActivity
     public void navigate_to_thread(View view) {
         // TODO : Navigate to thread
         RelativeLayout rl = (RelativeLayout)view;
-        TextView t = (TextView) rl.findViewById(R.id.complaint_id);
+        TextView t = (TextView) rl.findViewById(R.id.thread_id);
 
-        Log.i("SHREYAN2278194", ((TextView)((RelativeLayout) view).getChildAt(3)).getText().toString() );
+        //Log.i("SHREYAN2278194", ((TextView)((RelativeLayout) view).getChildAt(3)).getText().toString() );
 
         Bundle bundle = new Bundle();
-        bundle.putString("thread_json", ((TextView) ((RelativeLayout) view).getChildAt(3)).getText().toString());
+        bundle.putString("thread_json", t.getText().toString());
 
         FragmentManager mFragmentManager = getSupportFragmentManager();
         FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
@@ -457,7 +457,7 @@ public class MainActivity extends AppCompatActivity
         }.start();
         return true;
     }
-    public boolean timer4(final int x, final LoadData l){
+    public boolean timer4(final int x, final LoadData l, final String c_id){
 
         new CountDownTimer(50, 1000) {
             public void onTick(long millisUntilFinished) {
@@ -469,14 +469,15 @@ public class MainActivity extends AppCompatActivity
                 }
                 else if(l.flag[4]){
                     Toast.makeText(MainActivity.this,"New comment posted", Toast.LENGTH_LONG).show();
+
                     on_refresh();
-                    Thread_Fragment fragment = (Thread_Fragment) getSupportFragmentManager().findFragmentByTag("Thread_Fragment");
-                    fragment.populate_data();
-                    System.out.println("first one");
+                    //Thread_Fragment fragment = (Thread_Fragment) getSupportFragmentManager().findFragmentByTag("Thread_Fragment");
+                    //fragment.fraud();
+                    //System.out.println("first one");
                     //TextView thread_title = (TextView) l.thread_fragment.findViewById(R.id.thread_title);
                     //System.out.println("Shreyan "+thread_title.getText().toString());
                 } else {
-                    timer4(x + 1, l);
+                    timer4(x + 1, l, c_id);
                 }
             }
         }.start();
@@ -601,7 +602,7 @@ public class MainActivity extends AppCompatActivity
     private void on_refresh(){
         LoadData l = new LoadData();
         l.pseudo_login_request();
-        timer11(0,l);
+        timer11(0, l);
         l.flag[1] = false;
     }
     public boolean timer11(final int x, final LoadData l){

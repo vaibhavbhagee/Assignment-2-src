@@ -371,7 +371,7 @@ public class LoadData extends Activity {
 
                         newThreadResponse = response;
 
-                        System.out.println(newThreadResponse);
+                        System.out.println("New thread respones" + newThreadResponse);
                         flag[3] = true;
                     }
                 },

@@ -25,6 +25,8 @@ import java.util.ArrayList;
 public class Thread_Fragment extends Fragment {
 
     private View this_fragment;
+    private UserAdapter u;
+    private ArrayList<fraud> list;
 
     private String complaintID;
     private String threadID;
@@ -44,6 +46,12 @@ public class Thread_Fragment extends Fragment {
 
         populate_data();
         return view;
+    }
+
+    public void fraud(){
+        System.out.println("hello");
+        list.add(new fraud("bla", "bla", "bla"));
+        u.notifyDataSetChanged();
     }
 
     public void populate_data() {
@@ -66,6 +74,7 @@ public class Thread_Fragment extends Fragment {
         }catch(Exception e){e.printStackTrace();}
 
         TextView thread_id = (TextView) view.findViewById(R.id.thread_id);
+        TextView secret = (TextView) view.findViewById(R.id.secret);
         TextView complaint_id = (TextView) view.findViewById(R.id.complaint_id);
         TextView thread_title = (TextView) view.findViewById(R.id.thread_title);
         TextView thread_description = (TextView) view.findViewById(R.id.thread_description);
@@ -76,8 +85,9 @@ public class Thread_Fragment extends Fragment {
         thread_title.setText(tItle);
         thread_description.setText(_description);
         time.setText("Last updated:" + updatedon);
+        secret.setText(threadjsonstr);
 
-        ArrayList<fraud> list = new ArrayList<fraud>();
+        list = new ArrayList<fraud>();
         // TODO : add elements to the thread list
         try {
             for (int i = 0; i < comments.length(); ++i) {
@@ -90,10 +100,10 @@ public class Thread_Fragment extends Fragment {
             ((TextView) view.findViewById(R.id.no_comments)).setVisibility(View.VISIBLE);
         }
 
-        UserAdapter adapter = new UserAdapter(getActivity(), list);
+        u = new UserAdapter(getActivity(), list);
         ListView listView = (ListView) view.findViewById(R.id.listView);
-        listView.setAdapter(adapter);
-        adapter.setNotifyOnChange(true);
+        listView.setAdapter(u);
+        u.setNotifyOnChange(true);
     }
     public class UserAdapter extends ArrayAdapter<fraud> {
         public UserAdapter(Context context, ArrayList<fraud> items) {

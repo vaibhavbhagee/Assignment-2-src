@@ -128,7 +128,6 @@ public class LoginActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedpreferences.edit();
                     editor.putString("token", l.token);
                     editor.commit();
-                    Toast.makeText(LoginActivity.this,"Logged in successfully", Toast.LENGTH_LONG).show();
 
                     l.pseudo_login_request();
                     timer2(0, l);
@@ -175,6 +174,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else if(l.flag[11]){
                     System.out.print("ho gaya!!");
+                    Toast.makeText(LoginActivity.this,"Logged in successfully", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                 } else {
@@ -184,7 +184,7 @@ public class LoginActivity extends AppCompatActivity {
         }.start();
         return true;
     }
-
+/*
 
     public boolean timercomplaint(final int x, final LoadData l, final int whichflag, final String[] c_list){
 
@@ -282,5 +282,5 @@ public class LoginActivity extends AppCompatActivity {
             }
         }.start();
         return true;
-    }
+    }*/
 }
