@@ -460,7 +460,12 @@ public class MainActivity extends AppCompatActivity
                     Toast.makeText(MainActivity.this,"Connection Timed Out", Toast.LENGTH_LONG).show();
                 }
                 else if(l.flag[8]){
-                    Toast.makeText(MainActivity.this,"Vote Recorded", Toast.LENGTH_LONG).show();
+                    try {
+                        if (l.voteResponse.getString("success").equals("true"))
+                            Toast.makeText(MainActivity.this, "Vote Recorded", Toast.LENGTH_LONG).show();
+                        else
+                            Toast.makeText(MainActivity.this, "Already Voted. One account, one vote.", Toast.LENGTH_LONG).show();
+                    }catch(Exception e){e.printStackTrace();}
                     on_refresh();
                 } else {
                     timer8(x + 1, l);
