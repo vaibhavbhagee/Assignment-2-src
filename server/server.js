@@ -544,7 +544,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
 
       var complaint_list = req.body.complaint_list.split(",");
 
-      (notifications.find({"complaint_id":{$in: complaint_list}}).toArray(function(err,result)
+      (notifications.find({"complaint_id":{$in: complaint_list}}).sort({tstamp: -1}).toArray(function(err,result)
       {
         if (err)
           res.send({success:false,message:"incorrect request"});
@@ -590,6 +590,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
               var notif = {
                 complaint_id:req.body.complaint_id,
                 timestamp: (new Date()).toDateString(),
+                tstamp:new Date(),
                 content: req.decoded.name + " posted a new thread under complaint id "+req.body.complaint_id
               }
 
@@ -644,6 +645,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
               var notif = {
                 complaint_id:req.body.complaint_id,
                 timestamp: (new Date()).toDateString(),
+                tstamp:new Date(),
                 content: req.decoded.name + " posted a new comment on the thread "+req.body.thread_id+" under complaint id "+req.body.complaint_id
               }
 
@@ -693,6 +695,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
               var notif = {
                 complaint_id:req.body.complaint_id,
                 timestamp: (new Date()).toDateString(),
+                tstamp:new Date(),
                 content: req.decoded.name + " marked the complaint "+req.body.complaint_id+" as "+status
               }
 
@@ -771,6 +774,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
               var notif = {
                 complaint_id:req.body.complaint_id,
                 timestamp: (new Date()).toDateString(),
+                tstamp:new Date(),
                 content: req.decoded.name + " relodged the complaint with "+result[0]["current_level"]
               }
 
@@ -830,6 +834,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
                 var notif = {
                   complaint_id:req.body.complaint_id,
                   timestamp: (new Date()).toDateString(),
+                  tstamp:new Date(),
                   content: req.decoded.name + " "+req.body.type+"d the complaint "+req.body.complaint_id
                 }
 
@@ -913,6 +918,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
                   var notif = {
                       complaint_id:complaint_id,
                       timestamp: (new Date()).toDateString(),
+                      tstamp:new Date(),
                       content: req.decoded.name + " lodged a new complaint."
                     }
 
@@ -966,6 +972,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
             var notif = {
                     complaint_id:complaint_id,
                     timestamp: (new Date()).toDateString(),
+                    tstamp:new Date(),
                     content: req.decoded.name + " lodged a new complaint."
                   }
 
@@ -1034,6 +1041,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
                 var notif = {
                     complaint_id:complaint_id,
                     timestamp: (new Date()).toDateString(),
+                    tstamp:new Date(),
                     content: req.decoded.name + " lodged a new complaint."
                   }
 
@@ -1087,6 +1095,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
             var notif = {
                     complaint_id:complaint_id,
                     timestamp: (new Date()).toDateString(),
+                    tstamp:new Date(),
                     content: req.decoded.name + " lodged a new complaint."
                   }
 
@@ -1155,6 +1164,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
                 var notif = {
                     complaint_id:complaint_id,
                     timestamp: (new Date()).toDateString(),
+                    tstamp:new Date(),
                     content: req.decoded.name + " lodged a new complaint."
                   }
 
@@ -1208,6 +1218,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
             var notif = {
                     complaint_id:complaint_id,
                     timestamp: (new Date()).toDateString(),
+                    tstamp:new Date(),
                     content: req.decoded.name + " lodged a new complaint."
                   }
 
@@ -1276,6 +1287,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
                 var notif = {
                     complaint_id:complaint_id,
                     timestamp: (new Date()).toDateString(),
+                    tstamp:new Date(),
                     content: req.decoded.name + " lodged a new complaint."
                   }
 
@@ -1329,6 +1341,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
             var notif = {
               complaint_id:complaint_id,
               timestamp: (new Date()).toDateString(),
+              tstamp:new Date(),
               content: req.decoded.name + " lodged a new complaint."
             }
 
@@ -1386,6 +1399,7 @@ mongo.connect('mongodb://127.0.0.1/complaint_system', function(err,db) {
             var notif = {
               complaint_id:req.body.complaint_id,
               timestamp: (new Date()).toDateString(),
+              tstamp:new Date(),
               content: req.decoded.name + " relodged the complaint with "+result[0]["current_level"]
             }
 

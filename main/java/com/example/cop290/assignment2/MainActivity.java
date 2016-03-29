@@ -611,19 +611,18 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    public boolean timernotifications(final int x, final LoadData l, final int whichflag){
+    public boolean timernotifications(final int x, final LoadData l, final int whichflag) {
 
         new CountDownTimer(50, 1000) {
             public void onTick(long millisUntilFinished) {
 
             }
+
             public void onFinish() {
-                if(x==100){
+                if (x == 100) {
                     //Toast.makeText(LoginActivity.this, "Connection Timed Out", Toast.LENGTH_LONG).show();
-                }
-                else if(l.flag[whichflag]){
-                    if(whichflag == 10)
-                    {
+                } else if (l.flag[whichflag]) {
+                    if (whichflag == 10) {
                         Log.i("gaand", "sajdas");
                         try {
                             JSONObject cdr = l.notificationsJSON;
@@ -633,17 +632,14 @@ public class MainActivity extends AppCompatActivity
                                 JSONArray comparr = (JSONArray) cdr.get("notifications");
                                 Log.i("sandj", "sadjsakdas");
                                 l.notificationsArray = new JSONObject[comparr.length()];
-                                for ( int i = 0 ; i < comparr.length(); i ++ )
-                                {
+                                for (int i = 0; i < comparr.length(); i++) {
                                     l.notificationsArray[i] = comparr.getJSONObject(i);
                                 }
 
 
-
                             }
                             //list.add(new fraud("Title ka naam kya hona chaiyeh?? Shreyan kya hai.\n New line karke kya milega tujhe? " + i, "Lodger " + i, "bla"));
-                        }catch(Exception e)
-                        {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 
